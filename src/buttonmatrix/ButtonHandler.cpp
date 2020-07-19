@@ -37,8 +37,7 @@ namespace BusDashboard {
         uint8_t result = readMuxColumns();
         // calculate button position and notify corresponding listeners
         for (uint8_t bit = 0; bit < MATRIX_COLUMN_COUNT; bit++) {
-            std::bitset<8> x(result);
-            notify(button + bit, (x.test(7) ? 1: 0));
+            notify(button + bit, (result & 0b10000000 ? 1: 0));
             result = result << 1;
         }
         // prepare for next call

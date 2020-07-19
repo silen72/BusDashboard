@@ -1,6 +1,5 @@
 #pragma once
 #include <SPI.h>
-#include <bitset>
 #include <gpio_MCP23S17.h>	// install library "gpio_MCP23S17 by sumotoy" in PIO
 #include "ButtonListener.h"
 
@@ -91,8 +90,8 @@ namespace BusDashboard {
 
 		ButtonListenerNode* _listener[BUTTON_COUNT]; // registered listeners
 		uint8_t _row = 0; // the current row (this row gets queried on updateStatus)
-		uint32_t _lastButtonChange = 0; // timestamp: last change in a button state
-		uint32_t _lastRead = 0;  // timestamp: last read action (for throtteling the read frequency)
+		unsigned long _lastButtonChange = 0; // timestamp: last change in a button state
+		unsigned long _lastRead = 0;  // timestamp: last read action (for throtteling the read frequency)
 
 		gpio_MCP23S17* _mcp;
 
