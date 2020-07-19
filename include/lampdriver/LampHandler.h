@@ -11,8 +11,6 @@ namespace BusDashboard {
         private:
             LampHandler& _parent;
             const uint8_t _position; // connected to which logical pin number (0 .. numberOfChips * 8 - 1)
-            //bool _isOn = false;
-            //bool _hwState = false;
 
             // disallow creation
             Lamp() = delete;
@@ -115,7 +113,6 @@ namespace BusDashboard {
         const uint8_t _pinSerialClock;
         const uint8_t _pinLatch;
         const uint8_t _numberOfIcs;
-        //uint8_t _lastPosition = 0;          
         std::vector<Lamp*> _lamps;          // Lamp instances
         std::vector<uint8_t> _lampstates;   // logical lamp state:  vector of bitarrays, one 8bit-Array per IC
         std::vector<uint8_t> _lampstatesHw; // hardware lamp state: vector of bitarrays, one 8bit-Array per IC
