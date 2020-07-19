@@ -1,7 +1,7 @@
 # Bus Dashboard
 ## User interface
-![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Knopfbelegung links.jpg "Left part of the dashboard")
-![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Knopfbelegung Rechts.jpg "Right part of the dashboard")
+![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Knopfbelegungl.jpg "Left part of the dashboard")
+![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Knopfbelegungr.jpg "Right part of the dashboard")
 
 ## Buttons
 
