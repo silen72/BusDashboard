@@ -90,5 +90,10 @@ namespace BusDashboard {
         private:
             KeyActionNode* _next;
             KeyAction* _item;
+
+            KeyActionNode() = delete;
+            KeyActionNode(const KeyActionNode&) = delete;
+            KeyActionNode& operator=(const KeyActionNode&) = delete;
+
     };
 }
