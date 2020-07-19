@@ -6,9 +6,9 @@ On the Dashboard are nine different types of Buttons.
 
 ### Type one: "Kippschalter 1"
 
-..* Switchable in one direction.
-..* ON/OFF
-..* Can be a switch or a button.
+1. Switchable in one direction.
+2. ON/OFF
+3. Can be a switch or a button.
 
 ![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Kippschalter.jpeg "Left: Kippschalter 1 Right: Kippschalter 2")
 
