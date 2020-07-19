@@ -7,6 +7,10 @@
 
 namespace BusDashboard {
 
+	void KeyboardHandler::addAction(KeyAction& action) {
+		_keyactions.push(&action);
+	}
+
 	void KeyboardHandler::addPressAction(const uint8_t keycode)
 	{
 		addAction(*(new KeyPress(keycode)));
@@ -17,12 +21,12 @@ namespace BusDashboard {
 		addAction(*(new KeyRelease(keycode)));
 	}
 
-	void KeyboardHandler::addPressReleaseAction(const uint8_t keycode, const uint16_t duration)
+	void KeyboardHandler::addPressReleaseAction(const uint8_t keycode, const unsigned long duration)
 	{
 		addAction(*(new KeyPressRelease(keycode, duration)));
 	}
 
-	void KeyboardHandler::addPressReleaseActionMod(const uint8_t keycode, const uint8_t modifierkeycode, const uint16_t duration)
+	void KeyboardHandler::addPressReleaseActionMod(const uint8_t keycode, const uint8_t modifierkeycode, const unsigned long duration)
 	{
 		addAction(*(new KeyPressReleaseMod(keycode, modifierkeycode, duration)));
 	}

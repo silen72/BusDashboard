@@ -9,6 +9,6 @@ namespace BusDashboard {
         KeyPressRelease(const KeyPressRelease&) = delete;
         KeyPressRelease& operator=(const KeyPressRelease&) = delete;
     public:
-        KeyPressRelease(const uint8_t keycode, const uint16_t duration = KeyboardHandler::DEFAULT_KEYPRESS_DURATION_MS);
+        KeyPressRelease(const uint8_t keycode, const uint16_t duration = KeyAction::DEFAULT_KEYPRESS_DURATION_MS);
     };
 }
