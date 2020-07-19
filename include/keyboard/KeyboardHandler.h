@@ -13,25 +13,12 @@ namespace BusDashboard {
     class KeyboardHandler {
 
     private:
-        static KeyboardHandler* _instance; // the singleton instance of KeyboardHandler
         std::queue<KeyAction*> _keyactions; // the queue of KeyAction
         uint32_t _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
 
         // disallow creation
-        KeyboardHandler() {}
         KeyboardHandler(const KeyboardHandler&) = delete;
         KeyboardHandler& operator=(const KeyboardHandler&) = delete;
-
-        ~KeyboardHandler() {}
-        class CGuard {
-        public:
-            ~CGuard() {
-                if (nullptr != KeyboardHandler::_instance) {
-                    delete KeyboardHandler::_instance;
-                    KeyboardHandler::_instance = nullptr;
-                }
-            }
-        };
 
     public:
         enum Keys {
@@ -74,14 +61,7 @@ namespace BusDashboard {
 
         static const uint16_t DEFAULT_KEYPRESS_DURATION_MS = 250;
 
-        /**
-         * @returns the singleton KeyboardHandler instance
-         */
-        static KeyboardHandler* instance() {
-            static CGuard g;
-            if (!_instance) _instance = new KeyboardHandler();
-            return _instance;
-        }
+        KeyboardHandler() {}
 
         /**
          * adds a generic keyboard action to the keyboard queue

@@ -6,7 +6,6 @@
 #include "keyboard/KeyPressReleaseMod.h"
 
 namespace BusDashboard {
-	KeyboardHandler* KeyboardHandler::_instance = 0;
 
 	void KeyboardHandler::addPressAction(const uint8_t keycode)
 	{
