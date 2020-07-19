@@ -62,7 +62,7 @@ namespace BusDashboard {
         };
 
 
-        KeyboardHandler() { Serial.println(F("KeyboardHandler()")); }
+        KeyboardHandler() {}
 
         /**
          * adds a generic keyboard action to the keyboard queue
