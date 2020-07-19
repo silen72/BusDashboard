@@ -38,4 +38,5 @@ namespace BusDashboard {
             _dependant = nullptr;
         }
     }
+
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <Arduino.h>
 #include "keyboard/KeyAction.h"
-#include <queue>
 
 namespace BusDashboard {
 
@@ -12,7 +11,7 @@ namespace BusDashboard {
 
     private:
     
-        std::queue<KeyAction*> _keyactions; // the queue of KeyAction
+        KeyActionNode* _nextActionNode = nullptr;
         unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
 
         // disallow creation
@@ -106,10 +105,5 @@ namespace BusDashboard {
          */
         void update();
 
-        /**
-         * @returns the number of elements in the keyboard queue
-         */
-        size_t queuesize() const { return _keyactions.size(); }
-        
     };
 }

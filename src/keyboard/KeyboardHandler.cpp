@@ -8,7 +8,11 @@
 namespace BusDashboard {
 
 	void KeyboardHandler::addAction(KeyAction& action) {
-		_keyactions.push(&action);
+		if (nullptr == _nextActionNode) {
+			_nextActionNode = new KeyActionNode(action);
+		} else {
+			_nextActionNode->append(action);
+		}
 	}
 
 	void KeyboardHandler::addPressAction(const uint8_t keycode)
@@ -32,13 +36,16 @@ namespace BusDashboard {
 	}
 
 	void KeyboardHandler::update() {
-		if (_keyactions.size() == 0) return;
-		KeyAction* ka = _keyactions.front();
+		KeyActionNode* node = _nextActionNode;
+		if (nullptr == node) return;
+		KeyAction* ka = node->item();
 		ka->run();
 		if (ka->removable()) {
-			_keyactions.pop();
+			// remove action and node 
+			node = _nextActionNode->next();
 			delete ka;
-			ka = nullptr;
+			delete _nextActionNode;
+			_nextActionNode = node;
 			_lastKeyActionMs = millis();
 		}
 	}
