@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 #include "buttonmatrix/ButtonHandler.h"
 #include "KOMSI/KOMSIHandler.h"
 #include "keyboard/KeyboardHandler.h"
@@ -28,6 +29,10 @@ namespace BusDashboard {
      */
     class Dashboard {
     public:
+
+        static const uint32_t MAX_IDLE_MS = 5L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
+        static const uint32_t WARN_IDLE_MS = 30L * 1000L; // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
+        
         /**
          * @returns the singleton ButtonHandlerHandler
          */
@@ -55,7 +60,23 @@ namespace BusDashboard {
          * @returns the singleton LampHandler
          */
         static LampHandler* lampHandler() { return LampHandler::instance(); }
-        
+
+        /**
+         * controls the mains relay (turns it off after idle time threshold is met)
+         * emits a warning
+         */
+        static void checkIdle();
+
+        /**
+         * resets the idleTimer
+         */
+        static void resetIdleTimer();
+
+        /**
+         * initialization: turn on mains releay
+         */
+        static void begin();
+
     protected:
     
     private:
@@ -63,6 +84,10 @@ namespace BusDashboard {
         //static KeyboardHandler* _keyboardHandler;
         static KomsiHandler* _komsiHandler;
         //static LampHandler* _lampHandler;
+        static uint32_t _lastWakeupAction;
+        static bool _warningGiven;
+        static bool _warningActive;
+        static bool _sleeping;
 
         class CGuardKomsiHandler {
 		public:
@@ -83,5 +108,8 @@ namespace BusDashboard {
 				}
 			}
 		};
+
+        static uint32_t sleepTimeMs() { return millis() - _lastWakeupAction; }
+
     };
 }

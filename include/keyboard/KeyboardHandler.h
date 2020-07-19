@@ -69,8 +69,7 @@ namespace BusDashboard {
             KEY_SEMICOLON = 187,
             KEY_SLASH = 192,
             KEY_SPACE = 180,
-            KEY_TILDE = 189,
-            KEY_F7 = 200
+            KEY_TILDE = 189
         };
 
         static const uint16_t DEFAULT_KEYPRESS_DURATION_MS = 250;
