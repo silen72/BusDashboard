@@ -1,10 +1,10 @@
-#Bus Dashboard
+# Bus Dashboard
 
-##Buttons
+## Buttons
 
 On the Dashboard are nine different types of Buttons.
 
-###Type one: "Kippschalter 1"
+### Type one: "Kippschalter 1"
 
 -> Switchable in one direction.
 -> ON/OFF
@@ -13,12 +13,12 @@ On the Dashboard are nine different types of Buttons.
 ![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Kippschalter.jpeg "Left: Kippschalter 1 Right: Kippschalter 2")
 
 1:  Light 24V+
-2:  Nothing
+2:  not used
 3:  Option 2
 4:  Option 1
-5:  Nothing
-6:  Nothing
+5:  not used
+6:  not used
 7:  Option 2
 8:  Option 1
-9:  Nothing
+9:  not used
 10: Light 24V-
