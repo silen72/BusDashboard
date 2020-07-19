@@ -1,5 +1,7 @@
 #pragma once
+#include <Arduino.h>
 #include "KeyboardHandler.h"
+#include "Keyboard.h"
 
 namespace BusDashboard {
     /**
