@@ -2,15 +2,29 @@
 
 
 namespace BusDashboard {
+
+    ButtonHandler::ButtonHandler(const uint8_t pin_cs, const uint8_t address):_pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address)) {
+        for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
+            _listener[i] = nullptr;
+        }
+    }
+
 	bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
 		if (button >= ButtonHandler::BUTTON_COUNT) return false;
-		_listener[button].push_back(&listener);
+        if (nullptr == _listener[button]) {
+            _listener[button] = new ButtonListenerNode(listener);
+        } else {
+            _listener[button]->append(listener);
+        }
 		return true;
 	}
 
 	void ButtonHandler::notify(const uint8_t button, const bool state) {
-		if (_listener[button].size() == 0) return;
-		for (auto bl : _listener[button]) bl->setCurrentState(button, state);
+        ButtonListenerNode* node = _listener[button];
+        while (nullptr != node) {
+            node->item()->setCurrentState(button, state);
+            node = node->next();
+        }
 	}
 
 	void ButtonHandler::scan() {

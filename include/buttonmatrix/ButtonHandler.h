@@ -1,6 +1,5 @@
 #pragma once
 #include <SPI.h>
-#include <vector>			// install library "ArduinoSTL by Mike Matera" in PIO
 #include <bitset>
 #include <gpio_MCP23S17.h>	// install library "gpio_MCP23S17 by sumotoy" in PIO
 #include "ButtonListener.h"
@@ -82,7 +81,7 @@ namespace BusDashboard {
 		*/
 		void scan();
 
-		ButtonHandler(const uint8_t pin_cs, const uint8_t address):_pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address)) {}
+		ButtonHandler(const uint8_t pin_cs, const uint8_t address);
 
 	protected:
 
@@ -90,7 +89,7 @@ namespace BusDashboard {
         const uint8_t _pin_cs; // SPI: the Arduino pin the button matrix CS is connected to
 		const uint8_t _address = 0x20; // SPI: A0 .. A2 connected to ground
 
-		std::vector<ButtonListener*> _listener[BUTTON_COUNT]; // registered listeners
+		ButtonListenerNode* _listener[BUTTON_COUNT]; // registered listeners
 		uint8_t _row = 0; // the current row (this row gets queried on updateStatus)
 		uint32_t _lastButtonChange = 0; // timestamp: last change in a button state
 		uint32_t _lastRead = 0;  // timestamp: last read action (for throtteling the read frequency)
