@@ -62,21 +62,6 @@ namespace BusDashboard {
 	class LampHandler {
 	
 	public:
-        // the following consts must match the settings on the lamp driver board
-        static const uint8_t NUMBER_OF_ICs = 6;
-        static const uint8_t PIN_SI = 4;
-        static const uint8_t PIN_RCK = 5;
-        static const uint8_t PIN_SCK = 6;
-
-		/**
-		 * @returns the singleton LampHandler instance
-		 */
-		static LampHandler* instance() {
-			static CGuard g;
-			if (!_instance) _instance = new LampHandler(PIN_SI, PIN_SCK, PIN_RCK, NUMBER_OF_ICs);
-			return _instance;
-		}
-
 		/**
 		 * updates the physical state of the lamps to the logical state, if necessary
 		 * communicates with the shift register ICs
@@ -117,6 +102,9 @@ namespace BusDashboard {
           */
         bool isValidPosition(const uint8_t position) const { return (position < 8 * _numberOfIcs); }
 
+        LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch, const uint8_t numberOfICs);
+
+
 	protected:
         void setState(const uint8_t position, const bool state);
         bool state(const uint8_t position, const bool queryHw = false) const;
@@ -132,23 +120,10 @@ namespace BusDashboard {
         std::vector<uint8_t> _lampstates;   // logical lamp state:  vector of bitarrays, one 8bit-Array per IC
         std::vector<uint8_t> _lampstatesHw; // hardware lamp state: vector of bitarrays, one 8bit-Array per IC
 
-		static LampHandler* _instance; // the singleton instance
-
         // disallow creation
 		LampHandler() = delete;
         LampHandler(const LampHandler&) = delete;
         LampHandler& operator=(const LampHandler&) = delete;
-        LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch, const uint8_t numberOfICs);
-
-		class CGuard {
-		public:
-			~CGuard() {
-				if (nullptr != LampHandler::_instance) {
-					delete LampHandler::_instance;
-					LampHandler::_instance = nullptr;
-				}
-			}
-		};
 
  		/**
           * updates the hw state of the lamp pins with the logical lamp states

@@ -1,8 +1,6 @@
 #include "lampdriver/LampHandler.h"
 
 namespace BusDashboard {
-	LampHandler* LampHandler::_instance = nullptr;
-
 	void LampHandler::setState(const uint8_t position, const bool state) {
         uint8_t const index = position / 8;
         uint8_t const bitnum = 7 - (position - index * 8);

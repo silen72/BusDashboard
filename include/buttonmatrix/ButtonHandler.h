@@ -81,10 +81,10 @@ namespace BusDashboard {
 		 * note also that this neither tries to debounce buttons nor does it detect changes, the listeners receive 'raw' data
 		*/
 		void scan();
-	
-	protected:
+
 		ButtonHandler(const uint8_t pin_cs, const uint8_t address):_pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address)) {}
 
+	protected:
 
 	private:
         const uint8_t _pin_cs; // SPI: the Arduino pin the button matrix CS is connected to
@@ -124,6 +124,5 @@ namespace BusDashboard {
         ButtonHandler(const ButtonHandler&) = delete;
         ButtonHandler& operator=(const ButtonHandler&) = delete;
 
-		friend class Dashboard;
 	};
 }
