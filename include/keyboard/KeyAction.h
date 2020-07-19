@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include "KeyboardHandler.h"
+//#include "KeyboardHandler.h"
 #include "Keyboard.h"           // for some strange reasons this include must be the last - otherwise there are lots of strange compile errors ...
 
 namespace BusDashboard {
@@ -42,7 +42,9 @@ namespace BusDashboard {
         virtual void doAction() = 0;
 
     public:
-        static const uint8_t DEFAULT_DELAY = 200;
+        static const unsigned long DEFAULT_DELAY = 200;
+        static const unsigned long DEFAULT_KEYPRESS_DURATION_MS = 250;
+
         /**
         * call this if you want to create a chain of actions
         * 
