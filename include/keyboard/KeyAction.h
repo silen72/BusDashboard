@@ -76,24 +76,4 @@ namespace BusDashboard {
             KeyAction() {}
             virtual ~KeyAction();
     };
-
-    class KeyActionNode {
-        public:
-            KeyActionNode* append(KeyAction& item) {
-				_next = new KeyActionNode(item);
-				return _next;
-			}
-            KeyActionNode* next() { return _next; }
-            KeyAction* item() { return _item; }
-            KeyActionNode(KeyAction& item):_next(nullptr), _item(&item) {}
-
-        private:
-            KeyActionNode* _next;
-            KeyAction* _item;
-
-            KeyActionNode() = delete;
-            KeyActionNode(const KeyActionNode&) = delete;
-            KeyActionNode& operator=(const KeyActionNode&) = delete;
-
-    };
 }

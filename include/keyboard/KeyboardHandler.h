@@ -1,6 +1,7 @@
 #pragma once
 #include <Arduino.h>
 #include "keyboard/KeyAction.h"
+#include "ItemNode.h"
 
 namespace BusDashboard {
 
@@ -10,8 +11,7 @@ namespace BusDashboard {
     class KeyboardHandler {
 
     private:
-    
-        KeyActionNode* _nextActionNode = nullptr;
+        ItemNode<KeyAction> *_nextActionNode = nullptr;
         unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
 
         // disallow creation

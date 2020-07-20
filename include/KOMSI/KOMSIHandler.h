@@ -1,5 +1,6 @@
 #pragma once
 #include "KomsiCommandListener.h"
+#include "ItemNode.h"
 
 namespace BusDashboard {
 
@@ -12,9 +13,8 @@ namespace BusDashboard {
     class KomsiHandler {
     private:
         static const uint8_t COMMAND_COUNT = 2 * 26;
-        
 
-        KomsiCommandListenerNode* _commandListener[COMMAND_COUNT]; // stores the listeners per command
+        ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT]; // stores the listeners per command
         uint8_t _command = 0;
         uint16_t _command_value = 0;
 
