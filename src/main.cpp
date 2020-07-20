@@ -10,23 +10,20 @@ ButtonHandler buttonHandler(BusDashboard::ArduinoPins::BUTTON_MATRIX_CS, BusDash
 LampHandler lampHandler(ArduinoPins::LAMP_DRIVER_SI, ArduinoPins::LAMP_DRIVER_SCK, ArduinoPins::LAMP_DRIVER_RCK);
 KeyboardHandler keyboardHandler;
 KomsiHandler komsiHandler;
+CANBus canBus(ArduinoPins::CAN_CS, ArduinoPins::CAN_NT);
+Dashboard dashboard(ArduinoPins::MAINS_RELAY);
 
-void setup() {
+void setup()
+{
   SPI.begin();            // initialize communication with the SPI devices (button matrix and CAN-bus driver)
   Serial.begin(115200);   // initialize communication with the PC (only in:KOMSI)
-
-  pinMode(ArduinoPins::BUTTON_MATRIX_CS, OUTPUT);
-  pinMode(ArduinoPins::CAN_CS, OUTPUT);
-  pinMode(ArduinoPins::CAN_NT, OUTPUT);
-  pinMode(ArduinoPins::LAMP_DRIVER_RCK, OUTPUT);
-  pinMode(ArduinoPins::LAMP_DRIVER_SCK, OUTPUT);
-  pinMode(ArduinoPins::LAMP_DRIVER_SI, OUTPUT);
-  pinMode(ArduinoPins::MAINS_RELAY, OUTPUT);
-
-  digitalWrite(ArduinoPins::MAINS_RELAY, LOW);
-
   Keyboard.begin();       // initialize communication with the PC (only out: Keyboard)
-  BusDashboard::Dashboard::begin(); // wake up the dashboard
+
+  buttonHandler.begin();
+  canBus.begin();
+  keyboardHandler.begin();
+  lampHandler.begin();
+  dashboard.begin();      // wake up the dashboard
 }
 
 void loop() {
@@ -37,5 +34,5 @@ void loop() {
   buttonHandler.scan();
   lampHandler.update();
   keyboardHandler.update();
-  BusDashboard::Dashboard::checkIdle();
+  dashboard.checkIdle();
 }

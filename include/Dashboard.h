@@ -1,8 +1,9 @@
 #pragma once
 #include <Arduino.h>
 #include "buttonmatrix/ButtonHandler.h"
-#include "KOMSI/KOMSIHandler.h"
+#include "CANBus/CANBus.h"
 #include "keyboard/KeyboardHandler.h"
+#include "KOMSI/KOMSIHandler.h"
 #include "lampdriver/LampHandler.h"
 
 namespace BusDashboard {
@@ -22,40 +23,47 @@ namespace BusDashboard {
         SPI_SCK = 13            // on a leonardo board this is only available on the ISCP header (ISCP-3)!
     };
 
-    
-
     class Dashboard {
     public:
-       static const uint32_t MAX_IDLE_MS = 5L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
-        static const uint32_t WARN_IDLE_MS = 30L * 1000L; // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
+        const uint32_t MAX_IDLE_MS = 5L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
+        const uint32_t WARN_IDLE_MS = 30L * 1000L; // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
  
         /**
          * controls the mains relay (turns it off after idle time threshold is met)
          * emits a warning
          */
-        static void checkIdle();
+        void checkIdle();
 
         /**
          * resets the idleTimer
          */
-        static void resetIdleTimer();
+        void resetIdleTimer();
 
         /**
          * initialization: turn on mains releay
          */
-        static void begin();
+        void begin();
 
         /**
          * @returns the time in ms that have past without any waking actions
          */
-        static uint32_t sleepTimeMs() { return millis() - _lastWakeupAction; }
+        uint32_t sleepTimeMs() const { return millis() - _lastWakeupAction; }
+
+        
+        Dashboard(const uint8_t pin_relay);
 
     protected:
-    
+
     private:
-        static uint32_t _lastWakeupAction;
-        static bool _warningGiven;
-        static bool _warningActive;
-        static bool _sleeping;
+        const uint8_t _pin_relay;
+        uint32_t _lastWakeupAction;
+        bool _warningGiven = false;
+        bool _warningActive = false;
+        bool _sleeping = false;
+
+        // disallow creation
+        Dashboard() = delete;
+        Dashboard(const Dashboard &) = delete;
+        Dashboard &operator=(const Dashboard &) = delete;
     };
 }

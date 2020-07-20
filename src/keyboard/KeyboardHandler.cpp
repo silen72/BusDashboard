@@ -49,4 +49,6 @@ namespace BusDashboard {
 			_lastKeyActionMs = millis();
 		}
 	}
+
+	void KeyboardHandler::begin(){};
 }

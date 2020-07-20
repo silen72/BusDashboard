@@ -80,6 +80,11 @@ namespace BusDashboard {
 		*/
 		void scan();
 
+		/**
+		 * initialize the instance (call this once in setup())
+		*/
+		void begin();
+
 		ButtonHandler(const uint8_t pin_cs, const uint8_t address);
 
 	protected:

@@ -105,5 +105,9 @@ namespace BusDashboard {
          */
         void update();
 
+        /**
+         * initializes the instance
+         */
+        void begin();
     };
 }
