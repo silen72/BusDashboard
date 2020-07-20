@@ -2,6 +2,7 @@
 #include <SPI.h>
 #include <gpio_MCP23S17.h>	// install library "gpio_MCP23S17 by sumotoy" in PIO
 #include "ButtonListener.h"
+#include "ItemNode.h"
 
 namespace BusDashboard {
 
@@ -93,7 +94,7 @@ namespace BusDashboard {
         const uint8_t _pin_cs; // SPI: the Arduino pin the button matrix CS is connected to
 		const uint8_t _address = 0x20; // SPI: A0 .. A2 connected to ground
 
-		ButtonListenerNode* _listener[BUTTON_COUNT]; // registered listeners
+		ItemNode<ButtonListener> *_listener[BUTTON_COUNT]; // registered listeners
 		uint8_t _row = 0; // the current row (this row gets queried on updateStatus)
 		unsigned long _lastButtonChange = 0; // timestamp: last change in a button state
 		unsigned long _lastRead = 0;  // timestamp: last read action (for throtteling the read frequency)

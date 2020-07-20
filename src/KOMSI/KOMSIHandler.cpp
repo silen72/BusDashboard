@@ -18,7 +18,7 @@ namespace BusDashboard {
     void KomsiHandler::notifyListeners() {
         uint8_t index = toIndex(_command);
         if (!isIndexValid(index)) return;
-        KomsiCommandListenerNode* node = _commandListener[index];
+        ItemNode<KomsiCommandListener> *node = _commandListener[index];
         while (nullptr != node) {
             node->item()->receiveCommand(_command, _command_value);
             node = node->next();
@@ -30,7 +30,7 @@ namespace BusDashboard {
         bool valid = isIndexValid(index);
         if (valid) {
             if (nullptr == _commandListener[index]) {
-                _commandListener[index] = new KomsiCommandListenerNode(listener);
+                _commandListener[index] = new ItemNode<KomsiCommandListener>(listener);
             } else {
                 _commandListener[index]->append(listener);
             }

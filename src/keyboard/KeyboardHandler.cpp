@@ -9,7 +9,7 @@ namespace BusDashboard {
 
 	void KeyboardHandler::addAction(KeyAction& action) {
 		if (nullptr == _nextActionNode) {
-			_nextActionNode = new KeyActionNode(action);
+			_nextActionNode = new ItemNode<KeyAction>(action);
 		} else {
 			_nextActionNode->append(action);
 		}
@@ -36,7 +36,7 @@ namespace BusDashboard {
 	}
 
 	void KeyboardHandler::update() {
-		KeyActionNode* node = _nextActionNode;
+		ItemNode<KeyAction> *node = _nextActionNode;
 		if (nullptr == node) return;
 		KeyAction* ka = node->item();
 		ka->run();

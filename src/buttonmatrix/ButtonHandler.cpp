@@ -12,7 +12,7 @@ namespace BusDashboard {
 	bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
 		if (button >= ButtonHandler::BUTTON_COUNT) return false;
         if (nullptr == _listener[button]) {
-            _listener[button] = new ButtonListenerNode(listener);
+            _listener[button] = new ItemNode<ButtonListener>(listener);
         } else {
             _listener[button]->append(listener);
         }
@@ -20,7 +20,7 @@ namespace BusDashboard {
 	}
 
 	void ButtonHandler::notify(const uint8_t button, const bool state) {
-        ButtonListenerNode* node = _listener[button];
+        ItemNode<ButtonListener> *node = _listener[button];
         while (nullptr != node) {
             node->item()->setCurrentState(button, state);
             node = node->next();

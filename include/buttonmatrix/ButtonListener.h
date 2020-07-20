@@ -14,24 +14,4 @@ namespace BusDashboard {
 		*/
 		virtual void setCurrentState(const uint8_t button, const bool state) = 0;
 	};
-
-	    class ButtonListenerNode {
-        public:
-            ButtonListenerNode* next() { return _next; }
-            ButtonListenerNode* append(ButtonListener& buttonlistener) {
-				_next = new ButtonListenerNode(buttonlistener);
-				return _next;
-			}
-            ButtonListener* item() { return _item; }
-            ButtonListenerNode(ButtonListener& buttonlistener):_item(&buttonlistener), _next(nullptr) {};
-        
-        private:
-            ButtonListener* _item;
-            ButtonListenerNode* _next;
-
-            ButtonListenerNode() = delete;
-            ButtonListenerNode(const ButtonListenerNode&) = delete;
-            ButtonListenerNode& operator=(const ButtonListenerNode&) = delete;
-
-    };
 }
