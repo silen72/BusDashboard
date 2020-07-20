@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <stdint.h>
 #include <Keyboard.h>
 #include <SPI.h>
 #include "Dashboard.h"
