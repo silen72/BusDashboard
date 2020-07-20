@@ -27,6 +27,10 @@ namespace BusDashboard {
         }
 	}
 
+    void ButtonHandler::begin() {
+        pinMode(_pin_cs, OUTPUT);
+    }
+
 	void ButtonHandler::scan() {
         // throttle reads
         const uint32_t now = millis();

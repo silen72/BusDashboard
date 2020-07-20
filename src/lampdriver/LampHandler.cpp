@@ -55,4 +55,9 @@ namespace BusDashboard {
         digitalWrite(_pinLatch, HIGH);
     }
 
+    void LampHandler::begin() {
+        pinMode(_pinLatch, OUTPUT);
+        pinMode(_pinSerial, OUTPUT);
+        pinMode(_pinSerialClock, OUTPUT);
+    }
 }

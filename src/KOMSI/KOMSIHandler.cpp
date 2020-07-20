@@ -2,7 +2,7 @@
 
 namespace BusDashboard {
 
-    void KomsiHandler::processIncoming(const uint16_t incomingByte) {
+    void KomsiHandler::processIncoming(const int incomingByte) {
         if (isdigit(incomingByte)) {
             // avoid overflow
             if (_command_value < ((UINT16_MAX - 1) / 10)) _command_value = _command_value * 10 + incomingByte - '0'; // calculate command value

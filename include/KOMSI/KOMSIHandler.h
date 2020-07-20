@@ -117,7 +117,7 @@ namespace BusDashboard {
         *   Serial.read() receives a uint16_t, but only 8 bit (actually even less) are used
         *   one command consists of a char ('A' to 'Z' and 'a' to 'z') and a corresponding command value (no documentation there, this code assumes an uint16_t range)
         */
-        void processIncoming(const uint16_t value);
+        void processIncoming(const int value);
 
         /**
          * adds a listener

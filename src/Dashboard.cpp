@@ -1,10 +1,6 @@
 #include "Dashboard.h"
 
 namespace BusDashboard {
-    uint32_t Dashboard::_lastWakeupAction = millis();
-    bool Dashboard::_warningGiven = false;
-    bool Dashboard::_warningActive = false;
-    bool Dashboard::_sleeping = false;
 
     void Dashboard::checkIdle() {
         uint32_t idleTime = millis() - _lastWakeupAction;
@@ -21,7 +17,7 @@ namespace BusDashboard {
             }
         } else {
             // switch off dashboard
-            digitalWrite(ArduinoPins::MAINS_RELAY, LOW);
+            digitalWrite(_pin_relay, LOW);
         }
     }
 
@@ -29,7 +25,7 @@ namespace BusDashboard {
         _lastWakeupAction = millis();
         if (_sleeping) {
             // back to action: wake up dashboard
-            digitalWrite(ArduinoPins::MAINS_RELAY, HIGH);
+            digitalWrite(_pin_relay, HIGH);
         }
         _sleeping = false;
         _warningGiven = false;
@@ -37,7 +33,11 @@ namespace BusDashboard {
     }
 
     void Dashboard::begin() {
-        digitalWrite(ArduinoPins::MAINS_RELAY, HIGH);
+        pinMode(_pin_relay, OUTPUT);
+        digitalWrite(_pin_relay, HIGH);
     }
 
+    Dashboard::Dashboard(const uint8_t pin_relay):_pin_relay(pin_relay) {
+        _lastWakeupAction = millis();
+    }
 }
