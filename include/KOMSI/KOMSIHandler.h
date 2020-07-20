@@ -1,6 +1,4 @@
-
 #pragma once
-#include <vector>
 #include "KomsiCommandListener.h"
 
 namespace BusDashboard {
@@ -14,8 +12,9 @@ namespace BusDashboard {
     class KomsiHandler {
     private:
         static const uint8_t COMMAND_COUNT = 2 * 26;
+        
 
-        std::vector<KomsiCommandListener*> _commandListener[COMMAND_COUNT]; // stores the listeners per command
+        KomsiCommandListenerNode* _commandListener[COMMAND_COUNT]; // stores the listeners per command
         uint8_t _command = 0;
         uint16_t _command_value = 0;
 

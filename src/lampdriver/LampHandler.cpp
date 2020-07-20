@@ -23,21 +23,15 @@ namespace BusDashboard {
         return ((value & bitmask) > 0);
 	}
 
-    LampHandler::LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch, const uint8_t numberOfICs):
+    LampHandler::LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch):
         _pinSerial(pinSerial),
         _pinSerialClock(pinSerialClock),
-        _pinLatch(pinLatch),
-        _numberOfIcs(std::min(numberOfICs, (uint8_t)32)) // no more than 32 ICs allowed
+        _pinLatch(pinLatch)
     {
-        // initialize all possible members of the lamps vector
-        _lamps.reserve(_numberOfIcs * 8);
-        for (size_t i=0; i < _lamps.capacity(); i++) _lamps[i] = nullptr;
         // initial state of all lamps: off (both logical and hardware)
-        _lampstates.assign(_numberOfIcs, 0);
-        _lampstatesHw.assign(_numberOfIcs, 0);
-        // initialize all Lamp instances
-        for (uint8_t position = 0; position <= _numberOfIcs * 8 - 1; position++) {
-             _lamps[position] = new Lamp(*this, position);
+        for (uint8_t i = 0; i < NUMBER_OF_ICS; i++) {
+            _lampstates[i] = 0;
+            _lampstatesHw[i] = 0;
         }
     }
 
@@ -49,19 +43,16 @@ namespace BusDashboard {
             doWrite = (_lampstatesHw[idx] != _lampstates[idx]) ;
             idx++;
         }
-        while ((doWrite == false) && (idx < _numberOfIcs));
+        while ((doWrite == false) && (idx < NUMBER_OF_ICS));
 
         if (!doWrite) return;
         
         digitalWrite(_pinLatch, LOW);
-        for (idx = 0; idx < _numberOfIcs; idx++) {
+        for (idx = 0; idx < NUMBER_OF_ICS; idx++) {
             shiftOut(_pinSerial, _pinSerialClock, MSBFIRST, _lampstates[idx]);
             _lampstatesHw[idx] = _lampstates[idx];
         }
         digitalWrite(_pinLatch, HIGH);
     }
 
-    bool Lamp::state() const { return _parent.state(_position); }
-    bool Lamp::hwstate() const { return _parent.state(_position, true); }
-    void Lamp::setState(const bool state) { _parent.setState(_position, state); }
 }

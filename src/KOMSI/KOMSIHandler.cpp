@@ -1,12 +1,11 @@
 #include "Komsi/KOMSIHandler.h"
-#include <limits>
 
 namespace BusDashboard {
 
     void KomsiHandler::processIncoming(const uint16_t incomingByte) {
         if (isdigit(incomingByte)) {
             // avoid overflow
-            if (_command_value < ((INT_MAX - 1) / 10)) _command_value = _command_value * 10 + incomingByte - '0'; // calculate command value
+            if (_command_value < ((UINT16_MAX - 1) / 10)) _command_value = _command_value * 10 + incomingByte - '0'; // calculate command value
         }
         else {
             notifyListeners();          // command completely received, inform listeners
@@ -18,17 +17,24 @@ namespace BusDashboard {
 
     void KomsiHandler::notifyListeners() {
         uint8_t index = toIndex(_command);
-        if ( isIndexValid(index) && (_commandListener[index].size() > 0 )) {
-            for (auto cl : _commandListener[index]) {
-                cl->receiveCommand(_command, _command_value);
-            }
+        if (!isIndexValid(index)) return;
+        KomsiCommandListenerNode* node = _commandListener[index];
+        while (nullptr != node) {
+            node->item()->receiveCommand(_command, _command_value);
+            node = node->next();
         }
     }
 
     bool KomsiHandler::addListener(KomsiCommandListener& listener, const uint8_t command) {
         uint8_t index = toIndex(command);
         bool valid = isIndexValid(index);
-        if (valid) _commandListener[index].push_back(&listener);
+        if (valid) {
+            if (nullptr == _commandListener[index]) {
+                _commandListener[index] = new KomsiCommandListenerNode(listener);
+            } else {
+                _commandListener[index]->append(listener);
+            }
+        }
         return valid;
     }
 
