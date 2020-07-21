@@ -4,8 +4,18 @@ namespace BusDashboard {
 
     void KomsiHandler::processIncoming(const int incomingByte) {
         if (isdigit(incomingByte)) {
+#ifdef SerialDebug
+            Serial.print(F("_command_value: "));
+            Serial.print(_command_value);
+            Serial.print(F(", reveived: "));
+            Serial.println(incomingByte);
+#endif
             // avoid overflow
             if (_command_value < ((UINT16_MAX - 1) / 10)) _command_value = _command_value * 10 + incomingByte - '0'; // calculate command value
+#ifdef SerialDebug
+            Serial.print(F("new _command_value: "));
+            Serial.println(_command_value);
+#endif
         }
         else {
             notifyListeners();          // command completely received, inform listeners
@@ -17,7 +27,13 @@ namespace BusDashboard {
 
     void KomsiHandler::notifyListeners() {
         uint8_t index = toIndex(_command);
-        if (!isIndexValid(index)) return;
+        if (!isIndexValid(index)) {
+#ifdef SerialDebug
+            Serial.print(F("invalid command: "));
+            Serial.println(_command);
+#endif
+            return;
+        }
         ItemNode<KomsiCommandListener> *node = _commandListener[index];
         while (nullptr != node) {
             node->item()->receiveCommand(_command, _command_value);
