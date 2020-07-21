@@ -46,11 +46,16 @@ namespace BusDashboard {
         while ((doWrite == false) && (idx < NUMBER_OF_ICS));
 
         if (!doWrite) return;
-        
+#ifdef SerialDebug
+        Serial.println(F("writeLampState: shift out"));
+#endif
         digitalWrite(_pinLatch, LOW);
         for (idx = 0; idx < NUMBER_OF_ICS; idx++) {
             shiftOut(_pinSerial, _pinSerialClock, MSBFIRST, _lampstates[idx]);
             _lampstatesHw[idx] = _lampstates[idx];
+#ifdef SerialDebug
+            Serial.println(_lampstatesHw[idx], BIN);
+#endif
         }
         digitalWrite(_pinLatch, HIGH);
     }
