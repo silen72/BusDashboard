@@ -11,12 +11,26 @@ namespace BusDashboard {
 
 	bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
 		if (button >= ButtonHandler::BUTTON_COUNT) return false;
-        if (nullptr == _listener[button]) {
+#ifdef SerialDebug
+        Serial.print(F("ButtonHandler::addListener, button "));
+        Serial.print((int)button);
+#endif
+            if (nullptr == _listener[button]) {
             _listener[button] = new ItemNode<ButtonListener>(listener);
-        } else {
+#ifdef SerialDebug
+            Serial.print(F(" created root node"));
+            Serial.println((int)_listener[button]);
+#endif
+        }
+        else
+        {
+#ifdef SerialDebug
+            Serial.print(F(" appends node to "));
+            Serial.println((int)_listener[button]);
+#endif
             _listener[button]->append(listener);
         }
-		return true;
+        return true;
 	}
 
 	void ButtonHandler::notify(const uint8_t button, const bool state) {
