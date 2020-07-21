@@ -46,4 +46,7 @@ void loop() {
   lampHandler.update();
   keyboardHandler.update();
   dashboard.checkIdle();
+#ifdef SerialDebug
+  delay(500UL); // slow down the loop to be able to follow output in the serial monitor
+#endif
 }
