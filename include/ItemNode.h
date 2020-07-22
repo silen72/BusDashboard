@@ -9,8 +9,16 @@ public:
         ItemNode<T> *newnode = nullptr;
         if (nullptr == _next) {
             _next = new ItemNode(item);
+#ifdef SerialDebug
+            Serial.print(F("ItemNode<T> *append() created new ItemNode "));
+            Serial.println((int)_next);
+#endif
             newnode = _next;
         } else {
+#ifdef SerialDebug
+            Serial.print(F("ItemNode<T> *append() passes item to "));
+            Serial.println((int)_next);
+#endif
             newnode = _next->append(item);
         }
         return newnode;

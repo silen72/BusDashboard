@@ -25,7 +25,19 @@ void setup()
   dashboard.begin();      // wake up the dashboard
 }
 
+
+
+#ifdef SerialDebug
+#warning Compiling with Serial debugging enabled - connect the arduino to a Serial Monitor, not KOMSI
+#warning to configure Serial debugging use the build_flags = -D SerialDebug line in platformio.ini
+unsigned long loopcount = 0;
+#endif
+
 void loop() {
+#ifdef SerialDebug
+  Serial.print(F("loop "));
+  Serial.println(loopcount++);
+#endif
   if (Serial.available()) {
     int val = Serial.read();
     komsiHandler.processIncoming(val);
@@ -34,4 +46,8 @@ void loop() {
   lampHandler.update();
   keyboardHandler.update();
   dashboard.checkIdle();
+
+#ifdef SerialDebug
+  delay(750UL); // slow down the loop to be able to follow output in the serial monitor
+#endif
 }
