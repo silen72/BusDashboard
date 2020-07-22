@@ -36,7 +36,7 @@ unsigned long loopcount = 0;
 void loop() {
 #ifdef SerialDebug
   Serial.print(F("loop "));
-  Serial.println(loopcount);
+  Serial.println(loopcount++);
 #endif
   if (Serial.available()) {
     int val = Serial.read();
@@ -46,7 +46,8 @@ void loop() {
   lampHandler.update();
   keyboardHandler.update();
   dashboard.checkIdle();
+
 #ifdef SerialDebug
-  delay(500UL); // slow down the loop to be able to follow output in the serial monitor
+  delay(750UL); // slow down the loop to be able to follow output in the serial monitor
 #endif
 }
