@@ -1,6 +1,6 @@
 # The Lamp Driver PCB
 
-The Lamp Driver PCB was created with KiCAD. The complete project is downloadable [here](files/LampDriver-Kicad.zip).
+The Lamp Driver PCB was created with [KiCAD](https://kicad-pcb.org/). The complete project is downloadable [here](files/LampDriver-Kicad.zip).
 
 The Lamp Driver PCB mainly consist of three distinct parts:
 - the controller part: six shift register ICs controlling the two output parts (in the center of the schematics)
