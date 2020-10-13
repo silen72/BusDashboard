@@ -2,10 +2,10 @@
 
 The Button Matrix PCB was created with [KiCAD](https://kicad-pcb.org/). The complete project is downloadable [here](files/ButtonMatrix-Kicad.zip).
 
-![the schematics](images\ButtonMatrixSchematics.png)
+![the schematics](images/ButtonMatrixSchematics.png)
 
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
-![the pcb](images\Schaltermatrix-brd.svg)
+![the pcb](images/Schaltermatrix-brd.svg)
 
 
 ![the rendered pcb](images/Schaltermatrix2.png)
