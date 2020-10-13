@@ -1,18 +1,19 @@
 # Bus Dashboard
 ## User interface
-![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Knopfbelegungl.jpg "Left part of the dashboard")
+![Left part of the dashboard](images/Knopfbelegungl.jpg "Left part of the dashboard")
+
+![Right part of the dashboard](images/Knopfbelegungr.jpg "Right part of the dashboard")
+
 
 ## Buttons
-
 On the Dashboard there are nine different types of buttons.
 
 ### Type one: "Kippschalter 1"
-
 1. Switchable in one direction.
 2. ON/OFF
 3. Can be a switch or a button.
 
-![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Kippschalter.jpeg "Left: Kippschalter 1 Right: Kippschalter 2")
+![Left: Kippschalter 1 Right: Kippschalter 2](images/Kippschalter.jpeg "Left: Kippschalter 1 Right: Kippschalter 2")
 
 1.  24V+ (light)
 2.  not used
