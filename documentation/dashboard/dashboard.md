@@ -4,7 +4,7 @@
 
 ## Buttons
 
-On the Dashboard are nine different types of Buttons.
+On the Dashboard there are nine different types of buttons.
 
 ### Type one: "Kippschalter 1"
 
@@ -14,7 +14,7 @@ On the Dashboard are nine different types of Buttons.
 
 ![alt text](https://github.com/silen72/BusDashboard/blob/master/documentation/dashboard/images/Kippschalter.jpeg "Left: Kippschalter 1 Right: Kippschalter 2")
 
-1.  Light 24V+
+1.  24V+ (light)
 2.  not used
 3.  Option 2
 4.  Option 1
@@ -23,4 +23,4 @@ On the Dashboard are nine different types of Buttons.
 7.  Option 2
 8.  Option 1
 9.  not used
-10. Light 24V-
+10. 24V- (light)
