@@ -6,7 +6,8 @@ namespace BusDashboard {
 class LampHandler {
 
    public:
-      static const uint8_t NUMBER_OF_ICS = 6;
+      static const uint8_t NUMBER_OF_ICS = 6; // the number of 74HC595 ICs on the board
+      static const uint64_t WRITE_DELAY = 25; // wait at least this many ms between to actual writes to the lamp driver board
 
       /**
        * updates the physical state of the lamps to the logical state, if necessary
@@ -46,7 +47,7 @@ class LampHandler {
 
       /**
        * sets the logical state of one lamp position on the lampdriver board
-       * @param[in] position set the state of this lamp position
+       * @param[in] position set the state of this lamp position (0..n)
        * @param[in] state set the lamp to this state (true = on)
        */
       void setState(const uint8_t position, const bool state);
@@ -59,18 +60,39 @@ class LampHandler {
       bool state(const uint8_t position, const bool queryHw = false) const;
 
       /**
+       * switches off all lamps
+       */
+      void allOff();
+
+      /**
        * initializes the instance
        * call this once in setup()
        */
-      void begin();
+      void
+      begin();
 
-protected:
-private:
+   protected:
+   private:
       const uint8_t _pinSerial;
       const uint8_t _pinSerialClock;
       const uint8_t _pinLatch;
-      uint8_t _lampstates[NUMBER_OF_ICS];   // logical lamp state:  vector of bitarrays, one 8bit-Array per IC
-      uint8_t _lampstatesHw[NUMBER_OF_ICS]; // hardware lamp state: vector of bitarrays, one 8bit-Array per IC
+      uint64_t _lastWriteMs = 0;
+      uint8_t _lampstates[NUMBER_OF_ICS];   // logical lamp state:  one array entry (8bit) per IC; byte0, bit0 = position0; byte1, bit0 = position8 ...
+      uint8_t _lampstatesHw[NUMBER_OF_ICS]; // hardware lamp state: one array entry (8bit) per IC
+
+      /**
+       * takes the lamp position on the board and derives the index into _lampstates and the bitmask from it. 
+       * WARNING! does not check the plausibility of position! index will be out of boundaries (which in turn will cause a crash) when isValidPosition for that position is false!
+       * @param[in] the lamp position (see warning above)
+       * @param[out] index the resulting index
+       * @param[out] bitmask the resulting bitmask
+       */
+      void calculateIndexAndBitmask(const uint8_t position, uint8_t &index, uint8_t &bitmask) const;
+
+      /**
+       * @returns true, when any lamp state change has been requested since last writeLampState (=> a shift out is necessary)
+       */
+      bool needsHwUpdate() const;
 
       // disallow creation
       LampHandler() = delete;
@@ -78,8 +100,13 @@ private:
       LampHandler &operator=(const LampHandler &) = delete;
 
       /**
-       * updates the hw state of the lamp pins with the logical lamp states
+       * updates the hw state of the lamp pins with the logical lamp states, when necessary
        */
       void writeLampState();
+
+      /**
+       * updates the hw state of the lamp pins with the logical lamp states
+       */
+      void writeToHw();
    };
 }
