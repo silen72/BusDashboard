@@ -9,23 +9,21 @@
 namespace BusDashboard {
 
 
-    // Pins used to connect the various boards
-    enum ArduinoPins {
-        LAMP_DRIVER_SI = 4,
-        LAMP_DRIVER_RCK = 5,
-        LAMP_DRIVER_SCK = 6,
-        MAINS_RELAY = 7,
-        CAN_CS = 8,             // CAN-Bus driver chip select (SPI)
-        CAN_NT = 9,             // CAN-Bus driver NT (?) (SPI)
-        BUTTON_MATRIX_CS = 10,  // button matrix (SPI)
-        SPI_MOSI = 11,          // on a leonardo board this is only available on the ISCP header (ISCP-4)!
-        SPI_MISO = 12,          // on a leonardo board this is only available on the ISCP header (ISCP-1)!
-        SPI_SCK = 13            // on a leonardo board this is only available on the ISCP header (ISCP-3)!
+    // Pins used to connect to the various PCBs
+    enum LeonardoPins
+    {
+        LAMP_DRIVER_SI = 4,    // connected to the first 74HC595's SI-pin
+        LAMP_DRIVER_RCK = 5,   // connected to all 74HC595's RCLK-pins
+        LAMP_DRIVER_SCK = 6,   // connected to all 74HC595's SRCLK-pins
+        POWER_RELAY = 7,       // toggle power for the transformers using this pin
+        CAN_CS = 8,            // CAN-Bus driver chip select (SPI)
+        CAN_NT = 9,            // CAN-Bus driver NT (?) (SPI)
+        BUTTON_MATRIX_CS = 10, // button matrix (SPI)
     };
 
     class Dashboard {
     public:
-        const uint32_t MAX_IDLE_MS = 5L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
+        const uint32_t MAX_IDLE_MS = 15L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
         const uint32_t WARN_IDLE_MS = 30L * 1000L; // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
  
         /**
@@ -40,7 +38,7 @@ namespace BusDashboard {
         void resetIdleTimer();
 
         /**
-         * initialization: turn on mains releay
+         * initialization: turn on mains relay
          */
         void begin();
 
