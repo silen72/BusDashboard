@@ -19,8 +19,8 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 
 Some info about the board:
 - Instead of soldering all those ICs directly onto the pcb you should use sockets.
-- The board is pretty big. This is due to the fact that the connectors have a lot of space between them. Placing them closer to each other is possible but makes the assambly (or disassembly if necessary) more finicky.
-- Testing the MOSFETs with a 24V light bulb has shown that there was no noticable warming, hence no effort was made for cooling. Should you want to drive more mA please consider placing the MOSFETs further apart to allow for heatsinks.
+- The board is pretty big. This is due to the fact that the connectors have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
+- Testing the MOSFETs with a 24V light bulb has shown that there was no noticable warming, hence no effort was made for cooling. Should you want to drive more mA please consider a) placing the MOSFETs further apart to allow for heatsinks and b) increasing the trace width.
 - The number of fuses might be overkill. I have experienced a smokey situation without them so I added a few (and probably a few more than necessary).
 - The way I had to place the [74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/) ICs on the board has led to a not immediatly intuitive adressing order (which the code takes care of):
 
