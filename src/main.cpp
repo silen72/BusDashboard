@@ -26,7 +26,7 @@ void setup()
   keyboardHandler.begin();
   lampHandler.begin();
   dashboard.begin();      // wake up the dashboard (enable power for the transformers)
-  lampHandler.allOff();   // switch off all lamps (a flaw in hw design: the lamps got power with the previous instruction, so they probably already have flashed...)
+  lampHandler.allOff();   // switch off all lamps (a flaw in hw design: the lamps got power with the dashboard.begin() instruction, so they probably already have flashed...)
 
   // debug: add a test listener to all buttons
   for (uint8_t button = 0; button < LampHandler::NUMBER_OF_ICS * 8; button++)
