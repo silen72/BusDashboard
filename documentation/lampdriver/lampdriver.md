@@ -51,6 +51,7 @@ Bill of material:
 -  3 IC TBD62783APG octal DMOS-FET arrays
 - 52 blade terminals (2,8mm)
 -  9 fuse holders
--  9 fuses 
+-  9 fuses
+-  1 socket JST-XH-4A
 
 Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
