@@ -55,7 +55,7 @@ Bill of material:
 -  1 socket JST-XH-4A
 
 Improvements for (a planned) version 1.1:
-- The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the blade terminals do not align cleanly on the board but stick out a little. Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
+- The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little.  Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
 - More detail on the silk screen. Currently the silk screen is a mess because I was lazy / too eager to have the board created finally.
 
 Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
