@@ -41,4 +41,16 @@ Some info about the board:
 */
 ```
 
+Bill of material:
+- 24 MOSFET IRLZ44n
+- 24 100 Ω resistors
+- 24 22k Ω resistors
+-  6 IC sockets 16 pin
+-  6 IC 74hc595AG shift registers
+-  3 IC sockets 18 pin
+-  3 IC TBD62783APG octal DMOS-FET arrays
+- 52 blade terminals (2,8mm)
+-  9 fuse holders
+-  9 fuses 
+
 Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
