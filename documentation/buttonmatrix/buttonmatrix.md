@@ -15,6 +15,7 @@ Some infos about the pcb:
 - The blade terminals may seem to have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
 
 ## Bill of materials
+-   1 IC socket 28 pin
 -   1 IC MCP23S17
 -   1 resistor 1k
 -   8 resistors 10k
