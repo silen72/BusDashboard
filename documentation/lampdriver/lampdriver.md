@@ -10,7 +10,7 @@ The Lamp Driver PCB mainly consist of three distinct parts:
 ![the schematics](images/LampDriverSchematics.png)
 
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
-![the pcb](images/LampDriverBoard.svg)
+![the board](images/LampDriverBoard.png)
 
 
 ![the rendered pcb](images/LampDriverPCB.png)
