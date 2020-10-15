@@ -28,6 +28,9 @@ The MCP23S17 has 16 I/O pins. Eight of those (GP<b>A</b>x) are set to output, th
 
 The code powers only one of the eight ROWs at a time by setting exactly one of the eight GP<b>A</b>x pins on the MCP23S17 to HIGH. It then scans all eight GP<b>B</b>x pins. For each GPBx pin that measures HIGH it knows that the blade terminals in that ROW and COLumn must be connected -> the button connected to these blade terminals is pushed.
 
+## Improvements for a future version
+- Swap VCC and GND pins on the input connector. Alternative: swap VCC and GND on the shield pcb (yet to be desrcibed...)
+
 
 Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
 
