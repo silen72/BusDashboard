@@ -1,7 +1,6 @@
 #pragma once
 #include <Arduino.h>
 #include "buttonmatrix/ButtonListener.h"
-#include "lampdriver/LampHandler.h"
 #include "keyboard/KeyboardHandler.h"
 
 namespace BusDashboard {
