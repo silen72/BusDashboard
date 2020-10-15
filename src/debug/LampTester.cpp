@@ -2,7 +2,17 @@
 
 namespace BusDashboard {
 
-    LampTester::LampTester(LampHandler& lh) : _lh(&lh) {
+    void LampTester::registerWith(ButtonHandler &bh)
+    {
+        // add a test listener to all buttons
+        for (uint8_t button = 0; button < LampHandler::NUMBER_OF_ICS * 8; button++)
+        {
+            bh.addListener(*this, button);
+        }
+    }
+
+        LampTester::LampTester(LampHandler &lh) : _lh(&lh)
+    {
         for (uint8_t idx = 0; idx < 64; idx++) {
             _state[idx] = false;
         }

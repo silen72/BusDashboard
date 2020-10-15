@@ -1,5 +1,5 @@
 #pragma once
-#include "Arduino.h"
+#include <Arduino.h>
 #include "buttonmatrix/ButtonListener.h"
 #include "lampdriver/LampHandler.h"
 
@@ -7,6 +7,7 @@ namespace BusDashboard {
     class LampTester : public ButtonListener {
         public:
             void setCurrentState(const uint8_t button, const bool state);
+            void registerWith(ButtonHandler &bh);
             LampTester(LampHandler& lh);
 
         protected:
