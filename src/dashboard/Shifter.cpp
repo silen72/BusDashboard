@@ -8,7 +8,7 @@
 
 namespace BusDashboard
 {
-    Shifter::Shifter(LampHandler &lh, KeyboardHandler &kh) : _lh(&lh), _kh(&kh)
+    Shifter::Shifter(KeyboardHandler &kh) : _kh(&kh)
     {
         _state[state_D] = false;
         _state[state_R] = false;
@@ -66,8 +66,7 @@ namespace BusDashboard
         }
 
         // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
-        if (checkNone)
-            &(!(_state[state_N] | _state[state_R] | _state[state_D]))
+        if (checkNone & (!(_state[state_N] | _state[state_R] | _state[state_D])))
             {
                 _state[state_N] = true;
                 _kh->addPressReleaseAction('n');

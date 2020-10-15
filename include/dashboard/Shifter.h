@@ -1,5 +1,5 @@
 #pragma once
-#include "Arduino.h"
+#include <Arduino.h>
 #include "buttonmatrix/ButtonListener.h"
 #include "lampdriver/LampHandler.h"
 #include "keyboard/KeyboardHandler.h"
@@ -10,7 +10,7 @@ namespace BusDashboard {
         public:
             void setCurrentState(const uint8_t button, const bool state);
             void registerWith(ButtonHandler &bh);
-            Shifter(LampHandler &lh, KeyboardHandler &kh);
+            Shifter(KeyboardHandler &kh);
             void begin();
 
         protected:
@@ -20,7 +20,6 @@ namespace BusDashboard {
             static const uint8_t state_N = 2;
             bool _state[3];
             bool _initDone = false;
-            LampHandler *_lh;
             KeyboardHandler *_kh;
 
             Shifter() = delete;
