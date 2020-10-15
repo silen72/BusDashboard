@@ -96,7 +96,7 @@ namespace BusDashboard {
 		 * @param[in] listener the listener instance to add
 		 * @param[in] button the button the listener wants to be informed about (button number on the scan matrix)
 		*/
-		bool addListener(ButtonListener& listener, const uint8_t button);
+		bool addListener(ButtonListener &listener, const uint8_t button);
 
 		/**
 		 * queries the current state of connected buttons and notifies listeners
