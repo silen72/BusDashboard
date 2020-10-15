@@ -9,6 +9,22 @@ class LampHandler {
       static const uint8_t NUMBER_OF_ICS = 6; // the number of 74HC595 ICs on the board
       static const uint64_t WRITE_DELAY = 25; // wait at least this many ms between to actual writes to the lamp driver board
 
+      enum DriverPosition
+      {
+         // 24V: position 1 .. 24
+         Tuer_Freigabe,
+         Tuer_Sperren,
+         Kneeling_2,
+         Kneeling_1,
+         Kindersteuerung,
+
+         //  5V: position 25 .. 48
+         Gangschaltung = 25,
+         Tuer_3,
+         Tuer_2,
+         Tuer_1,
+      };
+
       /**
        * updates the physical state of the lamps to the logical state, if necessary
        * communicates with the shift register ICs
