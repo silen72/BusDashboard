@@ -18,46 +18,70 @@ namespace BusDashboard {
          * enum of all buttons on the dashboard with a mapping to their position on the button matrix
 		 * note: sorry for the missing translation, I may add it sometimes ...
          */
-		enum MatrixPositions {
-			Asr,
-			Blinker_Links,
-			Blinker_Rechts,
-			Blinker_Warn,
-			Licht_Abblend,
-			Licht_Fahrer,
-			Licht_Fern,
-			Licht_Innen_1,
-			Licht_Innen_2,
-			Licht_Nebelschluss,
-			Licht_Standlicht,
-			Gangschaltung_D,
+		enum MatrixPosition
+		{
+			// buttons and switches on the right half of the dashboard
+			Gangschaltung_D = 1,
 			Gangschaltung_N,
 			Gangschaltung_R,
-			Haltestellenansage,
+			Tuer_3,
+			Tuer_Freigabe,
+			Tuer_2,
+			Tuer_1,
+			Tuer_Sperren_1,
+			Tuer_Sperren_2,
+			Kneeling_2_auf,
+			Kneeling_2_ab,
+			Kneeling_1_auf,
+			Kneeling_1_ab,
+			Kindersteuerung_1,
+			Kindersteuerung_2,
 			Haltestellenbremse,
-			Hupe,
-			Kindersteuerung,
-			Kneeling_1,
-			Kneeling_2,
-			Parkbremse,
-			Profil_Wechseln,
-			Retarder,
+			Parkbremse, // Quit
+			SystemInfo_auf, // Profil_Wechseln
+			SystemInfo_ab,
+			Reset,
+			Display,
+
+			// ignition / lock
+			Zuendung_1,
+			Zuendung_2,
+			Zuendung_3,
+
+			// retarder
+			Retarder_1,
+			Retarder_2,
+			Retarder_3,
+			Retarder_4,
+			Retarder_5,
+			Retarder_6,
+
+			// direction-indicator control
 			Scheibenwischer_1,
 			Scheibenwischer_2,
 			Scheibenwischer_3,
+			Wischwasser,
+			Hupe,
+			Licht_Fern,
+			Blinker_Links,
+			Blinker_Rechts,
+
+			// buttons and switches on the left half of the dashboard
+			Haltestellenansage,
+			Blinker_Warn,
+			Licht_Fahrer,
+			Licht_Innen_1,
+			Licht_Innen_2,
+			Asr,
+
+			// light control
+			/*Licht_Abblend,
+			Licht_Standlicht,
+			Licht_Nebelschluss, */
 			Scheinwerfer_A1,
 			Scheinwerfer_A2,
 			Scheinwerfer_I1,
-			Scheinwerfer_I2,
-			Tuer_1,
-			Tuer_2,
-			Tuer_3,
-			Tuer_Freigabe,
-			Tuer_Sperren,
-			Wischwasser,
-			Zuendung_1,
-			Zuendung_2,
-			Zuendung_3
+			Scheinwerfer_I2
 		};
 
 		static const uint8_t MATRIX_ROW_COUNT = 8; // the number of rows in the multiplexer matrix
