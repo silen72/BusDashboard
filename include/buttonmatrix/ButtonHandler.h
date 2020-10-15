@@ -37,7 +37,7 @@ namespace BusDashboard {
 			Kindersteuerung_1,
 			Kindersteuerung_2,
 			Haltestellenbremse,
-			Parkbremse, // Quit
+			Parkbremse,		// Quit
 			SystemInfo_auf, // Profil_Wechseln
 			SystemInfo_ab,
 			Reset,
