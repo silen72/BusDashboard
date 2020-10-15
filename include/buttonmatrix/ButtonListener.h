@@ -1,11 +1,16 @@
 #pragma once
 #include <Arduino.h>
+#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard {
+
+	class ButtonHandler;
+
 	/**
 	interface for classes that want to receive button states
 	*/
-	class ButtonListener {
+	class ButtonListener
+	{
 	public:
 		/**
 		this gets called every time a button state is read from the muxer hardware
@@ -13,5 +18,6 @@ namespace BusDashboard {
 		@param[in] state the state the button was in (true: connected / pressed)
 		*/
 		virtual void setCurrentState(const uint8_t button, const bool state) = 0;
+		virtual void registerWith(ButtonHandler &bh) = 0;
 	};
 }
