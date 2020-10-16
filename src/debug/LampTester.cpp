@@ -1,4 +1,5 @@
 #include "debug/LampTester.h"
+#include "lampdriver/LampHandler.h"
 
 namespace BusDashboard {
 

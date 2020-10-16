@@ -2,7 +2,13 @@
 #include <Keyboard.h>
 #include <SPI.h>
 #include "Dashboard.h"
+
 #include "debug/LampTester.h"
+#include "buttonmatrix/ButtonHandler.h"
+#include "lampdriver/LampHandler.h"
+#include "keyboard/KeyboardHandler.h"
+#include "KOMSI/KOMSIHandler.h"
+#include "CANBus/CANBus.h"
 
 using namespace BusDashboard;
 

@@ -1,5 +1,7 @@
 #include "buttonmatrix/ButtonHandler.h"
 
+#include "Dashboard.h"
+#include "buttonmatrix/ButtonListener.h"
 
 namespace BusDashboard {
 

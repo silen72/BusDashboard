@@ -1,18 +1,19 @@
 #pragma once
-#include "KomsiCommandListener.h"
 #include "ItemNode.h"
-#include "Dashboard.h"
 
 namespace BusDashboard {
 
     class Dashboard;
+    class KomsiCommandListener;
+
     /**
      * handles the commands sent by KOMSI
      * 
      * to map a command to a function, edit the enum Commands
      *  e.g.: to map 'A' to Indicator, set KomsiHandler::Commands::Blinker = KomsiHandler::Codes::C01
     */
-    class KomsiHandler {
+    class KomsiHandler
+    {
     private:
         static const uint8_t COMMAND_COUNT = 2 * 26;
 
@@ -137,6 +138,5 @@ namespace BusDashboard {
          * @return true if the listener was added successfully
         */
         bool addListener(KomsiCommandListener& listener, const uint8_t command);
-
     };
 }

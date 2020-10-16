@@ -1,19 +1,21 @@
 #pragma once
 #include <Arduino.h>
 #include "buttonmatrix/ButtonListener.h"
-#include "lampdriver/LampHandler.h"
-#include "keyboard/KeyboardHandler.h"
 
 namespace BusDashboard
 {
+    class Dashboard;
+    class ButtonHandler;
 
     class LightControl : public ButtonListener
     {
     public:
+        LightControl(Dashboard &parent);
+        Dashboard &dashboard() { return _parent; }
         void setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
-        LightControl(LampHandler &lh, KeyboardHandler &kh);
         void begin();
+        bool isLit() { return _dashboardLit; }
 
     protected:
     private:
@@ -41,13 +43,12 @@ namespace BusDashboard
             I2,           // lighting control knob is in position "I2"
             I2_leaving    // I2 has changed to LOW but no other knob position is measured HIGH yet
         };
+        Dashboard &_parent;
         bool _isConnected[MaxIndex + 1];
         State _currentState = State::Undefined;
         unsigned long _leavingTS = 0;
         unsigned long _blinkTS = 0;
         bool _dashboardLit = false;
-        LampHandler *_lh;
-        KeyboardHandler *_kh;
 
         LightControl() = delete;
         LightControl(const LightControl &) = delete;

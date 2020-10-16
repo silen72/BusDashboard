@@ -1,4 +1,6 @@
-#include "Komsi/KOMSIHandler.h"
+#include <Arduino.h>
+#include "KOMSI/KOMSIHandler.h"
+#include "KOMSI/KomsiCommandListener.h"
 
 namespace BusDashboard {
 

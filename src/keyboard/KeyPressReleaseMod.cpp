@@ -1,4 +1,5 @@
 #include "keyboard/KeyPressReleaseMod.h"
+#include "keyboard/KeyRelease.h"
 
 namespace BusDashboard {
     KeyPressReleaseMod::KeyPressReleaseMod(const uint8_t keycode, const uint8_t modifierkeycode, const uint16_t duration) : KeyPress(modifierkeycode), _duration(duration) {

@@ -1,15 +1,12 @@
 #pragma once
 #include <SPI.h>
 #include <gpio_MCP23S17.h>	// install library "gpio_MCP23S17 by sumotoy" in PIO
-#include "ButtonListener.h"
 #include "ItemNode.h"
-#include "Dashboard.h"
 
 namespace BusDashboard {
 
 	class Dashboard;
-
-	class ButtonListener; // forward declaration
+	class ButtonListener;
 
 	/**
 	handles the multiplexer matrix used to query up to 64 button states

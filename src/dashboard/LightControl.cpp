@@ -1,8 +1,13 @@
 #include "dashboard/LightControl.h"
 
+#include "lampdriver/LampHandler.h"
+#include "keyboard/KeyboardHandler.h"
+#include "Keyboard.h"
+#include "Dashboard.h"
+
 namespace BusDashboard
 {
-    LightControl::LightControl(LampHandler &lh, KeyboardHandler &kh) : _lh(&lh), _kh(&kh)
+    LightControl::LightControl(Dashboard &parent) : _parent(parent)
     {
         _isConnected[(uint8_t)Index::A1] = false;
         _isConnected[(uint8_t)Index::A2] = false;
@@ -27,12 +32,12 @@ namespace BusDashboard
                     case State::Off:
                     case State::A2:
                     case State::A2_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                         _currentState = State::A1;
                         break;
                     case State::I1:
                     case State::I1_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::A1;
                         break;
                     case State::Undefined:
@@ -62,12 +67,12 @@ namespace BusDashboard
                     {
                     case State::A1:
                     case State::A1_leaving:
-                        _kh->addPressReleaseAction('l');
+                        _parent.keyboardHandler().addPressReleaseAction('l');
                         _currentState = State::A2;
                         break;
                     case State::I2:
                     case State::I2_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::A2;
                         break;
                     case State::Undefined:
@@ -96,12 +101,12 @@ namespace BusDashboard
                     {
                     case State::A1:
                     case State::A1_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::I1;
                         break;
                     case State::I2:
                     case State::I2_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                         _currentState = State::I1;
                         break;
                     case State::Undefined:
@@ -130,12 +135,12 @@ namespace BusDashboard
                     {
                     case State::A2:
                     case State::A2_leaving:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::I2;
                         break;
                     case State::I1:
                     case State::I1_leaving:
-                        _kh->addPressReleaseAction('l');
+                        _parent.keyboardHandler().addPressReleaseAction('l');
                         _currentState = State::I2;
                         break;
                     case State::Undefined:
@@ -164,11 +169,11 @@ namespace BusDashboard
             {
             case State::I2_leaving:
             case State::A2_leaving:
-                _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                 // intentional fall through
             case State::I1_leaving:
             case State::A1_leaving:
-                _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                 break;
             default:
                 break;
@@ -196,7 +201,7 @@ namespace BusDashboard
         if (newDashboardLitState != _dashboardLit)
         {
             _dashboardLit = newDashboardLitState;
-            _lh->setState(LampHandler::DriverPosition::Gangschaltung, _dashboardLit);
+            _parent.lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, _dashboardLit);
         }
     }
 

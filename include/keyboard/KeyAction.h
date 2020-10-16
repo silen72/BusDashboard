@@ -1,6 +1,5 @@
 #pragma once
 #include <Arduino.h>
-#include "Keyboard.h"           // for some strange reasons this include must be the last - otherwise there are lots of strange compile errors ...
 
 namespace BusDashboard {
     /**

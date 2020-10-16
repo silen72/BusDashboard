@@ -1,10 +1,5 @@
 #pragma once
 #include <Arduino.h>
-#include "buttonmatrix/ButtonHandler.h"
-#include "lampdriver/LampHandler.h"
-#include "keyboard/KeyboardHandler.h"
-#include "KOMSI/KOMSIHandler.h"
-#include "CANBus/CANBus.h"
 
 namespace BusDashboard {
 
@@ -13,6 +8,8 @@ namespace BusDashboard {
     class KeyboardHandler;
     class KomsiHandler;
     class CANBus;
+
+    class LightControl;
 
     // Pins used to connect to the various PCBs
     enum LeonardoPins
@@ -52,7 +49,8 @@ namespace BusDashboard {
          */
         uint32_t sleepTimeMs() const { return millis() - _lastWakeupAction; }
 
-        
+        bool isLit() { return false; }
+
         Dashboard(const uint8_t pin_relay);
 
         // hardware handler classes
@@ -62,12 +60,11 @@ namespace BusDashboard {
         KomsiHandler &komsiHandler() { return *_komsiHandler; };
         CANBus &canBusHandler() { return *_canBusHandler; };
 
-        // classes implementing switches
-        
 
     protected:
 
     private:
+        
         const uint8_t _pin_relay;
         uint32_t _lastWakeupAction;
         bool _warningGiven = false;
@@ -80,6 +77,8 @@ namespace BusDashboard {
         KeyboardHandler *_keyboardHandler;
         KomsiHandler *_komsiHandler;
         CANBus *_canBusHandler;
+
+        LightControl *_lightcontrol;
 
         // disallow creation
         Dashboard() = delete;

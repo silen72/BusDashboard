@@ -1,6 +1,5 @@
-
 #pragma once
-#include <Arduino.h>
+//#include <Arduino.h>
 
 namespace BusDashboard {
     class KomsiCommandListener {

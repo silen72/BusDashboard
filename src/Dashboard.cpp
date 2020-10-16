@@ -1,5 +1,12 @@
 #include "Dashboard.h"
 
+#include "buttonmatrix/ButtonHandler.h"
+#include "lampdriver/LampHandler.h"
+#include "keyboard/KeyboardHandler.h"
+#include "KOMSI/KOMSIHandler.h"
+#include "CANBus/CANBus.h"
+#include "dashboard/LightControl.h"
+
 namespace BusDashboard {
 
     void Dashboard::checkIdle() {
@@ -39,6 +46,7 @@ namespace BusDashboard {
         _keyboardHandler = new KeyboardHandler(*this);
         _komsiHandler = new KomsiHandler(*this);
         _canBusHandler = new CANBus(*this, LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
+        _lightcontrol = new LightControl(*this);
 
         // initialize own hardware
         pinMode(_pin_relay, OUTPUT);

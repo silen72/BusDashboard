@@ -5,6 +5,7 @@
 */
 
 #include "dashboard/Shifter.h"
+#include "keyboard/KeyboardHandler.h"
 
 namespace BusDashboard
 {
