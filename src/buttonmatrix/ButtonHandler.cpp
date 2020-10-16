@@ -3,8 +3,8 @@
 #include "Dashboard.h"
 #include "buttonmatrix/ButtonListener.h"
 
-namespace BusDashboard {
-
+namespace BusDashboard
+{
   ButtonHandler::ButtonHandler(Dashboard &parent, const uint8_t pin_cs, const uint8_t address) : _parent(parent), _pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address))
   {
     for (uint8_t i = 0; i < BUTTON_COUNT; i++)
@@ -13,42 +13,53 @@ namespace BusDashboard {
     }
   }
 
-  bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
-		if (button >= ButtonHandler::BUTTON_COUNT) return false;
+  bool ButtonHandler::addListener(ButtonListener &listener, const uint8_t button)
+  {
+    if (button >= ButtonHandler::BUTTON_COUNT)
+      return false;
 #ifdef SerialDebug
-        Serial.print(F("ButtonHandler::addListener, button "));
-        Serial.print((int)button);
+    Serial.print(F("ButtonHandler::addListener, button "));
+    Serial.print((int)button);
 #endif
-            if (nullptr == _listener[button]) {
-            _listener[button] = new ItemNode<ButtonListener>(listener);
+    if (nullptr == _listener[button])
+    {
+      _listener[button] = new ItemNode<ButtonListener>(listener);
 #ifdef SerialDebug
-            Serial.print(F(" created root node"));
-            Serial.println((int)_listener[button]);
+      Serial.print(F(" created root node"));
+      Serial.println((int)_listener[button]);
 #endif
-        }
-        else
-        {
+    }
+    else
+    {
 #ifdef SerialDebug
-            Serial.print(F(" appends node to "));
-            Serial.println((int)_listener[button]);
+      Serial.print(F(" appends node to "));
+      Serial.println((int)_listener[button]);
 #endif
-            _listener[button]->append(listener);
-        }
-        return true;
-	}
+      _listener[button]->append(listener);
+    }
+    return true;
+  }
 
-	void ButtonHandler::notify(const uint8_t button, const bool state) {
-        ItemNode<ButtonListener> *node = _listener[button];
-        while (nullptr != node) {
-            node->item()->setCurrentState(button, state);
-            node = node->next();
-        }
-	}
+  void ButtonHandler::notify(const uint8_t button, const bool state)
+  {
+    bool resetTimer = false;
+    ItemNode<ButtonListener> *node = _listener[button];
+    while (nullptr != node)
+    {
+      resetTimer |= node->item()->setCurrentState(button, state);
+      node = node->next();
+    }
+    if (resetTimer)
+    {
+      dashboard().resetIdleTimer();
+    }
+  }
 
-    void ButtonHandler::begin() {
-        _mcp->begin();
-        //setup the gpio
-        /*        7     6     5	     4     3   2     1    0
+  void ButtonHandler::begin()
+  {
+    _mcp->begin();
+    //setup the gpio
+    /*        7     6     5	     4     3   2     1    0
   IOCON = BANK MIRROR SEQOP DISSLW HAEN ODR INTPOL -NC-
   
   bit 7 BANK: Controls how the registers are addressed
@@ -75,31 +86,35 @@ namespace BusDashboard {
   bit 0 Unimplemented: Read as ‘0’
   */
 
-        // left in case of trouble with SPI: might need to slow down SPI in the future ...
-        //SPI.setClockDivider(SPI_CLOCK_DIV32);
+    // left in case of trouble with SPI: might need to slow down SPI in the future ...
+    //SPI.setClockDivider(SPI_CLOCK_DIV32);
 
-        _mcp->gpioRegisterWriteByte(MCP23S17_IOCON, 0b00000000);
-        _mcp->gpioRegisterWriteByte(MCP23S17_IODIR, 0x00); // IODIRA: all output -> row driver
-        _mcp->gpioRegisterWriteByte(MCP23S17_IODIR + 1, 0xff); // IODIRB: all input -> column query
-        _mcp->gpioRegisterWriteByte(MCP23S17_GPPU + 1, 0x00);  // no pullup on input ports
+    _mcp->gpioRegisterWriteByte(MCP23S17_IOCON, 0b00000000);
+    _mcp->gpioRegisterWriteByte(MCP23S17_IODIR, 0x00);     // IODIRA: all output -> row driver
+    _mcp->gpioRegisterWriteByte(MCP23S17_IODIR + 1, 0xff); // IODIRB: all input -> column query
+    _mcp->gpioRegisterWriteByte(MCP23S17_GPPU + 1, 0x00);  // no pullup on input ports
+  }
+
+  void ButtonHandler::scan()
+  {
+    // throttle reads
+    const uint32_t now = millis();
+    if (abs(now - _lastRead) < READ_DELAY_MS)
+      return;
+    // read one row of buttons
+    setMuxRow();
+    const uint8_t button = _row * MATRIX_COLUMN_COUNT;
+    uint8_t result = readMuxColumns();
+    // calculate button position and notify corresponding listeners
+    for (uint8_t bit = 0; bit < MATRIX_COLUMN_COUNT; bit++)
+    {
+      notify(button + bit, (result & 0b10000000 ? 1 : 0));
+      result = result << 1;
     }
-
-    void ButtonHandler::scan() {
-        // throttle reads
-        const uint32_t now = millis();
-        if (abs(now - _lastRead) < READ_DELAY_MS) return;
-        // read one row of buttons
-        setMuxRow();
-        const uint8_t button = _row * MATRIX_COLUMN_COUNT;
-        uint8_t result = readMuxColumns();
-        // calculate button position and notify corresponding listeners
-        for (uint8_t bit = 0; bit < MATRIX_COLUMN_COUNT; bit++) {
-            notify(button + bit, (result & 0b10000000 ? 1: 0));
-            result = result << 1;
-        }
-        // prepare for next call
-        _row++;
-        if (_row >= MATRIX_ROW_COUNT) _row = 0;
-        _lastRead = now;
-	}
-}	
+    // prepare for next call
+    _row++;
+    if (_row >= MATRIX_ROW_COUNT)
+      _row = 0;
+    _lastRead = now;
+  }
+} // namespace BusDashboard

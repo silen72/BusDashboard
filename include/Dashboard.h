@@ -27,12 +27,13 @@ namespace BusDashboard {
     public:
         const uint32_t MAX_IDLE_MS = 15L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
         const uint32_t WARN_IDLE_MS = 30L * 1000L; // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
- 
+
         /**
-         * controls the mains relay (turns it off after idle time threshold is met)
-         * emits a warning
+         * polls the Serial input queue for KOMSI commands
+         * scans the buttons
+         * sets lamps on the dashboard accordingly
          */
-        void checkIdle();
+        void update();
 
         /**
          * resets the idleTimer
@@ -79,6 +80,12 @@ namespace BusDashboard {
         CANBus *_canBusHandler;
 
         LightControl *_lightcontrol;
+
+        /**
+         * controls the mains relay (turns it off after idle time threshold is met)
+         * emits a warning
+         */
+        void checkIdle();
 
         // disallow creation
         Dashboard() = delete;

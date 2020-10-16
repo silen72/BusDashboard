@@ -64,4 +64,18 @@ namespace BusDashboard {
     {
         return _lightcontrol->isLit();
     }
+
+    void Dashboard::update()
+    {
+        if (Serial.available())
+        {
+            int val = Serial.read();
+            komsiHandler().processIncoming(val);
+            resetIdleTimer();
+        }
+        buttonHandler().scan();
+        lampHandler().update();
+        keyboardHandler().update();
+        checkIdle();
+    }
 }
