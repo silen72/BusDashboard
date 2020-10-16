@@ -16,8 +16,9 @@ namespace BusDashboard {
 		this gets called every time a button state is read from the muxer hardware
 		@param[in] button the button that has been read
 		@param[in] state the state the button was in (true: connected / pressed)
+		@returns true, if the state has changed
 		*/
-		virtual void setCurrentState(const uint8_t button, const bool state) = 0;
+		virtual bool setCurrentState(const uint8_t button, const bool state) = 0;
 		virtual void registerWith(ButtonHandler &bh) = 0;
 	};
 }

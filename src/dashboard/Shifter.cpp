@@ -16,13 +16,15 @@ namespace BusDashboard
         _state[state_N] = false;
     }
 
-    void Shifter::setCurrentState(const uint8_t button, const bool state)
+    bool Shifter::setCurrentState(const uint8_t button, const bool state)
     {
+        bool changed = false;
         bool checkNone = false;
         switch (button)
         {
         case ButtonHandler::MatrixPosition::Gangschaltung_D:
-            if (_state[state_D] != state)
+            changed = _state[state_D] != state;
+            if (changed)
             {
                 if (state)
                 {
@@ -37,7 +39,8 @@ namespace BusDashboard
             break;
 
         case ButtonHandler::MatrixPosition::Gangschaltung_R:
-            if (_state[state_R] != state)
+            changed = _state[state_R] != state;
+            if (changed)
             {
                 if (state)
                 {
@@ -52,12 +55,18 @@ namespace BusDashboard
             break;
 
         case ButtonHandler::MatrixPosition::Gangschaltung_N:
-            if (_state[state_N] != state)
+            changed = _state[state_N] != state;
+            if (changed)
             {
                 if (state)
                 {
                     _kh->addPressReleaseAction('n');
                 }
+                else
+                {
+                    checkNone = true;
+                }
+
                 _state[state_N] = state;
             }
             break;
@@ -68,10 +77,11 @@ namespace BusDashboard
 
         // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
         if (checkNone & (!(_state[state_N] | _state[state_R] | _state[state_D])))
-            {
-                _state[state_N] = true;
-                _kh->addPressReleaseAction('n');
-            }
+        {
+            _state[state_N] = true;
+            _kh->addPressReleaseAction('n');
+        }
+        return changed;
     }
 
     void Shifter::registerWith(ButtonHandler &bh)

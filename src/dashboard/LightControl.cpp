@@ -15,8 +15,9 @@ namespace BusDashboard
         _isConnected[(uint8_t)Index::I2] = false;
     }
 
-    void LightControl::setCurrentState(const uint8_t button, const bool state)
+    bool LightControl::setCurrentState(const uint8_t button, const bool state)
     {
+        bool resetTimer = false;
         uint8_t index;
         switch (button)
         {
@@ -25,6 +26,7 @@ namespace BusDashboard
             if (_isConnected[index] != state)
             {
                 _isConnected[index] = state;
+                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -61,6 +63,7 @@ namespace BusDashboard
             if (_isConnected[index] != state)
             {
                 _isConnected[index] = state;
+                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -95,6 +98,7 @@ namespace BusDashboard
             if (_isConnected[index] != state)
             {
                 _isConnected[index] = state;
+                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -129,6 +133,7 @@ namespace BusDashboard
             if (_isConnected[index] != state)
             {
                 _isConnected[index] = state;
+                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -203,6 +208,8 @@ namespace BusDashboard
             _dashboardLit = newDashboardLitState;
             _parent.lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, _dashboardLit);
         }
+        
+        return resetTimer;
     }
 
     void LightControl::registerWith(ButtonHandler &bh)

@@ -19,8 +19,9 @@ namespace BusDashboard {
         }
     }
 
-    void LampTester::setCurrentState(const uint8_t button, const bool state) {
-        if (_state[button] == state) return;
+    bool LampTester::setCurrentState(const uint8_t button, const bool state)
+    {
+        if (_state[button] == state) return false;
 
         Serial.print(F("button "));
         Serial.print((int)button);
@@ -39,6 +40,7 @@ namespace BusDashboard {
         if (_lampposition >= LampHandler::NUMBER_OF_ICS * 8) _lampposition = 0;
         */
         _state[button] = state;
+        return true;
     }
 
 } // namespace BusDashboard class 

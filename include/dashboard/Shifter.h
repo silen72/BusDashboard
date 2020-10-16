@@ -10,7 +10,7 @@ namespace BusDashboard {
     class Shifter : public ButtonListener
     {
     public:
-        void setCurrentState(const uint8_t button, const bool state);
+        bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
         Shifter(KeyboardHandler &kh);
         void begin();
