@@ -48,10 +48,8 @@ namespace BusDashboard {
         return ((value & bitmask) > 0);
 	}
 
-    LampHandler::LampHandler(Dashboard &parent , const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch): _parent(parent),
-                                                                                                                                 _pinSerial(pinSerial),
-                                                                                                                                 _pinSerialClock(pinSerialClock),
-                                                                                                                                 _pinLatch(pinLatch)
+    LampHandler::LampHandler(Dashboard &parent , const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch): 
+        _parent(parent), _pinSerial(pinSerial), _pinSerialClock(pinSerialClock), _pinLatch(pinLatch)
     {
         // initial state of all lamps: off (both logical and hardware)
         for (uint8_t i = 0; i < NUMBER_OF_ICS; i++) {
