@@ -3,8 +3,11 @@
 #include <gpio_MCP23S17.h>	// install library "gpio_MCP23S17 by sumotoy" in PIO
 #include "ButtonListener.h"
 #include "ItemNode.h"
+#include "Dashboard.h"
 
 namespace BusDashboard {
+
+	class Dashboard;
 
 	class ButtonListener; // forward declaration
 
@@ -110,14 +113,14 @@ namespace BusDashboard {
 		*/
 		void begin();
 
-		ButtonHandler(const uint8_t pin_cs, const uint8_t address);
+		ButtonHandler(Dashboard &parent, const uint8_t pin_cs, const uint8_t address);
+		Dashboard &dashboard() { return _parent; };
 
 	protected:
-
 	private:
-        const uint8_t _pin_cs; // SPI: the Arduino pin the button matrix CS is connected to
+		Dashboard &_parent;
+		const uint8_t _pin_cs;		   // SPI: the Arduino pin the button matrix CS is connected to
 		const uint8_t _address = 0x20; // SPI: A0 .. A2 connected to ground
-
 		ItemNode<ButtonListener> *_listener[BUTTON_COUNT]; // registered listeners
 		uint8_t _row = 0; // the current row (this row gets queried on updateStatus)
 		unsigned long _lastButtonChange = 0; // timestamp: last change in a button state

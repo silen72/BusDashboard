@@ -1,20 +1,27 @@
 #pragma once
 #include <Arduino.h>
+#include "Dashboard.h"
+
 namespace BusDashboard {
-    class CANBus {
-        public:
-            CANBus(const uint8_t pin_cs, const uint8_t pin_nt) : _pin_cs(pin_cs), _pin_nt(pin_nt) {}
-            void begin();
 
-        protected :
+    class Dashboard;
 
-        private:
-            const uint8_t _pin_cs;
-            const uint8_t _pin_nt;
+    class CANBus
+    {
+    public:
+        CANBus(Dashboard &parent, const uint8_t pin_cs, const uint8_t pin_nt) : _parent(parent), _pin_cs(pin_cs), _pin_nt(pin_nt) {}
+        Dashboard &dashboard() { return _parent; }
+        void begin();
 
-            // disallow creation
-            CANBus() = delete;
-            CANBus(const CANBus&) = delete;
-            CANBus &operator=(const CANBus&) = delete;
+    protected:
+    private:
+        Dashboard &_parent;
+        const uint8_t _pin_cs;
+        const uint8_t _pin_nt;
+
+        // disallow creation
+        CANBus() = delete;
+        CANBus(const CANBus &) = delete;
+        CANBus &operator=(const CANBus &) = delete;
     };
 };

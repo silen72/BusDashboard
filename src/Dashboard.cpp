@@ -16,7 +16,7 @@ namespace BusDashboard {
                 }
             }
         } else {
-            // switch off dashboard
+            // switch off dashboard power relay
             digitalWrite(_pin_relay, LOW);
         }
     }
@@ -33,8 +33,19 @@ namespace BusDashboard {
     }
 
     void Dashboard::begin() {
+        // initialise embedded classes
+        _buttonHandler = new ButtonHandler(*this, LeonardoPins::BUTTON_MATRIX_CS, ButtonHandler::MCP23S17_ADRS);
+        _lampHandler = new LampHandler(*this, LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
+        _keyboardHandler = new KeyboardHandler(*this);
+        _komsiHandler = new KomsiHandler(*this);
+        _canBusHandler = new CANBus(*this, LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
+
+        // initialize own hardware
         pinMode(_pin_relay, OUTPUT);
         digitalWrite(_pin_relay, HIGH);
+
+        // switch off all lamps (a flaw in hw design: the lamps got power with the digitalWrite instruction above, so they probably already have flashed...)
+        _lampHandler->allOff();
     }
 
     Dashboard::Dashboard(const uint8_t pin_relay):_pin_relay(pin_relay) {

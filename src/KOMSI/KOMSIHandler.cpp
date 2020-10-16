@@ -2,7 +2,8 @@
 
 namespace BusDashboard {
 
-    void KomsiHandler::processIncoming(const int incomingByte) {
+    void KomsiHandler::processIncoming(const int incomingByte)
+    {
         if (isdigit(incomingByte)) {
 #ifdef SerialDebug
             Serial.print(F("_command_value: "));
@@ -23,7 +24,6 @@ namespace BusDashboard {
             _command_value = 0;         // init command value
         }
     }
-
 
     void KomsiHandler::notifyListeners() {
         uint8_t index = toIndex(_command);

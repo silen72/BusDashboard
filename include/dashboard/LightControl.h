@@ -17,14 +17,35 @@ namespace BusDashboard
 
     protected:
     private:
-        static const uint8_t state_A1 = 0;
-        static const uint8_t state_A2 = 1;
-        static const uint8_t state_I1 = 2;
-        static const uint8_t state_I2 = 3;
-        bool _state[4];
-        bool _initDone = false;
-        bool _dashBoardLightsOn = false;
-        uint8_t _previousState = 0;
+        static uint8_t const WAIT_MAX_MS_IN_LEAVING_STATE_MS = 50;
+        static uint8_t const WAIT_FOR_OFF_BLINK_DELAY_MS = 250;
+        enum class Index
+        {
+            A1,
+            A2,
+            I1,
+            I2
+        };
+        static uint8_t const MaxIndex = (uint8_t)Index::A2;
+        enum class State
+        {
+            Undefined,    // before initialization, never reached afterwards
+            Wait_for_off, // this state indicates that the knob has to be set to off to sync it with the OMSI bus state
+            Off,          // lighting control knob is in position "off"; this cannot be measured directly because "all off" can mean both "really off" and "between two on positions"
+            A1,           // lighting control knob is in position "A1"
+            A1_leaving,   // A1 has changed to LOW but no other knob position is measured HIGH yet
+            A2,           // lighting control knob is in position "A2"
+            A2_leaving,   // A2 has changed to LOW but no other knob position is measured HIGH yet
+            I1,           // lighting control knob is in position "I1"
+            I1_leaving,   // I1 has changed to LOW but no other knob position is measured HIGH yet
+            I2,           // lighting control knob is in position "I2"
+            I2_leaving    // I2 has changed to LOW but no other knob position is measured HIGH yet
+        };
+        bool _isConnected[MaxIndex + 1];
+        State _currentState = State::Undefined;
+        unsigned long _leavingTS = 0;
+        unsigned long _blinkTS = 0;
+        bool _dashboardLit = false;
         LampHandler *_lh;
         KeyboardHandler *_kh;
 

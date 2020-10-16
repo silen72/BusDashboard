@@ -3,13 +3,15 @@
 
 namespace BusDashboard {
 
-    ButtonHandler::ButtonHandler(const uint8_t pin_cs, const uint8_t address):_pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address)) {
-        for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
-            _listener[i] = nullptr;
-        }
+  ButtonHandler::ButtonHandler(Dashboard &parent, const uint8_t pin_cs, const uint8_t address) : _parent(parent), _pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address))
+  {
+    for (uint8_t i = 0; i < BUTTON_COUNT; i++)
+    {
+      _listener[i] = nullptr;
     }
+  }
 
-	bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
+  bool ButtonHandler::addListener(ButtonListener& listener, const uint8_t button) {
 		if (button >= ButtonHandler::BUTTON_COUNT) return false;
 #ifdef SerialDebug
         Serial.print(F("ButtonHandler::addListener, button "));
