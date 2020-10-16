@@ -6,14 +6,9 @@
 
 using namespace BusDashboard;
 
-ButtonHandler buttonHandler(LeonardoPins::BUTTON_MATRIX_CS, ButtonHandler::MCP23S17_ADRS);
-LampHandler lampHandler(LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
-KeyboardHandler keyboardHandler;
-KomsiHandler komsiHandler;
-CANBus canBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
 Dashboard dashboard(LeonardoPins::POWER_RELAY);
 
-LampTester debuglamptester(lampHandler);
+LampTester debuglamptester(dashboard.lampHandler());
 
 void setup()
 {
@@ -21,12 +16,7 @@ void setup()
   Serial.begin(115200);   // initialize communication with the PC (only in: KOMSI)
   Keyboard.begin();       // initialize communication with the PC (only out: Keyboard)
 
-  buttonHandler.begin();
-  canBus.begin();
-  keyboardHandler.begin();
-  lampHandler.begin();
   dashboard.begin();      // wake up the dashboard (enable power for the transformers)
-  lampHandler.allOff();   // switch off all lamps (a flaw in hw design: the lamps got power with the dashboard.begin() instruction, so they probably already have flashed...)
 
 }
 
@@ -44,21 +34,21 @@ void loop()
 {
   if (Serial.available()) {
     int val = Serial.read();
-    komsiHandler.processIncoming(val);
+    dashboard.komsiHandler().processIncoming(val);
   }
 
   // moving lights for lamp 1 to 4 (0 ..3); next every second
   if ((millis() - m) > 1000UL) {
-    lampHandler.setState(lampPosition, true);
-    lampHandler.setState(prevpos, false);
+    dashboard.lampHandler().setState(lampPosition, true);
+    dashboard.lampHandler().setState(prevpos, false);
     prevpos = lampPosition;
     lampPosition++;
     if (lampPosition >= 4) lampPosition = 0;
   }
 
-  buttonHandler.scan();
-  lampHandler.update();
-  keyboardHandler.update();
+  dashboard.buttonHandler().scan();
+  dashboard.lampHandler().update();
+  dashboard.keyboardHandler().update();
   dashboard.checkIdle();
 
 }

@@ -1,9 +1,11 @@
 #pragma once
 #include "KomsiCommandListener.h"
 #include "ItemNode.h"
+#include "Dashboard.h"
 
 namespace BusDashboard {
 
+    class Dashboard;
     /**
      * handles the commands sent by KOMSI
      * 
@@ -14,6 +16,7 @@ namespace BusDashboard {
     private:
         static const uint8_t COMMAND_COUNT = 2 * 26;
 
+        Dashboard &_parent;
         ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT]; // stores the listeners per command
         uint8_t _command = 0;
         uint16_t _command_value = 0;
@@ -42,67 +45,75 @@ namespace BusDashboard {
         // notify all listeners about the current command and its value
         void notifyListeners();
 
+        // disallow creation
+        KomsiHandler() = delete;
+        KomsiHandler(const KomsiHandler &) = delete;
+        KomsiHandler &operator=(const KomsiHandler &) = delete;
+
     protected:
 
     public:
+        KomsiHandler(Dashboard &parent) : _parent(parent) {}
+
+        Dashboard &dashboard() { return _parent;}
 
         /**
          * this enum contains all valid command codes that may be received from KOMSI
          */
-        enum Codes {
-            A = 'A',
-            a = 'a',
-            B = 'B',
-            b = 'b',
-            C = 'C',
-            c = 'c',
-            D = 'D',
-            d = 'd',
-            E = 'E',
-            e = 'e',
-            F = 'F',
-            G = 'G',
-            g = 'g',
-            H = 'H',
-            h = 'h',
-            I = 'I',
-            i = 'i',
-            J = 'J',
-            j = 'j',
-            K = 'K',
-            k = 'k',
-            L = 'L',
-            l = 'l',
-            M = 'M',
-            m = 'm',
-            N = 'N',
-            n = 'n',
-            O = 'O',
-            o = 'o',
-            P = 'P',
-            p = 'p',
-            Q = 'Q',
-            q = 'q',
-            R = 'R',
-            r = 'r',
-            S = 'S',
-            s = 's',
-            T = 'T',
-            t = 't',
-            U = 'U',
-            u = 'u',
-            V = 'V',
-            v = 'v',
-            W = 'W',
-            w = 'w',
-            X = 'X',
-            x = 'x',
-            Y = 'Y',
-            y = 'y',
-            Z = 'Z',
-            z = 'z'
-        };
-        
+            enum Codes {
+                A = 'A',
+                a = 'a',
+                B = 'B',
+                b = 'b',
+                C = 'C',
+                c = 'c',
+                D = 'D',
+                d = 'd',
+                E = 'E',
+                e = 'e',
+                F = 'F',
+                G = 'G',
+                g = 'g',
+                H = 'H',
+                h = 'h',
+                I = 'I',
+                i = 'i',
+                J = 'J',
+                j = 'j',
+                K = 'K',
+                k = 'k',
+                L = 'L',
+                l = 'l',
+                M = 'M',
+                m = 'm',
+                N = 'N',
+                n = 'n',
+                O = 'O',
+                o = 'o',
+                P = 'P',
+                p = 'p',
+                Q = 'Q',
+                q = 'q',
+                R = 'R',
+                r = 'r',
+                S = 'S',
+                s = 's',
+                T = 'T',
+                t = 't',
+                U = 'U',
+                u = 'u',
+                V = 'V',
+                v = 'v',
+                W = 'W',
+                w = 'w',
+                X = 'X',
+                x = 'x',
+                Y = 'Y',
+                y = 'y',
+                Z = 'Z',
+                z = 'z'
+            };
+
         /**
          * this enum maps command codes to actual commands
          * this mapping must match the definition you made in KOMSIs .opl file!

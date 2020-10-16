@@ -2,15 +2,20 @@
 #include <Arduino.h>
 #include "keyboard/KeyAction.h"
 #include "ItemNode.h"
+#include "Dashboard.h"
 
 namespace BusDashboard {
+
+    class Dashboard;
 
     /**
     handles the keystrokes that need to be sent to the PC
     */
-    class KeyboardHandler {
+    class KeyboardHandler
+    {
 
     private:
+        Dashboard &_parent;
         ItemNode<KeyAction> *_nextActionNode = nullptr;
         unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
 
@@ -21,8 +26,8 @@ namespace BusDashboard {
     protected:
 
     public:
-        
-        enum Keys {
+        enum Keys
+        {
             KEYPAD_0 = 234,
             KEYPAD_1 = 225,
             KEYPAD_2 = 226,
@@ -60,8 +65,9 @@ namespace BusDashboard {
             KEY_TILDE = 189
         };
 
+        KeyboardHandler(Dashboard &parent) : _parent(parent) {}
 
-        KeyboardHandler() {}
+        Dashboard &dashboard() { return _parent; }
 
         /**
          * adds a generic keyboard action to the keyboard queue

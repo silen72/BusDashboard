@@ -4,112 +4,151 @@ namespace BusDashboard
 {
     LightControl::LightControl(LampHandler &lh, KeyboardHandler &kh) : _lh(&lh), _kh(&kh)
     {
-        _state[state_A1] = false;
-        _state[state_A2] = false;
-        _state[state_I1] = false;
-        _state[state_I2] = false;
+        _isConnected[(uint8_t)Index::A1] = false;
+        _isConnected[(uint8_t)Index::A2] = false;
+        _isConnected[(uint8_t)Index::I1] = false;
+        _isConnected[(uint8_t)Index::I2] = false;
     }
 
     void LightControl::setCurrentState(const uint8_t button, const bool state)
     {
-        bool checkLight = false;
+        uint8_t index;
         switch (button)
         {
         case ButtonHandler::MatrixPosition::Scheinwerfer_A1:
-            if (_state[state_A1] != state)
+            index = (uint8_t)Index::A1;
+            if (_isConnected[index] != state)
             {
-                checkLight = true;
-                _state[state_A1] = state;
+                _isConnected[index] = state;
                 if (state)
                 {
-                    switch (_previousState)
+                    switch (_currentState)
                     {
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_A2:
+                    case State::Off:
+                    case State::A2:
+                    case State::A2_leaving:
                         _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        _currentState = State::A1;
                         break;
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_I1:
+                    case State::I1:
+                    case State::I1_leaving:
                         _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _currentState = State::A1;
+                        break;
+                    case State::Undefined:
+                        _currentState = State::Wait_for_off;
                         break;
                     default:
                         break;
                     }
-                    _previousState = button;
+                    _leavingTS = 0;
                 }
-            }
-            else if ((_previousState == button) & !state)
-            {
-                // _previousState was A1 but A1 was set to off and it (still) should be off => switch is in position off
-                _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
-                _previousState = 0;
+                else
+                {
+                    _currentState = State::A1_leaving;
+                    _leavingTS = millis();
+                }
             }
             break;
 
         case ButtonHandler::MatrixPosition::Scheinwerfer_A2:
-            if (_state[state_A2] != state)
+            index = (uint8_t)Index::A2;
+            if (_isConnected[index] != state)
             {
-                checkLight = true;
-                _state[state_A2] = state;
-
+                _isConnected[index] = state;
                 if (state)
                 {
-                    switch (_previousState)
+                    switch (_currentState)
                     {
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_A1:
+                    case State::A1:
+                    case State::A1_leaving:
                         _kh->addPressReleaseAction('l');
+                        _currentState = State::A2;
                         break;
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_I2:
+                    case State::I2:
+                    case State::I2_leaving:
                         _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _currentState = State::A2;
                         break;
+                    case State::Undefined:
+                        _currentState = State::Wait_for_off;
                     default:
                         break;
                     }
-                    _previousState = button;
+                    _leavingTS = 0;
+                }
+                else
+                {
+                    _currentState = State::A2_leaving;
+                    _leavingTS = millis();
                 }
             }
             break;
 
         case ButtonHandler::MatrixPosition::Scheinwerfer_I1:
-            if (_state[state_I1] != state)
+            index = (uint8_t)Index::I1;
+            if (_isConnected[index] != state)
             {
-                checkLight = true;
-                _state[state_I1] = state;
+                _isConnected[index] = state;
                 if (state)
                 {
-                    switch (_previousState)
+                    switch (_currentState)
                     {
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_I2:
-                        _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
-                        break;
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_A1:
+                    case State::A1:
+                    case State::A1_leaving:
                         _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _currentState = State::I1;
                         break;
+                    case State::I2:
+                    case State::I2_leaving:
+                        _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        _currentState = State::I1;
+                        break;
+                    case State::Undefined:
+                        _currentState = State::Wait_for_off;
                     default:
                         break;
                     }
-                    _previousState = button;
+                    _leavingTS = 0;
+                }
+                else
+                {
+                    _currentState = State::I1_leaving;
+                    _leavingTS = millis();
                 }
             }
             break;
 
         case ButtonHandler::MatrixPosition::Scheinwerfer_I2:
-            if (_state[state_I2] != state)
+            index = (uint8_t)Index::I2;
+            if (_isConnected[index] != state)
             {
-                checkLight = true;
-                _state[state_I2] = state;
+                _isConnected[index] = state;
                 if (state)
                 {
-                    switch (_previousState)
+                    switch (_currentState)
                     {
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_I1:
-                        _kh->addPressReleaseAction('l');
-                        break;
-                    case ButtonHandler::MatrixPosition::Scheinwerfer_A2:
+                    case State::A2:
+                    case State::A2_leaving:
                         _kh->addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        _currentState = State::I2;
                         break;
+                    case State::I1:
+                    case State::I1_leaving:
+                        _kh->addPressReleaseAction('l');
+                        _currentState = State::I2;
+                        break;
+                    case State::Undefined:
+                        _currentState = State::Wait_for_off;
                     default:
                         break;
                     }
-                    _previousState = button;
+                    _leavingTS = 0;
+                }
+                else
+                {
+                    _currentState = State::I2_leaving;
+                    _leavingTS = millis();
                 }
             }
             break;
@@ -118,14 +157,46 @@ namespace BusDashboard
             break;
         }
 
-        if (checkLight)
+        // check leaving state duration to detect "off" state of lighting control knob
+        if ((_leavingTS > 0) & (millis() - _leavingTS > WAIT_MAX_MS_IN_LEAVING_STATE_MS))
         {
-            bool const newState = (_state[state_A1] | _state[state_A2] | _state[state_I1] | _state[state_I2]);
-            if (_dashBoardLightsOn != newState)
+            switch (_currentState)
             {
-                _dashBoardLightsOn = newState;
-                _lh->setState(LampHandler::DriverPosition::Gangschaltung, newState);
+            case State::I2_leaving:
+            case State::A2_leaving:
+                _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                // intentional fall through
+            case State::I1_leaving:
+            case State::A1_leaving:
+                _kh->addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                break;
+            default:
+                break;
             }
+            _currentState = State::Off;
+            _leavingTS = 0;
+        }
+
+        bool newDashboardLitState;
+        switch (_currentState)
+        {
+        case State::Wait_for_off:
+            // blink to indicate problem
+
+            // intentional fall through
+        case State::Off:
+        case State::Undefined:
+            newDashboardLitState = false;
+            break;
+        default:
+            newDashboardLitState = true;
+            break;
+        }
+
+        if (newDashboardLitState != _dashboardLit)
+        {
+            _dashboardLit = newDashboardLitState;
+            _lh->setState(LampHandler::DriverPosition::Gangschaltung, _dashboardLit);
         }
     }
 
@@ -137,7 +208,7 @@ namespace BusDashboard
         bh.addListener(*this, ButtonHandler::MatrixPosition::Scheinwerfer_I2);
     }
 
-    void LightControl::begin()
+    void begin()
     {
     }
 }
