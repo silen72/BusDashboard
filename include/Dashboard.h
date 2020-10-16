@@ -49,7 +49,7 @@ namespace BusDashboard {
          */
         uint32_t sleepTimeMs() const { return millis() - _lastWakeupAction; }
 
-        bool isLit() { return false; }
+        bool isLit();
 
         Dashboard(const uint8_t pin_relay);
 

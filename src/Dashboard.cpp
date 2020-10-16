@@ -59,4 +59,9 @@ namespace BusDashboard {
     Dashboard::Dashboard(const uint8_t pin_relay):_pin_relay(pin_relay) {
         _lastWakeupAction = millis();
     }
+
+    bool Dashboard::isLit()
+    {
+        return _lightcontrol->isLit();
+    }
 }
