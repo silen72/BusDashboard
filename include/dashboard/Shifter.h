@@ -6,14 +6,14 @@
 
 namespace BusDashboard {
 
-    class KeyboardHandler;
+    class Dashboard;
 
     class Shifter : public ButtonListener
     {
     public:
         bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
-        Shifter(KeyboardHandler &kh);
+        Shifter(Dashboard &parent);
         void begin();
 
     protected:
@@ -41,7 +41,7 @@ namespace BusDashboard {
         bool _state[MAX_INDEX + 1];
         bool _charToSend[MAX_INDEX + 1];
         bool _initDone = false;
-        KeyboardHandler *_kh;
+        Dashboard &_parent;
 
         Shifter() = delete;
         Shifter(const Shifter &) = delete;

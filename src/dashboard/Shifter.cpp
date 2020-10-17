@@ -6,10 +6,11 @@
 
 #include "dashboard/Shifter.h"
 #include "keyboard/KeyboardHandler.h"
+#include "dashboard/Dashboard.h"
 
 namespace BusDashboard
 {
-    Shifter::Shifter(KeyboardHandler &kh) : _kh(&kh)
+    Shifter::Shifter(Dashboard &parent) : _parent(parent)
     {
         uint8_t index = (uint8_t)Index::D;
         _state[index] = false;
@@ -52,14 +53,14 @@ namespace BusDashboard
                 _state[index] = state;
                 if (state)
                 {
-                    _kh->addPressReleaseAction(_charToSend[index]);
+                    _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
                 }
                 else if (!(_state[(uint8_t)Index::D] | _state[(uint8_t)Index::R] | _state[(uint8_t)Index::N]))
                 {
                     // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
                     index = (uint8_t)Index::N;
                     _state[index] = true;
-                    _kh->addPressReleaseAction(_charToSend[index]);
+                    _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
                 }
             }
         }

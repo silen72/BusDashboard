@@ -10,6 +10,7 @@ namespace BusDashboard {
     class CANBus;
 
     class LightControl;
+    class Shifter;
 
     // Pins used to connect to the various PCBs
     enum LeonardoPins
@@ -80,6 +81,7 @@ namespace BusDashboard {
         CANBus *_canBusHandler;
 
         LightControl *_lightcontrol;
+        Shifter *_shifter;
 
         /**
          * controls the mains relay (turns it off after idle time threshold is met)

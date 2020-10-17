@@ -3,7 +3,7 @@
 #include "lampdriver/LampHandler.h"
 #include "keyboard/KeyboardHandler.h"
 #include "Keyboard.h"
-#include "Dashboard.h"
+#include "dashboard/Dashboard.h"
 
 namespace BusDashboard
 {

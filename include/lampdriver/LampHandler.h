@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include "Dashboard.h"
+#include "dashboard/Dashboard.h"
 
 namespace BusDashboard {
 

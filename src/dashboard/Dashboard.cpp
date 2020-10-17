@@ -1,11 +1,13 @@
-#include "Dashboard.h"
+#include "dashboard/Dashboard.h"
 
 #include "buttonmatrix/ButtonHandler.h"
 #include "lampdriver/LampHandler.h"
 #include "keyboard/KeyboardHandler.h"
 #include "KOMSI/KOMSIHandler.h"
 #include "CANBus/CANBus.h"
+
 #include "dashboard/LightControl.h"
+#include "dashboard/Shifter.h"
 
 namespace BusDashboard {
 

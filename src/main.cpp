@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Keyboard.h>
 #include <SPI.h>
-#include "Dashboard.h"
+#include "dashboard/Dashboard.h"
 
 #include "debug/LampTester.h"
 #include "buttonmatrix/ButtonHandler.h"
