@@ -13,17 +13,6 @@ namespace BusDashboard {
     class KeyboardHandler
     {
 
-    private:
-        Dashboard &_parent;
-        ItemNode<KeyAction> *_nextActionNode = nullptr;
-        unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
-
-        // disallow creation
-        KeyboardHandler(const KeyboardHandler&) = delete;
-        KeyboardHandler& operator=(const KeyboardHandler&) = delete;
-    
-    protected:
-
     public:
         enum Keys
         {
@@ -64,9 +53,7 @@ namespace BusDashboard {
             KEY_TILDE = 189
         };
 
-        KeyboardHandler(Dashboard &parent) : _parent(parent) {}
-
-        Dashboard &dashboard() { return _parent; }
+        KeyboardHandler() {}
 
         /**
          * adds a generic keyboard action to the keyboard queue
@@ -114,5 +101,16 @@ namespace BusDashboard {
          * initializes the instance
          */
         void begin();
+
+    protected:
+
+    private:
+        ItemNode<KeyAction> *_nextActionNode = nullptr;
+        unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
+
+        // disallow creation
+        KeyboardHandler(const KeyboardHandler &) = delete;
+        KeyboardHandler &operator=(const KeyboardHandler &) = delete;
     };
+
 }
