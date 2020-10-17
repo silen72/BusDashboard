@@ -187,7 +187,6 @@ namespace BusDashboard
             _leavingTS = 0;
         }
 
-        bool newDashboardLitState;
         switch (_currentState)
         {
         case State::Wait_for_off:
@@ -196,17 +195,11 @@ namespace BusDashboard
             // intentional fall through
         case State::Off:
         case State::Undefined:
-            newDashboardLitState = false;
+            _dashboardLit = false;
             break;
         default:
-            newDashboardLitState = true;
+            _dashboardLit = true;
             break;
-        }
-
-        if (newDashboardLitState != _dashboardLit)
-        {
-            _dashboardLit = newDashboardLitState;
-            _parent.lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, _dashboardLit);
         }
         
         return resetTimer;

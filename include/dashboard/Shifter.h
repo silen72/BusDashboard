@@ -41,6 +41,7 @@ namespace BusDashboard {
         bool _state[MAX_INDEX + 1];
         bool _charToSend[MAX_INDEX + 1];
         bool _initDone = false;
+        unsigned long _lastBlinkToggle = 0;
         Dashboard &_parent;
 
         Shifter() = delete;

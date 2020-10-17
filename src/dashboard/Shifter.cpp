@@ -7,6 +7,7 @@
 #include "dashboard/Shifter.h"
 #include "keyboard/KeyboardHandler.h"
 #include "dashboard/Dashboard.h"
+#include "lampdriver/LampHandler.h"
 
 namespace BusDashboard
 {
@@ -55,19 +56,23 @@ namespace BusDashboard
                 {
                     _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
                 }
-                else if (!(_state[(uint8_t)Index::D] | _state[(uint8_t)Index::R] | _state[(uint8_t)Index::N]))
-                {
-                    // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
-                    index = (uint8_t)Index::N;
-                    _state[index] = true;
-                    _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
-                }
             }
         }
         else
         {
             changed = false;
         }
+
+        // it is possible to switch all three buttons off (which should not happen) -> if that's the case alert the dashboard
+        //   we cannot have the switch blink, because the pcb lights only the pressed button ...
+        if (!(_state[(uint8_t)Index::D] | _state[(uint8_t)Index::R] | _state[(uint8_t)Index::N]))
+        {
+            index = (uint8_t)Index::N;
+            _state[index] = true;
+            _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
+        }
+
+        _parent.lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, _parent.isLit());
 
         return changed;
     }
