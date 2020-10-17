@@ -11,76 +11,63 @@ namespace BusDashboard
 {
     Shifter::Shifter(KeyboardHandler &kh) : _kh(&kh)
     {
-        _state[state_D] = false;
-        _state[state_R] = false;
-        _state[state_N] = false;
+        uint8_t index = (uint8_t)Index::D;
+        _state[index] = false;
+        _charToSend[index] = 'd';
+
+        index = (uint8_t)Index::R;
+        _state[index] = false;
+        _charToSend[index] = 'r';
+
+        index = (uint8_t)Index::N;
+        _state[index] = false;
+        _charToSend[index] = 'n';
     }
 
     bool Shifter::setCurrentState(const uint8_t button, const bool state)
     {
-        bool changed = false;
-        bool checkNone = false;
+        uint8_t index;
         switch (button)
         {
         case ButtonHandler::MatrixPosition::Gangschaltung_D:
-            changed = _state[state_D] != state;
-            if (changed)
-            {
-                if (state)
-                {
-                    _kh->addPressReleaseAction('d');
-                }
-                else
-                {
-                    checkNone = true;
-                }
-                _state[state_D] = state;
-            }
+            index = (uint8_t)Index::D;
             break;
-
         case ButtonHandler::MatrixPosition::Gangschaltung_R:
-            changed = _state[state_R] != state;
-            if (changed)
-            {
-                if (state)
-                {
-                    _kh->addPressReleaseAction('r');
-                }
-                else
-                {
-                    checkNone = true;
-                }
-                _state[state_R] = state;
-            }
+            index = (uint8_t)Index::R;
             break;
-
         case ButtonHandler::MatrixPosition::Gangschaltung_N:
-            changed = _state[state_N] != state;
+            index = (uint8_t)Index::N;
+            break;
+        default:
+            index = MAX_INDEX+1;
+            break;
+        }
+
+        bool changed;
+        if (index <= MAX_INDEX)
+        {
+            changed = _state[index] != state;
             if (changed)
             {
+                _state[index] = state;
                 if (state)
                 {
-                    _kh->addPressReleaseAction('n');
+                    _kh->addPressReleaseAction(_charToSend[index]);
                 }
-                else
+                else if (!(_state[(uint8_t)Index::D] | _state[(uint8_t)Index::R] | _state[(uint8_t)Index::N]))
                 {
-                    checkNone = true;
+                    // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
+                    index = (uint8_t)Index::N;
+                    _state[index] = true;
+                    _kh->addPressReleaseAction(_charToSend[index]);
                 }
-
-                _state[state_N] = state;
             }
-            break;
-
-        default:
-            break;
         }
-
-        // it is possible to switch all three buttons off (which should not happen) -> if that's the case set the state to "n"
-        if (checkNone & (!(_state[state_N] | _state[state_R] | _state[state_D])))
+        else
         {
-            _state[state_N] = true;
-            _kh->addPressReleaseAction('n');
+            changed = false;
         }
+
         return changed;
     }
 

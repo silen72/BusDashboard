@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "buttonmatrix/ButtonListener.h"
 
+// ToDo: implement state machine to handle "all off" gracefully (without sending lots of "n")
 
 namespace BusDashboard {
 
@@ -17,10 +18,28 @@ namespace BusDashboard {
 
     protected:
     private:
-        static const uint8_t state_D = 0;
-        static const uint8_t state_R = 1;
-        static const uint8_t state_N = 2;
-        bool _state[3];
+        enum class State
+        {
+            Undefined,
+            Off,
+            D,
+            D_leaving,
+            R,
+            R_leaving,
+            N,
+            N_leaving
+        };
+
+        enum class Index
+        {
+            D = 0,
+            R = 1,
+            N = 2
+        };
+        static const uint8_t MAX_INDEX = (uint8_t)Index::N;
+        State _currentState = State::Undefined;
+        bool _state[MAX_INDEX + 1];
+        bool _charToSend[MAX_INDEX + 1];
         bool _initDone = false;
         KeyboardHandler *_kh;
 
