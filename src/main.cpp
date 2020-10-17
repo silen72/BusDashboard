@@ -12,7 +12,7 @@
 
 using namespace BusDashboard;
 
-Dashboard dashboard(LeonardoPins::POWER_RELAY);
+Dashboard &dashboard = Dashboard::instance();
 
 //LampTester debuglamptester(dashboard.lampHandler());
 

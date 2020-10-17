@@ -48,7 +48,9 @@ namespace BusDashboard {
         _keyboardHandler = new KeyboardHandler(*this);
         _komsiHandler = new KomsiHandler(*this);
         _canBusHandler = new CANBus(*this, LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
+
         _lightcontrol = new LightControl(*this);
+        _shifter = new Shifter(*this);
 
         // initialize own hardware
         pinMode(_pin_relay, OUTPUT);
@@ -80,4 +82,6 @@ namespace BusDashboard {
         keyboardHandler().update();
         checkIdle();
     }
+
+    Dashboard *Dashboard::_instance = 0;
 }
