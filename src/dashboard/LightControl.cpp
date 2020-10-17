@@ -7,7 +7,7 @@
 
 namespace BusDashboard
 {
-    LightControl::LightControl(Dashboard &parent) : _parent(parent)
+    LightControl::LightControl()
     {
         _isConnected[(uint8_t)Index::A1] = false;
         _isConnected[(uint8_t)Index::A2] = false;
@@ -34,12 +34,12 @@ namespace BusDashboard
                     case State::Off:
                     case State::A2:
                     case State::A2_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                         _currentState = State::A1;
                         break;
                     case State::I1:
                     case State::I1_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::A1;
                         break;
                     case State::Undefined:
@@ -70,12 +70,12 @@ namespace BusDashboard
                     {
                     case State::A1:
                     case State::A1_leaving:
-                        _parent.keyboardHandler().addPressReleaseAction('l');
+                        Dashboard::instance().keyboardHandler().addPressReleaseAction('l');
                         _currentState = State::A2;
                         break;
                     case State::I2:
                     case State::I2_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::A2;
                         break;
                     case State::Undefined:
@@ -105,12 +105,12 @@ namespace BusDashboard
                     {
                     case State::A1:
                     case State::A1_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::I1;
                         break;
                     case State::I2:
                     case State::I2_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                         _currentState = State::I1;
                         break;
                     case State::Undefined:
@@ -140,12 +140,12 @@ namespace BusDashboard
                     {
                     case State::A2:
                     case State::A2_leaving:
-                        _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
+                        Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_CTRL);
                         _currentState = State::I2;
                         break;
                     case State::I1:
                     case State::I1_leaving:
-                        _parent.keyboardHandler().addPressReleaseAction('l');
+                        Dashboard::instance().keyboardHandler().addPressReleaseAction('l');
                         _currentState = State::I2;
                         break;
                     case State::Undefined:
@@ -174,11 +174,11 @@ namespace BusDashboard
             {
             case State::I2_leaving:
             case State::A2_leaving:
-                _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                 // intentional fall through
             case State::I1_leaving:
             case State::A1_leaving:
-                _parent.keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
+                Dashboard::instance().keyboardHandler().addPressReleaseActionMod('l', KEY_LEFT_SHIFT);
                 break;
             default:
                 break;

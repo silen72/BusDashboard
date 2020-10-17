@@ -49,7 +49,7 @@ namespace BusDashboard {
         _komsiHandler = new KomsiHandler(*this);
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
 
-        _lightcontrol = new LightControl(*this);
+        _lightcontrol = new LightControl();
         _shifter = new Shifter(*this);
 
         // initialize own hardware

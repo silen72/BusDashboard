@@ -10,8 +10,7 @@ namespace BusDashboard
     class LightControl : public ButtonListener
     {
     public:
-        LightControl(Dashboard &parent);
-        Dashboard &dashboard() { return _parent; }
+        LightControl();
         bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
         void begin();
@@ -43,14 +42,12 @@ namespace BusDashboard
             I2,           // lighting control knob is in position "I2"
             I2_leaving    // I2 has changed to LOW but no other knob position is measured HIGH yet
         };
-        Dashboard &_parent;
         bool _isConnected[MaxIndex + 1];
         State _currentState = State::Undefined;
         unsigned long _leavingTS = 0;
         unsigned long _blinkTS = 0;
         bool _dashboardLit = false;
 
-        LightControl() = delete;
         LightControl(const LightControl &) = delete;
         LightControl &operator=(const LightControl &) = delete;
     };
