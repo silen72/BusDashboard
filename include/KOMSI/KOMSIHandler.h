@@ -3,7 +3,6 @@
 
 namespace BusDashboard {
 
-    class Dashboard;
     class KomsiCommandListener;
 
     /**
@@ -14,49 +13,11 @@ namespace BusDashboard {
     */
     class KomsiHandler
     {
-    private:
-        static const uint8_t COMMAND_COUNT = 2 * 26;
-
-        Dashboard &_parent;
-        ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT]; // stores the listeners per command
-        uint8_t _command = 0;
-        uint16_t _command_value = 0;
-
-        /**
-         * calculates the index position inside the array of listeners
-         * @param command calculates the index position for this command
-         * @return index position for the given command (or KomsiHandler::COMMAND_COUNT + 1 if command is invalid)
-        */ 
-        static uint8_t toIndex(uint8_t command);
-
-        /**
-         * checks, whether a given index exists in the _commandListener array
-         * @param index the index to check
-         * @return true if the index is valid
-        */
-        static bool isIndexValid(uint8_t index) { return index < COMMAND_COUNT; }
-
-        /**
-         * checks whether the given char value represents a digit
-         * @param value the char value to check
-         * @return true, if value represents a digit
-         */
-        static bool isdigit(const uint8_t value) { return (value >= '0') && (value <= '9'); }
-
-        // notify all listeners about the current command and its value
-        void notifyListeners();
-
-        // disallow creation
-        KomsiHandler() = delete;
-        KomsiHandler(const KomsiHandler &) = delete;
-        KomsiHandler &operator=(const KomsiHandler &) = delete;
-
-    protected:
 
     public:
-        KomsiHandler(Dashboard &parent) : _parent(parent) {}
+        KomsiHandler() {}
 
-        Dashboard &dashboard() { return _parent;}
+        void begin() {}
 
         /**
          * this enum contains all valid command codes that may be received from KOMSI
@@ -138,5 +99,42 @@ namespace BusDashboard {
          * @return true if the listener was added successfully
         */
         bool addListener(KomsiCommandListener& listener, const uint8_t command);
+
+    protected:
+
+    private:
+        static const uint8_t COMMAND_COUNT = 2 * 26;
+
+        ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT]; // stores the listeners per command
+        uint8_t _command = 0;
+        uint16_t _command_value = 0;
+
+        /**
+         * calculates the index position inside the array of listeners
+         * @param command calculates the index position for this command
+         * @return index position for the given command (or KomsiHandler::COMMAND_COUNT + 1 if command is invalid)
+        */
+        static uint8_t toIndex(uint8_t command);
+
+        /**
+         * checks, whether a given index exists in the _commandListener array
+         * @param index the index to check
+         * @return true if the index is valid
+        */
+        static bool isIndexValid(uint8_t index) { return index < COMMAND_COUNT; }
+
+        /**
+         * checks whether the given char value represents a digit
+         * @param value the char value to check
+         * @return true, if value represents a digit
+         */
+        static bool isdigit(const uint8_t value) { return (value >= '0') && (value <= '9'); }
+
+        // notify all listeners about the current command and its value
+        void notifyListeners();
+
+        // disallow creation
+        KomsiHandler(const KomsiHandler &) = delete;
+        KomsiHandler &operator=(const KomsiHandler &) = delete;
     };
 }

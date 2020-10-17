@@ -49,7 +49,8 @@ namespace BusDashboard {
         _lampHandler->begin();
         _keyboardHandler = new KeyboardHandler();
         _keyboardHandler->begin();
-        _komsiHandler = new KomsiHandler(*this);
+        _komsiHandler = new KomsiHandler();
+        _komsiHandler->begin();
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
 
         _lightcontrol = new LightControl();
