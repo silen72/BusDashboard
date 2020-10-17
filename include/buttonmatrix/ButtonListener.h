@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include "buttonmatrix/ButtonHandler.h"
+//#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard {
 
@@ -20,5 +20,6 @@ namespace BusDashboard {
 		*/
 		virtual bool setCurrentState(const uint8_t button, const bool state) = 0;
 		virtual void registerWith(ButtonHandler &bh) = 0;
+		virtual void begin() = 0;
 	};
 }

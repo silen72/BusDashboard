@@ -8,6 +8,7 @@ namespace BusDashboard {
             bool setCurrentState(const uint8_t button, const bool state);
             void registerWith(ButtonHandler &bh);
             LampTester(LampHandler& lh);
+            void begin() {}
 
         protected:
 

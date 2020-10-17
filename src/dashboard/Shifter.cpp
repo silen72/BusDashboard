@@ -8,6 +8,7 @@
 #include "keyboard/KeyboardHandler.h"
 #include "dashboard/Dashboard.h"
 #include "lampdriver/LampHandler.h"
+#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard
 {
@@ -82,8 +83,5 @@ namespace BusDashboard
         bh.addListener(*this, ButtonHandler::MatrixPosition::Gangschaltung_D);
         bh.addListener(*this, ButtonHandler::MatrixPosition::Gangschaltung_R);
         bh.addListener(*this, ButtonHandler::MatrixPosition::Gangschaltung_N);
-    }
-
-    void Shifter::begin() {
     }
 }

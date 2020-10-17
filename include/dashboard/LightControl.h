@@ -13,7 +13,7 @@ namespace BusDashboard
         LightControl();
         bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
-        void begin();
+        void begin() {};
         bool isLit() { return _dashboardLit; }
 
     protected:

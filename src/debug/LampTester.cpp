@@ -1,5 +1,6 @@
 #include "debug/LampTester.h"
 #include "lampdriver/LampHandler.h"
+#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard {
 

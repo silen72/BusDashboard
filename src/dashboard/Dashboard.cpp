@@ -50,7 +50,11 @@ namespace BusDashboard {
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
 
         _lightcontrol = new LightControl();
+        _lightcontrol->registerWith(*_buttonHandler);
+        _lightcontrol->begin();
         _shifter = new Shifter();
+        _shifter->registerWith(*_buttonHandler);
+        _shifter->begin();
 
         // initialize own hardware
         pinMode(_pin_relay, OUTPUT);

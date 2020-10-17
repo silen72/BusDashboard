@@ -4,6 +4,7 @@
 #include "keyboard/KeyboardHandler.h"
 #include "Keyboard.h"
 #include "dashboard/Dashboard.h"
+#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard
 {
@@ -213,8 +214,5 @@ namespace BusDashboard
         bh.addListener(*this, ButtonHandler::MatrixPosition::Scheinwerfer_I2);
     }
 
-    void begin()
-    {
-    }
 }
 

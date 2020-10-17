@@ -14,7 +14,7 @@ namespace BusDashboard {
         bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
         Shifter();
-        void begin();
+        void begin() {};
 
     protected:
     private:
