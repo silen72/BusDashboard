@@ -110,12 +110,10 @@ namespace BusDashboard {
 		*/
 		void begin();
 
-		ButtonHandler(Dashboard &parent, const uint8_t pin_cs, const uint8_t address);
-		Dashboard &dashboard() { return _parent; };
+		ButtonHandler(const uint8_t pin_cs, const uint8_t address);
 
 	protected:
 	private:
-		Dashboard &_parent;
 		const uint8_t _pin_cs;		   // SPI: the Arduino pin the button matrix CS is connected to
 		const uint8_t _address = 0x20; // SPI: A0 .. A2 connected to ground
 		ItemNode<ButtonListener> *_listener[BUTTON_COUNT]; // registered listeners

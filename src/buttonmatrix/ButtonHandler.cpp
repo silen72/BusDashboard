@@ -5,7 +5,7 @@
 
 namespace BusDashboard
 {
-  ButtonHandler::ButtonHandler(Dashboard &parent, const uint8_t pin_cs, const uint8_t address) : _parent(parent), _pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address))
+  ButtonHandler::ButtonHandler(const uint8_t pin_cs, const uint8_t address) : _pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address))
   {
     for (uint8_t i = 0; i < BUTTON_COUNT; i++)
     {
@@ -51,7 +51,7 @@ namespace BusDashboard
     }
     if (resetTimer)
     {
-      dashboard().resetIdleTimer();
+      Dashboard::instance().resetIdleTimer();
     }
   }
 
