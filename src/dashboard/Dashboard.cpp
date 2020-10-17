@@ -52,6 +52,7 @@ namespace BusDashboard {
         _komsiHandler = new KomsiHandler();
         _komsiHandler->begin();
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
+        _canBusHandler->begin();
 
         _lightcontrol = new LightControl();
         _lightcontrol->registerWith(*_buttonHandler);
