@@ -8,13 +8,11 @@ namespace BusDashboard {
     class CANBus
     {
     public:
-        CANBus(Dashboard &parent, const uint8_t pin_cs, const uint8_t pin_nt) : _parent(parent), _pin_cs(pin_cs), _pin_nt(pin_nt) {}
-        Dashboard &dashboard() { return _parent; }
+        CANBus(const uint8_t pin_cs, const uint8_t pin_nt) : _pin_cs(pin_cs), _pin_nt(pin_nt) {}
         void begin();
 
     protected:
     private:
-        Dashboard &_parent;
         const uint8_t _pin_cs;
         const uint8_t _pin_nt;
 
