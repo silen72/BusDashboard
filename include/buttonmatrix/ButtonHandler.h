@@ -5,7 +5,6 @@
 
 namespace BusDashboard {
 
-	class Dashboard;
 	class ButtonListener;
 
 	/**
