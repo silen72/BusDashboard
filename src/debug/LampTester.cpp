@@ -1,6 +1,7 @@
 #include "debug/LampTester.h"
 #include "lampdriver/LampHandler.h"
 #include "buttonmatrix/ButtonHandler.h"
+#include "dashboard/Dashboard.h"
 
 namespace BusDashboard {
 
@@ -13,7 +14,7 @@ namespace BusDashboard {
         }
     }
 
-        LampTester::LampTester(LampHandler &lh) : _lh(&lh)
+        LampTester::LampTester()
     {
         for (uint8_t idx = 0; idx < 64; idx++) {
             _state[idx] = false;
@@ -32,9 +33,9 @@ namespace BusDashboard {
 
         _lampposition = 4;
 
-        const bool currentState = _lh->state(_lampposition);
+        const bool currentState = Dashboard::instance().lampHandler().state(_lampposition);
 
-        _lh->setState(_lampposition, !currentState);
+        Dashboard::instance().lampHandler().setState(_lampposition, !currentState);
         /*_lh->setState(_prevposition, false);
         _prevposition = _lampposition;
         _lampposition++;
