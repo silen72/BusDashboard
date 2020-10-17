@@ -1,10 +1,10 @@
 #pragma once
 #include <Arduino.h>
-#include "dashboard/Dashboard.h"
+//#include "dashboard/Dashboard.h"
 
 namespace BusDashboard {
 
-   class Dashboard;
+   //class Dashboard;
 
    class LampHandler
    {
@@ -63,7 +63,7 @@ namespace BusDashboard {
        * @param[in] pinSerialClock the Arduino pin the lampdriver board SCK is connected to
        * @param[in] pinLatch the Arduino pin the lampdriver board RCK is connected to
        */
-      LampHandler(Dashboard &parent, const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch);
+      LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch);
 
       /**
        * sets the logical state of one lamp position on the lampdriver board
@@ -90,11 +90,8 @@ namespace BusDashboard {
        */
       void begin();
 
-      Dashboard &dashboard() { return _parent; }
-
    protected:
    private:
-      Dashboard &_parent;
       const uint8_t _pinSerial;
       const uint8_t _pinSerialClock;
       const uint8_t _pinLatch;

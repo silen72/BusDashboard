@@ -44,7 +44,7 @@ namespace BusDashboard {
     void Dashboard::begin() {
         // initialise embedded classes
         _buttonHandler = new ButtonHandler(LeonardoPins::BUTTON_MATRIX_CS, ButtonHandler::MCP23S17_ADRS);
-        _lampHandler = new LampHandler(*this, LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
+        _lampHandler = new LampHandler(LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
         _keyboardHandler = new KeyboardHandler(*this);
         _komsiHandler = new KomsiHandler(*this);
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
