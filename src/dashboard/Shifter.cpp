@@ -11,7 +11,7 @@
 
 namespace BusDashboard
 {
-    Shifter::Shifter(Dashboard &parent) : _parent(parent)
+    Shifter::Shifter()
     {
         uint8_t index = (uint8_t)Index::D;
         _state[index] = false;
@@ -54,7 +54,7 @@ namespace BusDashboard
                 _state[index] = state;
                 if (state)
                 {
-                    _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
+                    Dashboard::instance().keyboardHandler().addPressReleaseAction(_charToSend[index]);
                 }
             }
         }
@@ -69,10 +69,10 @@ namespace BusDashboard
         {
             index = (uint8_t)Index::N;
             _state[index] = true;
-            _parent.keyboardHandler().addPressReleaseAction(_charToSend[index]);
+            Dashboard::instance().keyboardHandler().addPressReleaseAction(_charToSend[index]);
         }
 
-        _parent.lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, _parent.isLit());
+        Dashboard::instance().lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, Dashboard::instance().isLit());
 
         return changed;
     }

@@ -13,7 +13,7 @@ namespace BusDashboard {
     public:
         bool setCurrentState(const uint8_t button, const bool state);
         void registerWith(ButtonHandler &bh);
-        Shifter(Dashboard &parent);
+        Shifter();
         void begin();
 
     protected:
@@ -42,9 +42,7 @@ namespace BusDashboard {
         bool _charToSend[MAX_INDEX + 1];
         bool _initDone = false;
         unsigned long _lastBlinkToggle = 0;
-        Dashboard &_parent;
 
-        Shifter() = delete;
         Shifter(const Shifter &) = delete;
         Shifter &operator=(const Shifter &) = delete;
     };
