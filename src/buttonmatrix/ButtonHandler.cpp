@@ -48,19 +48,21 @@ namespace BusDashboard
 
   void ButtonHandler::notify(const uint8_t button, const bool state)
   {
+    bool prevstate = _prevState[button];
+    bool changed = (state != prevstate);
+    // Dashboard must be powered, in case listers decide to activate lamps
+    if (changed)
+    {
+      Dashboard::instance().resetIdleTimer();
+      _prevState[button] = state;
+    }
+    // notify listeners
     ItemNode<ButtonListener> *node = _listener[button];
     while (nullptr != node)
     {
-      node->item()->setCurrentState(button, state, previousState(button));
+      node->item()->setCurrentState(button, state, prevstate);
       node = node->next();
     }
-    if (_prevState[button] != state)
-    {
-      _prevState[button] = state;
-      Dashboard::instance()
-          .resetIdleTimer();
-    }
-    
   }
 
   void ButtonHandler::begin()
