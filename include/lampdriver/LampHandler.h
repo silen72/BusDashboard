@@ -17,15 +17,20 @@ namespace BusDashboard
       {
          None = 0,
          // 24V: position 1 .. 24
+         Gangschaltung,
          Tuer_Freigabe,
          Tuer_Sperren,
          Kneeling_2,
          Kneeling_1,
          Kindersteuerung,
+         Parkbremse,
+         Haltestellenansage,
+         Licht_Fahrer,
+         Licht_Innen,
+         ASR,
 
          //  5V: position 25 .. 48
-         Gangschaltung = 25,
-         Tuer_3,
+         Tuer_3 = 25,
          Tuer_2,
          Tuer_1,
       };
