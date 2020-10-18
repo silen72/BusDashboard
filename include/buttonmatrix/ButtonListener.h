@@ -1,6 +1,5 @@
 #pragma once
 #include <Arduino.h>
-//#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard {
 
@@ -15,10 +14,11 @@ namespace BusDashboard {
 		/**
 		this gets called every time a button state is read from the muxer hardware
 		@param[in] button the button that has been read
-		@param[in] state the state the button was in (true: connected / pressed)
+		@param[in] state the state the button is in (true: connected / pressed)
+		@param[in] state the state the button was in last time it was read
 		@returns true, if the state has changed
 		*/
-		virtual bool setCurrentState(const uint8_t button, const bool state) = 0;
+		virtual void setCurrentState(const uint8_t button, const bool state, const bool prev_state) = 0;
 		virtual void registerWith(ButtonHandler &bh) = 0;
 		virtual void begin() = 0;
 	};
