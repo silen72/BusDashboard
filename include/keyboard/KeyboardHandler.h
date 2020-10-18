@@ -3,7 +3,8 @@
 #include "ItemNode.h"
 #include "keyboard/KeyAction.h"
 
-namespace BusDashboard {
+namespace BusDashboard
+{
 
     class Dashboard;
 
@@ -14,7 +15,7 @@ namespace BusDashboard {
     {
 
     public:
-        enum Keys
+        enum class Keys : uint8_t
         {
             KEYPAD_0 = 234,
             KEYPAD_1 = 225,
@@ -26,7 +27,7 @@ namespace BusDashboard {
             KEYPAD_7 = 231,
             KEYPAD_8 = 232,
             KEYPAD_9 = 233,
-            KEYPAD_ASTERIX = 221,
+            KEYPAD_ASTERISK = 221,
             KEYPAD_ENTER = 224,
             KEYPAD_MINUS = 222,
             KEYPAD_PERIOD = 235,
@@ -59,7 +60,7 @@ namespace BusDashboard {
          * adds a generic keyboard action to the keyboard queue
          * @param[in] action: the action you want to add
          */
-        void addAction(KeyAction& action);
+        void addAction(KeyAction &action);
 
         /**
         * adds a press keyboard action to the keyboard queue
@@ -103,7 +104,6 @@ namespace BusDashboard {
         void begin();
 
     protected:
-
     private:
         ItemNode<KeyAction> *_nextActionNode = nullptr;
         unsigned long _lastKeyActionMs = UINT32_MAX; // timestamp of the last key action
@@ -113,4 +113,4 @@ namespace BusDashboard {
         KeyboardHandler &operator=(const KeyboardHandler &) = delete;
     };
 
-}
+} // namespace BusDashboard
