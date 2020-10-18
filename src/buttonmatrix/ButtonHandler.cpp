@@ -1,7 +1,6 @@
-#include "buttonmatrix/ButtonHandler.h"
-
 #include "dashboard/Dashboard.h"
 #include "buttonmatrix/ButtonListener.h"
+#include "buttonmatrix/ButtonHandler.h"
 
 namespace BusDashboard
 {
@@ -10,49 +9,58 @@ namespace BusDashboard
     for (uint8_t i = 0; i < BUTTON_COUNT; i++)
     {
       _listener[i] = nullptr;
+      _prevState[i] = false;
     }
   }
 
-  bool ButtonHandler::addListener(ButtonListener &listener, const uint8_t button)
+  bool ButtonHandler::previousState(const uint8_t button)
   {
-    if (button >= ButtonHandler::BUTTON_COUNT)
+    return _prevState[button];
+  }
+
+  bool ButtonHandler::addListener(ButtonListener &listener, const MatrixPosition button)
+  {
+    uint8_t index = (uint8_t)button;
+    if (index >= ButtonHandler::BUTTON_COUNT)
       return false;
 #ifdef SerialDebug
     Serial.print(F("ButtonHandler::addListener, button "));
     Serial.print((int)button);
 #endif
-    if (nullptr == _listener[button])
+    if (nullptr == _listener[index])
     {
-      _listener[button] = new ItemNode<ButtonListener>(listener);
+      _listener[index] = new ItemNode<ButtonListener>(listener);
 #ifdef SerialDebug
       Serial.print(F(" created root node"));
-      Serial.println((int)_listener[button]);
+      Serial.println((int)_listener[index]);
 #endif
     }
     else
     {
 #ifdef SerialDebug
       Serial.print(F(" appends node to "));
-      Serial.println((int)_listener[button]);
+      Serial.println((int)_listener[index]);
 #endif
-      _listener[button]->append(listener);
+      _listener[index]->append(listener);
     }
     return true;
   }
 
   void ButtonHandler::notify(const uint8_t button, const bool state)
   {
-    bool resetTimer = false;
     ItemNode<ButtonListener> *node = _listener[button];
     while (nullptr != node)
     {
-      resetTimer |= node->item()->setCurrentState(button, state);
+      node->item()->setCurrentState(button, state, previousState(button));
       node = node->next();
     }
-    if (resetTimer)
+    if (_prevState[button] != state)
     {
-      Dashboard::instance().resetIdleTimer();
+      _prevState[button] = state;
+      Dashboard::instance()
+          .resetIdleTimer();
     }
+    
   }
 
   void ButtonHandler::begin()

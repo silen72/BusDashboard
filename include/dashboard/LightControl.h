@@ -4,14 +4,13 @@
 
 namespace BusDashboard
 {
-    class Dashboard;
     class ButtonHandler;
 
     class LightControl : public ButtonListener
     {
     public:
         LightControl();
-        bool setCurrentState(const uint8_t button, const bool state);
+        void setCurrentState(const uint8_t button, const bool state, const bool prev_state);
         void registerWith(ButtonHandler &bh);
         void begin() {};
         bool isLit() { return _dashboardLit; }
@@ -20,14 +19,6 @@ namespace BusDashboard
     private:
         static uint8_t const WAIT_MAX_MS_IN_LEAVING_STATE_MS = 50;
         static uint8_t const WAIT_FOR_OFF_BLINK_DELAY_MS = 250;
-        enum class Index : uint8_t
-        {
-            A1,
-            A2,
-            I1,
-            I2
-        };
-        static uint8_t const MaxIndex = (uint8_t)Index::A2;
         enum class State : uint8_t
         {
             Undefined,    // before initialization, never reached afterwards
@@ -42,7 +33,6 @@ namespace BusDashboard
             I2,           // lighting control knob is in position "I2"
             I2_leaving    // I2 has changed to LOW but no other knob position is measured HIGH yet
         };
-        bool _isConnected[MaxIndex + 1];
         State _currentState = State::Undefined;
         unsigned long _leavingTS = 0;
         unsigned long _blinkTS = 0;

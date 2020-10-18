@@ -10,26 +10,16 @@
 
 namespace BusDashboard
 {
-    LightControl::LightControl()
-    {
-        _isConnected[(uint8_t)Index::A1] = false;
-        _isConnected[(uint8_t)Index::A2] = false;
-        _isConnected[(uint8_t)Index::I1] = false;
-        _isConnected[(uint8_t)Index::I2] = false;
-    }
+    LightControl::LightControl() {}
 
-    bool LightControl::setCurrentState(const uint8_t button, const bool state)
+    void LightControl::setCurrentState(const uint8_t button, const bool state, const bool prev_state)
     {
-        bool resetTimer = false;
-        uint8_t index;
+        bool _isConnected = prev_state;
         switch (button)
         {
-        case ButtonHandler::MatrixPosition::Scheinwerfer_A1:
-            index = (uint8_t)Index::A1;
-            if (_isConnected[index] != state)
+        case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_A1:
+            if (_isConnected != state)
             {
-                _isConnected[index] = state;
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -61,12 +51,9 @@ namespace BusDashboard
             }
             break;
 
-        case ButtonHandler::MatrixPosition::Scheinwerfer_A2:
-            index = (uint8_t)Index::A2;
-            if (_isConnected[index] != state)
+        case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_A2:
+            if (_isConnected != state)
             {
-                _isConnected[index] = state;
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -96,12 +83,9 @@ namespace BusDashboard
             }
             break;
 
-        case ButtonHandler::MatrixPosition::Scheinwerfer_I1:
-            index = (uint8_t)Index::I1;
-            if (_isConnected[index] != state)
+        case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_I1:
+            if (_isConnected != state)
             {
-                _isConnected[index] = state;
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -131,12 +115,9 @@ namespace BusDashboard
             }
             break;
 
-        case ButtonHandler::MatrixPosition::Scheinwerfer_I2:
-            index = (uint8_t)Index::I2;
-            if (_isConnected[index] != state)
+        case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_I2:
+            if (_isConnected != state)
             {
-                _isConnected[index] = state;
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -205,7 +186,6 @@ namespace BusDashboard
             break;
         }
         
-        return resetTimer;
     }
 
     void LightControl::registerWith(ButtonHandler &bh)

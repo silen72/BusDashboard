@@ -4,7 +4,7 @@
 namespace BusDashboard {
     class LampTester : public ButtonListener {
         public:
-            bool setCurrentState(const uint8_t button, const bool state);
+            void setCurrentState(const uint8_t button, const bool state, bool prev_state);
             void registerWith(ButtonHandler &bh);
             LampTester();
             void begin() {}
