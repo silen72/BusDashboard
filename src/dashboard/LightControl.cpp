@@ -185,7 +185,6 @@ namespace BusDashboard
             _dashboardLit = true;
             break;
         }
-        
     }
 
     void LightControl::registerWith(ButtonHandler &bh)
@@ -196,5 +195,4 @@ namespace BusDashboard
         bh.addListener(*this, ButtonHandler::MatrixPosition::Scheinwerfer_I2);
     }
 
-}
-
+} // namespace BusDashboard

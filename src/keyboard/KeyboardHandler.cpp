@@ -5,12 +5,17 @@
 #include "keyboard/KeyPressRelease.h"
 #include "keyboard/KeyPressReleaseMod.h"
 
-namespace BusDashboard {
+namespace BusDashboard
+{
 
-	void KeyboardHandler::addAction(KeyAction& action) {
-		if (nullptr == _nextActionNode) {
+	void KeyboardHandler::addAction(KeyAction &action)
+	{
+		if (nullptr == _nextActionNode)
+		{
 			_nextActionNode = new ItemNode<KeyAction>(action);
-		} else {
+		}
+		else
+		{
 			_nextActionNode->append(action);
 		}
 	}
@@ -35,13 +40,16 @@ namespace BusDashboard {
 		addAction(*(new KeyPressReleaseMod(keycode, modifierkeycode, duration)));
 	}
 
-	void KeyboardHandler::update() {
+	void KeyboardHandler::update()
+	{
 		ItemNode<KeyAction> *node = _nextActionNode;
-		if (nullptr == node) return;
-		KeyAction* ka = node->item();
+		if (nullptr == node)
+			return;
+		KeyAction *ka = node->item();
 		ka->run();
-		if (ka->removable()) {
-			// remove action and node 
+		if (ka->removable())
+		{
+			// remove action and node
 			node = _nextActionNode->next();
 			delete ka;
 			delete _nextActionNode;
@@ -51,4 +59,4 @@ namespace BusDashboard {
 	}
 
 	void KeyboardHandler::begin(){};
-}
+} // namespace BusDashboard

@@ -1,18 +1,25 @@
 #include "lampdriver/LampHandler.h"
 
-namespace BusDashboard {
-	void LampHandler::setState(const uint8_t position, const bool state) {
-        if (!isValidPosition(position)) return;
+namespace BusDashboard
+{
+    void LampHandler::setState(const uint8_t position, const bool state)
+    {
+        if (!isValidPosition(position))
+            return;
         uint8_t index;
         uint8_t bitmask;
         uint8_t newstate;
         calculateIndexAndBitmask(position, index, bitmask);
-        if (state) {
+        if (state)
+        {
             newstate = _lampstates[index] | bitmask;
-        } else {
+        }
+        else
+        {
             newstate = _lampstates[index] & (0xff ^ bitmask);
         }
-        if (newstate != _lampstates[index]) {
+        if (newstate != _lampstates[index])
+        {
 #ifdef SerialDebug
             Serial.print(F("LampHandler::setState: position: "));
             Serial.print((int)position);
@@ -31,41 +38,50 @@ namespace BusDashboard {
         }
     }
 
-	void LampHandler::update() {
+    void LampHandler::update()
+    {
         uint64_t const now = millis();
         int64_t const diff = abs(now - _lastWriteMs);
-        if ((uint64_t)diff < WRITE_DELAY) return;
+        if ((uint64_t)diff < WRITE_DELAY)
+            return;
         writeLampState();
         _lastWriteMs = now;
     }
 
-	bool LampHandler::state(const uint8_t position, const bool queryHw) const {
-        if (! isValidPosition(position)) return false;
+    bool LampHandler::state(const uint8_t position, const bool queryHw) const
+    {
+        if (!isValidPosition(position))
+            return false;
         uint8_t index;
         uint8_t bitmask;
         calculateIndexAndBitmask(position, index, bitmask);
         uint8_t const value = (queryHw ? _lampstatesHw[index] : _lampstates[index]);
         return ((value & bitmask) > 0);
-	}
+    }
 
-    LampHandler::LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch): 
-        _pinSerial(pinSerial), _pinSerialClock(pinSerialClock), _pinLatch(pinLatch)
+    LampHandler::LampHandler(const uint8_t pinSerial, const uint8_t pinSerialClock, const uint8_t pinLatch) : _pinSerial(pinSerial), _pinSerialClock(pinSerialClock), _pinLatch(pinLatch)
     {
         // initial state of all lamps: off (both logical and hardware)
-        for (uint8_t i = 0; i < NUMBER_OF_ICS; i++) {
+        for (uint8_t i = 0; i < NUMBER_OF_ICS; i++)
+        {
             _lampstates[i] = 0;
             _lampstatesHw[i] = 0;
         }
     }
 
-    void LampHandler::writeLampState() {
+    void LampHandler::writeLampState()
+    {
         // is a shift out necessary (has any lamp state changed?)
-        if (needsHwUpdate()) writeToHw();
+        if (needsHwUpdate())
+            writeToHw();
     }
 
-    bool LampHandler::needsHwUpdate() const {
-        for (uint8_t idx = 0; idx < NUMBER_OF_ICS; idx++) {
-            if (_lampstatesHw[idx] != _lampstates[idx]) return true;
+    bool LampHandler::needsHwUpdate() const
+    {
+        for (uint8_t idx = 0; idx < NUMBER_OF_ICS; idx++)
+        {
+            if (_lampstatesHw[idx] != _lampstates[idx])
+                return true;
         }
         return false;
     }
@@ -129,4 +145,4 @@ namespace BusDashboard {
         uint8_t const bitnum = 7 - position % 8;
         bitmask = 1 << bitnum;
     }
-}
+} // namespace BusDashboard

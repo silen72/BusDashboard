@@ -1,7 +1,9 @@
 #include "keyboard/KeyRelease.h"
 
-namespace BusDashboard {
-    void KeyRelease::doAction() {
+namespace BusDashboard
+{
+    void KeyRelease::doAction()
+    {
 #ifdef SerialDebug
         Serial.print(F("KeyRelease::doAction(), code: "));
         Serial.println((int)_keycode);
@@ -9,4 +11,4 @@ namespace BusDashboard {
         Keyboard.release(_keycode);
 #endif
     }
-}
+} // namespace BusDashboard

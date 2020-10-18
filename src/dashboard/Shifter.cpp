@@ -63,7 +63,8 @@ namespace BusDashboard
                 charToSend = 0;
                 break;
             }
-            if (charToSend >0) Dashboard::instance().keyboardHandler().addPressReleaseAction(charToSend);
+            if (charToSend > 0)
+                Dashboard::instance().keyboardHandler().addPressReleaseAction(charToSend);
             targetState = _state;
         }
         Dashboard::instance().lampHandler().setState(LampHandler::DriverPosition::Gangschaltung, Dashboard::instance().isLit());
@@ -75,4 +76,4 @@ namespace BusDashboard
         bh.addListener(*this, ButtonHandler::MatrixPosition::Gangschaltung_R);
         bh.addListener(*this, ButtonHandler::MatrixPosition::Gangschaltung_N);
     }
-}
+} // namespace BusDashboard
