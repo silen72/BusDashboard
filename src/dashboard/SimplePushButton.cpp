@@ -20,7 +20,7 @@ namespace BusDashboard
             else if (state)
                 Dashboard::instance().keyboardHandler().addPressReleaseAction(_toggleChar);
         }
-        if (_lmp_position != LampHandler::DriverPosition::None)
+        if ((_lmp_position != LampHandler::DriverPosition::None) & (_lightmode != LightMode::Ignore))
         {
             bool lightOn;
             switch (_lightmode)

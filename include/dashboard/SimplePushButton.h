@@ -7,17 +7,18 @@ namespace BusDashboard
 {
     class SimplePushButton : public ButtonListener
     {
+    public:
         enum class LightMode
         {
             AlwaysOn,
             AlwaysOff,
             WhenOn,
             WhenOff,
-            WhenDashboardIsLit
+            WhenDashboardIsLit,
+            Ignore
         };
 
-    public:
-        SimplePushButton(char const toggleChar,
+        SimplePushButton(uint8_t const toggleChar,
                          ButtonHandler::MatrixPosition const btn_position,
                          LampHandler::DriverPosition const lamp_position = LampHandler::DriverPosition::None,
                          LightMode const lightmode = LightMode::WhenDashboardIsLit,
@@ -28,11 +29,11 @@ namespace BusDashboard
 
         void setCurrentState(const uint8_t button, const bool state, const bool prev_state);
         void registerWith(ButtonHandler &bh);
-        void begin();
+        void begin(){};
 
     protected:
     private:
-        char _toggleChar;
+        uint8_t _toggleChar;
         ButtonHandler::MatrixPosition _btn_position;
         LampHandler::DriverPosition _lmp_position;
         LightMode _lightmode;
