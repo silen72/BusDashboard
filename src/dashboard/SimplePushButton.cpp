@@ -3,7 +3,6 @@
 #include "dashboard/Dashboard.h"
 #include "keyboard/KeyboardHandler.h"
 
-
 namespace BusDashboard
 {
 
@@ -11,10 +10,15 @@ namespace BusDashboard
     {
         if (state != prev_state)
         {
-            if (state)
-                Dashboard::instance().keyboardHandler().addPressAction(_toggleChar);
-            else
-                Dashboard::instance().keyboardHandler().addReleaseAction(_toggleChar);
+            if (_holdKey)
+            {
+                if (state)
+                    Dashboard::instance().keyboardHandler().addPressAction(_toggleChar);
+                else
+                    Dashboard::instance().keyboardHandler().addReleaseAction(_toggleChar);
+            }
+            else if (state)
+                Dashboard::instance().keyboardHandler().addPressReleaseAction(_toggleChar);
         }
         if (_lmp_position != LampHandler::DriverPosition::None)
         {
