@@ -17,70 +17,85 @@ namespace BusDashboard {
          * enum of all buttons on the dashboard with a mapping to their position on the button matrix
 		 * note: sorry for the missing translation, I may add it sometimes ...
          */
-		enum MatrixPosition
+		class MatrixPosition
 		{
-			// buttons and switches on the right half of the dashboard
-			Gangschaltung_D = 1,
-			Gangschaltung_N,
-			Gangschaltung_R,
-			Tuer_3,
-			Tuer_Freigabe,
-			Tuer_2,
-			Tuer_1,
-			Tuer_Sperren_1,
-			Tuer_Sperren_2,
-			Kneeling_2_auf,
-			Kneeling_2_ab,
-			Kneeling_1_auf,
-			Kneeling_1_ab,
-			Kindersteuerung_1,
-			Kindersteuerung_2,
-			Haltestellenbremse,
-			Parkbremse,		// Quit
-			SystemInfo_auf, // Profil_Wechseln
-			SystemInfo_ab,
-			Reset,
-			Display,
+			public:
+				enum Value : uint8_t
+				{
+					// buttons and switches on the right half of the dashboard
+					Gangschaltung_D = 1,
+					Gangschaltung_N,
+					Gangschaltung_R,
+					Tuer_3,
+					Tuer_Freigabe,
+					Tuer_2,
+					Tuer_1,
+					Tuer_Sperren_1,
+					Tuer_Sperren_2,
+					Kneeling_2_auf,
+					Kneeling_2_ab,
+					Kneeling_1_auf,
+					Kneeling_1_ab,
+					Kindersteuerung_1,
+					Kindersteuerung_2,
+					Haltestellenbremse,
+					Parkbremse,		// Quit
+					SystemInfo_auf, // Profil_Wechseln
+					SystemInfo_ab,
+					Reset,
+					Display,
 
-			// ignition / lock
-			Zuendung_1,
-			Zuendung_2,
-			Zuendung_3,
+					// ignition / lock
+					Zuendung_1,
+					Zuendung_2,
+					Zuendung_3,
 
-			// retarder
-			Retarder_1,
-			Retarder_2,
-			Retarder_3,
-			Retarder_4,
-			Retarder_5,
-			Retarder_6,
+					// retarder
+					Retarder_1,
+					Retarder_2,
+					Retarder_3,
+					Retarder_4,
+					Retarder_5,
+					Retarder_6,
 
-			// direction-indicator control
-			Scheibenwischer_1,
-			Scheibenwischer_2,
-			Scheibenwischer_3,
-			Wischwasser,
-			Hupe,
-			Licht_Fern,
-			Blinker_Links,
-			Blinker_Rechts,
+					// direction-indicator control
+					Scheibenwischer_1,
+					Scheibenwischer_2,
+					Scheibenwischer_3,
+					Wischwasser,
+					Hupe,
+					Licht_Fern,
+					Blinker_Links,
+					Blinker_Rechts,
 
-			// buttons and switches on the left half of the dashboard
-			Haltestellenansage,
-			Blinker_Warn,
-			Licht_Fahrer,
-			Licht_Innen_1,
-			Licht_Innen_2,
-			Asr,
+					// buttons and switches on the left half of the dashboard
+					Haltestellenansage,
+					Blinker_Warn,
+					Licht_Fahrer,
+					Licht_Innen_1,
+					Licht_Innen_2,
+					Asr,
 
-			// light control
-			/*Licht_Abblend,
-			Licht_Standlicht,
-			Licht_Nebelschluss, */
-			Scheinwerfer_A1,
-			Scheinwerfer_A2,
-			Scheinwerfer_I1,
-			Scheinwerfer_I2
+					// light control
+					/*Licht_Abblend,
+					Licht_Standlicht,
+					Licht_Nebelschluss, */
+					Scheinwerfer_A1,
+					Scheinwerfer_A2,
+					Scheinwerfer_I1,
+					Scheinwerfer_I2,
+
+				};
+				MatrixPosition() = default;
+				constexpr MatrixPosition(Value aFruit) : value(aFruit) {}
+				/*
+				constexpr bool operator==(MatrixPosition a) const { return value == MatrixPosition.value; }
+				constexpr bool operator!=(MatrixPosition a) const { return value != MatrixPosition.value; }
+				*/
+				uint8_t toUint8_t() { return value; }
+
+			private:
+				Value value;
 		};
 
 		static const uint8_t MATRIX_ROW_COUNT = 8; // the number of rows in the multiplexer matrix
@@ -156,7 +171,7 @@ namespace BusDashboard {
 		 */
 		void notify(const uint8_t button, const bool state);
 
-        ButtonHandler() = delete;
+		ButtonHandler() = delete;
         ButtonHandler(const ButtonHandler&) = delete;
         ButtonHandler& operator=(const ButtonHandler&) = delete;
 

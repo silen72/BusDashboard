@@ -20,7 +20,7 @@ namespace BusDashboard
     private:
         static uint8_t const WAIT_MAX_MS_IN_LEAVING_STATE_MS = 50;
         static uint8_t const WAIT_FOR_OFF_BLINK_DELAY_MS = 250;
-        enum class Index
+        enum class Index : uint8_t
         {
             A1,
             A2,
@@ -28,7 +28,7 @@ namespace BusDashboard
             I2
         };
         static uint8_t const MaxIndex = (uint8_t)Index::A2;
-        enum class State
+        enum class State : uint8_t
         {
             Undefined,    // before initialization, never reached afterwards
             Wait_for_off, // this state indicates that the knob has to be set to off to sync it with the OMSI bus state

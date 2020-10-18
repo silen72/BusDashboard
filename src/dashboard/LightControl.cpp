@@ -6,6 +6,8 @@
 #include "dashboard/Dashboard.h"
 #include "buttonmatrix/ButtonHandler.h"
 
+// unlit knob to control the bus lighting
+
 namespace BusDashboard
 {
     LightControl::LightControl()
