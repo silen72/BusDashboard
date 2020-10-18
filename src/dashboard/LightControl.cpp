@@ -15,13 +15,11 @@ namespace BusDashboard
     void LightControl::setCurrentState(const uint8_t button, const bool state, const bool prev_state)
     {
         bool _isConnected = prev_state;
-        bool resetTimer = false;
         switch (button)
         {
         case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_A1:
             if (_isConnected != state)
             {
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -56,7 +54,6 @@ namespace BusDashboard
         case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_A2:
             if (_isConnected != state)
             {
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -89,7 +86,6 @@ namespace BusDashboard
         case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_I1:
             if (_isConnected != state)
             {
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
@@ -122,7 +118,6 @@ namespace BusDashboard
         case (uint8_t)ButtonHandler::MatrixPosition::Scheinwerfer_I2:
             if (_isConnected != state)
             {
-                resetTimer = true;
                 if (state)
                 {
                     switch (_currentState)
