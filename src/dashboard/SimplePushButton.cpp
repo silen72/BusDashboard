@@ -1,20 +1,20 @@
-#include "dashboard/SimpleSwitch.h"
+#include "dashboard/SimplePushButton.h"
 #include "buttonmatrix/ButtonHandler.h"
 #include "dashboard/Dashboard.h"
 #include "keyboard/KeyboardHandler.h"
-#include "keyboard/KeyboardHandler.h"
+
 
 namespace BusDashboard
 {
 
-    void SimpleSwitch::setCurrentState(const uint8_t button, const bool state, const bool prev_state)
+    void SimplePushButton::setCurrentState(const uint8_t button, const bool state, const bool prev_state)
     {
         if (state != prev_state)
         {
             if (state)
-                Dashboard::instance().keyboardHandler().addPressReleaseAction(_sendOn);
+                Dashboard::instance().keyboardHandler().addPressAction(_toggleChar);
             else
-                Dashboard::instance().keyboardHandler().addPressReleaseAction(_sendOff);
+                Dashboard::instance().keyboardHandler().addReleaseAction(_toggleChar);
         }
         if (_lmp_position != LampHandler::DriverPosition::None)
         {
@@ -41,7 +41,7 @@ namespace BusDashboard
         }
     }
 
-    void SimpleSwitch::registerWith(ButtonHandler &bh)
+    void SimplePushButton::registerWith(ButtonHandler &bh)
     {
         bh.addListener(*this, _btn_position);
     }

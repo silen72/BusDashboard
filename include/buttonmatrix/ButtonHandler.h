@@ -19,6 +19,7 @@ namespace BusDashboard {
          */
 		enum class MatrixPosition : uint8_t
 		{
+			None = 0,
 			// buttons and switches on the right half of the dashboard
 			Gangschaltung_D = 1,
 			Gangschaltung_N,

@@ -1,8 +1,8 @@
 #pragma once
 #include <Arduino.h>
-//#include "dashboard/Dashboard.h"
 
-namespace BusDashboard {
+namespace BusDashboard
+{
 
    //class Dashboard;
 
@@ -15,6 +15,7 @@ namespace BusDashboard {
 
       enum DriverPosition
       {
+         None = 0,
          // 24V: position 1 .. 24
          Tuer_Freigabe,
          Tuer_Sperren,
@@ -128,4 +129,4 @@ namespace BusDashboard {
        */
       void writeToHw();
    };
-}
+} // namespace BusDashboard
