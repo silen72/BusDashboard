@@ -4,8 +4,6 @@
 namespace BusDashboard
 {
 
-   //class Dashboard;
-
    class LampHandler
    {
 
