@@ -27,9 +27,9 @@ namespace BusDashboard
                                                        _lmp_position(lamp_position),
                                                        _lightmode(lightmode), _holdKey(holdKey){};
 
-        void setCurrentState(const uint8_t button, const bool state, const bool prev_state);
-        void registerWith(ButtonHandler &bh);
-        void begin(){};
+        void setCurrentState(const uint8_t button, const bool state, const bool prev_state) override;
+        void registerWith(ButtonHandler &bh) override;
+        void begin() override {};
 
     protected:
     private:

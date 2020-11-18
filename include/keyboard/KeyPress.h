@@ -10,6 +10,6 @@ namespace BusDashboard {
         const uint8_t _keycode;
     public:
         KeyPress(const uint8_t keycode) :_keycode(keycode) {}
-        void doAction();
+        void doAction() override;
     };
 }

@@ -4,10 +4,10 @@
 namespace BusDashboard {
     class LampTester : public ButtonListener {
         public:
-            void setCurrentState(const uint8_t button, const bool state, bool prev_state);
-            void registerWith(ButtonHandler &bh);
+            void setCurrentState(const uint8_t button, const bool state, bool prev_state) override;
+            void registerWith(ButtonHandler &bh) override;
             LampTester();
-            void begin() {}
+            void begin() override {}
 
         protected:
 

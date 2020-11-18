@@ -9,6 +9,6 @@ namespace BusDashboard {
         KeyRelease& operator=(const KeyRelease&) = delete;
     public:
         KeyRelease(const uint8_t keycode) :_keycode(keycode) {}
-        void doAction();
+        void doAction() override;
     };
 }
