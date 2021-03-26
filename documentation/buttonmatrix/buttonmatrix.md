@@ -24,7 +24,7 @@ Some infos about the pcb:
 -   1 connector JST-XH-6A
 
 ## How does it work?
-The MCP23S17 has 16 I/O pins. Eight of those (GP<b>A</b>x) are set to output, the other eight (GP<b>B</b>x) to input. The eight input pins are pulled down to ground because otherwise they would be floating (not connected to anything) when the connected button is not pressed or not button is connected at all. In the rendered pcb image above you can see the GP<b>B</b>x pins and their resistors facing to the left and the GP<b>A</b>x on the opposing side of the IC.
+The MCP23S17 has 16 I/O pins. Eight of those (GP<b>A</b>x) are set to output, the other eight (GP<b>B</b>x) to input. The eight input pins are pulled down to ground because otherwise they would be floating (not connected to anything) when the connected button is not pressed or no button is connected at all. In the rendered pcb image above you can see the GP<b>B</b>x pins and their resistors facing to the left and the GP<b>A</b>x on the opposing side of the IC.
 
 The code powers only one of the eight ROWs at a time by setting exactly one of the eight GP<b>A</b>x pins on the MCP23S17 to HIGH. It then scans all eight GP<b>B</b>x pins. For each GPBx pin that measures HIGH it knows that the blade terminals in that ROW and COLumn must be connected -> the button connected to these blade terminals is pushed.
 
