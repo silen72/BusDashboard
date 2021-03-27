@@ -10,7 +10,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 
 ![the rendered pcb](images/Schaltermatrix2.png)
 
-Some infos about the pcb:
+## Some infos about the pcb
 - The diodes are necessary to avoid [keyboard ghosting](https://en.wikipedia.org/wiki/Rollover_(key)#Ghosting)
 - The blade terminals may seem to have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
 
@@ -29,9 +29,10 @@ The MCP23S17 has 16 I/O pins. Eight of those (GP<b>A</b>x) are set to output, th
 The code powers only one of the eight ROWs at a time by setting exactly one of the eight GP<b>A</b>x pins on the MCP23S17 to HIGH. It then scans all eight GP<b>B</b>x pins. For each GPBx pin that measures HIGH it knows that the blade terminals in that ROW and COLumn must be connected -> the button connected to these blade terminals is pushed.
 
 ## Improvements for a future version
-- Swap VCC and GND pins on the input connector. Alternative: swap VCC and GND on the shield pcb (yet to be described...)
+- Swap VCC and GND pins on the input connector. Alternative: swap VCC and GND on the [shield pcb](../shield/shield.md)
 
 
-Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
+## Disclaimer
+The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
 
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text">This work   is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" /></a></p>

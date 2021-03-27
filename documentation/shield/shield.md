@@ -6,7 +6,6 @@ Its only purpose is to provide sockets for the connection cables to the various 
 
 ![the schematics](images/ShieldSchematics.png)
 
-
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
 
 ![the pcb](images/Shield-brd.svg)
@@ -22,3 +21,11 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 * 2 Dupont 1x8
 * 1 Dupont 1x10
 * 1 Dupont 2*3 (ICSP)
+
+## Improvements for a future version
+
+## How does it work?
+Pretty well, thanks for asking... (to be done)
+
+## Improvements for a future version
+- Swap VCC and GND pins on the connector to the [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md). Alternative: swap VCC and GND there
