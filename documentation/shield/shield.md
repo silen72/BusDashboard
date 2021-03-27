@@ -25,7 +25,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 ## Improvements for a future version
 
 ## How does it work?
-Pretty well, thanks for asking... (to be done)
+It has no real funcionality besides routing the various arduino I/O-pins to socket pins.
 
 ## Improvements for a future version
 - Swap VCC and GND pins on the connector to the [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md). Alternative: swap VCC and GND there
