@@ -6,6 +6,7 @@ Its only purpose is to provide sockets for the connection cables to the various 
 
 ![the schematics](images/ShieldSchematics.png)
 
+
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
 ![the pcb](images/Shield-brd.svg)
 
