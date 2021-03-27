@@ -6,9 +6,9 @@ The power supply consist of two switching power supplies:
 
 We opted for the [MW LRS-100-24](https://www.meanwell.com/productPdf.aspx?i=411) and the [SNT RS 25 5](https://www.meanwell.com/productPdf.aspx?i=392), mainly because they were available at a decent price.
 
-Both power supplies are controlled by a relais. We didn't want to tinker with high voltage. So we dedided to use a commercially available relais that is operated using 5V and is specified to switch up to 10A: the [COM-KY019RM](https://joy-it.net/en/products/COM-KY019RM). The relais is used by the Arduino to turn off mains after a period of inactivity on the dashboard.
+Both power supplies are controlled by a relay. We didn't want to tinker with high voltage. So we dedided to use a commercially available relay that is operated using 5V and is specified to switch up to 10A: the [COM-KY019RM](https://joy-it.net/en/products/COM-KY019RM). The relay is used by the Arduino to turn off mains after a period of inactivity on the dashboard.
 
-Both power supplies and the relais are mounted on a board that nicely fits in the base part of the dashboard. We placed it there so it does not need to be moved when opening the dashboard.
+Both power supplies and the relay are mounted on a board that nicely fits in the base part of the dashboard. We placed it there so it does not need to be moved when opening the dashboard.
 
 The assembled power supply:
 ![The assembled power supply](images/sps_assembled.png)
