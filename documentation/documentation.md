@@ -6,7 +6,7 @@ The ultimate goal is to use a real bus dashboard that has been stripped from a b
 
 This is made possible because of a fan-made dll that links into OMSI called KOMSI. It receives OMSI-internal information, which it in turn sends to a configurable serial port via USB. This is a one way communication, it is only capable of sending information.
 
-Every new frame (each time, a complete screen has been rendered) it sends all information it has gathered in a pretty simple format. So the controller needs to be able to reveive the information via serial port from the PC and decode it.
+Every new frame (each time, a complete screen has been rendered) it sends all information it has gathered in a pretty simple format. So the controller needs to be able to receive the information via serial port from the PC and decode it.
 
 ## Controlling and sending information to OMSI
 
