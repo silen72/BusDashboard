@@ -16,7 +16,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 
 ## Bill of materials
 -   1 IC socket 28 pin
--   1 IC MCP23S17
+-   1 IC [MCP23S17](https://www.microchip.com/wwwproducts/en/MCP23S17)
 -   1 resistor 1k
 -   8 resistors 10k
 -  64 diodes 1N4148

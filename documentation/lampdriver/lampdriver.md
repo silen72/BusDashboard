@@ -50,8 +50,8 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 -  3 IC sockets 18 pin
 -  3 IC [TBD62783APG](https://toshiba.semicon-storage.com/info/docget.jsp?did=35900) octal DMOS-FET arrays
 - 52 [blade terminals](https://www.vogtshop.ch/index.cfm?content=productData&Language=1&TreeID=BC533B35-D97E-46A2-872A-A3342E5C8212&sId=DEB33619-878B-4929-88BA-EDD863B07F05&sId=DEB33619-878B-4929-88BA-EDD863B07F05) 2,8mm
--  9 fuse holders
--  9 fuses
+-  9 fuse holders [RND 170-00187](https://www.reichelt.de/sicherungshalter-fuer-5-x-20-mm-250-v-10-a-beige-rnd-170-00187-p253172.html?CCOUNTRY=445&LANGUAGE=de) (I haven't found a manufacturer's site for this so I simply chose the reseller's)
+-  9 fuses 500mA (f)
 -  1 socket JST-XH-4A
 
 ## Improvements for a future version
