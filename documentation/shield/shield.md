@@ -22,6 +22,8 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 * 1 Dupont 1x10
 * 1 Dupont 2*3 (ICSP)
 
+The prototype was a separate board, not shield. It can be seen in the picture of the complete prototype on the [overall documentation page](../documentation.md).
+
 The board pre-soldering:
 ![The board pre-soldering](images/pre_soldering.png)
 
