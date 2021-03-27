@@ -20,9 +20,9 @@ For steering we want to use a standard commercial force feedback wheel. For that
 
 The dashboard was formerly used in a real bus - it's pretty heavy. To use it safely it was neccessary to build something that holds it relyably in position. The initial idea was to build a frame. We ditched that idea in favor of a much more simple solution: a cheap used sofa table. After stripping off every non-vital part of the dashboard (and thus dropping a considerable amount of weight) we were able to simply attach it to the table with four sturdy screws. To make room for the drivers legs we simply cut out a conveniently sized piece of the table top. Coincidentally the table had just the right height. With the dashboard on top of it, the steering wheel is in a position that needs no further adjusting.
 
-![violated sofa table](dashboard/images/sofa_table.jpg)
+![dashboard mounted on a sofa table](dashboard/images/dashboard_mounted.jpg)
 
-![dashboard mounted on a sofa table](dashboard/images/first_prototype.jpg)
+![violated sofa table](dashboard/images/sofa_table.jpg)
 
 Of course it came without any documentation - so we had to take inventory ourselves, try, fail, learn... The knowledge we gained is documented [here](dashboard/dashboard.md).
 
