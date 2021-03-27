@@ -17,7 +17,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 
 To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exported the board design to gerber format](files/LampDriverPCB_gerber.zip).
 
-Some info about the board:
+## Some infos about the pcb
 - Instead of soldering all those ICs directly onto the pcb you should use sockets.
 - The board is pretty big. This is due to the fact that the connectors have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
 - Testing the MOSFETs with a 24V light bulb has shown that there was no noticable warming, hence no effort was made for cooling. Should you want to drive more mA please consider a) placing the MOSFETs further apart to allow for heatsinks and b) increasing the trace width.
@@ -41,7 +41,7 @@ Some info about the board:
 */
 ```
 
-Bill of material:
+## Bill of materials
 - 24 MOSFET IRLZ44n
 - 24 100 Ω resistors
 - 24 22k Ω resistors
@@ -54,11 +54,12 @@ Bill of material:
 -  9 fuses
 -  1 socket JST-XH-4A
 
-Improvements for (a planned) version 1.1:
+## Improvements for a future version
 - The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little.  Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
 - More detail on the silk screen. Currently the silk screen is a mess because I was lazy / too eager to have the board created finally.
 - In version 1.0 the 74hc595 ICs are powered by the separate 5V power source rather than by the arduino. This is a design flaw because the ICs AND the lamps (both 5V and 24V) get powered up simultanously. The state of the 74hc595 is not defined at that very moment and there is no way to set all the 74hc595 output pins to LOW. In effect that might lead to a brief flashing of at least some of the lamps. In a future version there will be a different design that powers the 74hc595 ICs via the arduino.
 
-Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
+## Disclaimer
+The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
 
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text">This work   is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" /></a></p>
