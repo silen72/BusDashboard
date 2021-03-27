@@ -5,7 +5,7 @@ The Lamp Driver PCB was created with [KiCAD](https://kicad-pcb.org/). The comple
 The Lamp Driver PCB mainly consist of three distinct parts:
 - the controller part: six shift register ICs ([74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/)) controlling the two output parts (in the center of the schematics)
 - the 5V output part: three driver ICs that deliver power to LEDs on the bus dashboard (on the bottom of the schematics)
-- the 24V output part: 3x8 MOSFETs that deliver power to the switches etc. on the bus dashboard (on the top of the schematics)
+- the 24V output part: 3x8 MOSFETs ([IRLZ44N](https://www.infineon.com/cms/en/product/power/mosfet/12v-300v-n-channel-power-mosfet/irlz44n/), a logic level MOSFET that conducts at low voltages) that control power to the switches etc. on the bus dashboard (on the top of the schematics)
 
 ![the schematics](images/LampDriverSchematics.png)
 
