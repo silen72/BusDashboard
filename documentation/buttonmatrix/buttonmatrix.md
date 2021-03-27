@@ -14,7 +14,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 - The diodes are necessary to avoid [keyboard ghosting](https://en.wikipedia.org/wiki/Rollover_(key)#Ghosting)
 - The blade terminals may seem to have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
 
-The first prototype:
+<a id="prototype" />The first prototype:
 ![The first prototype](images/prototype.png)
 
 ## Bill of materials
@@ -36,6 +36,7 @@ The soldered board:
 
 ## Improvements for a future version
 - Swap VCC and GND pins on the input connector. Alternative: swap VCC and GND on the [shield pcb](../shield/shield.md)
+- The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little. Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
 
 
 ## Disclaimer
