@@ -28,7 +28,7 @@ Of course it came without any documentation - so we had to take inventory oursel
 
 The controller is based on an [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo), mostly because it is capable of sending keystrokes to the PC via its USB-connection.
 
-It is connected to two custom pcb that take care of the in- and output of the bus dashboard. The input is mostly "which switch is in what position", "which button is currently pressed", and so on. The pcb is called [buttonmatrix](buttonmatrix/buttonmatrix.md). The output in mainly switching light bulbs and leds on and off. So the pcb is called [lampdriver](lampdriver/lampdriver.md).
+It is connected to two custom pcb that take care of the in- and output of the bus dashboard. The input is mostly "which switch is in what position", "which button is currently pressed", and so on. The pcb is called [buttonmatrix](buttonmatrix/buttonmatrix.md). The output is mainly switching light bulbs and leds on and off. So the pcb is called [lampdriver](lampdriver/lampdriver.md).
 
 The [power supply](powersupply/powersupply.md) needs to provide 24V for lighting most of the stock switches and 5V for a few customized parts on the dashboard. To add a little security it is controlled by the arduino via a relais. The Arduino itself is independantly powered by the connected PC via USB.
 
