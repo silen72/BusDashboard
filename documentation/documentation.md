@@ -45,7 +45,7 @@ Ultimately we wanted to have that crisp sound when the indicator / turn signal i
 ![relay for indicator / turn signal sound](dashboard/images/indicator_relay.png)
 
 
-[A first prototype of the controller:](#picprototype)
+#### A first prototype of the controller
 ![first prototype](dashboard/images/first_prototype.jpg)
 
 ## Software
