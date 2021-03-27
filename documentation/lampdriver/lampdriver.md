@@ -1,6 +1,6 @@
 # The Lamp Driver PCB
 
-The Lamp Driver PCB was created with [KiCAD](https://kicad-pcb.org/). The complete project is downloadable [here](files/LampDriver-Kicad.zip).
+The Lamp Driver PCB was created with [KiCAD](https://kicad-pcb.org/). The complete project is downloadable [here](files/LampDriver-Kicad.zip). I found the 3D data file for creating the blade terminal part in KICad on the [manufacturers website (vogtshop.ch)](https://www.vogtshop.ch/index.cfm?content=productData&Language=1&TreeID=BC533B35-D97E-46A2-872A-A3342E5C8212&sId=DEB33619-878B-4929-88BA-EDD863B07F05&sId=DEB33619-878B-4929-88BA-EDD863B07F05).
 
 The Lamp Driver PCB mainly consist of three distinct parts:
 - the controller part: six shift register ICs ([74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/)) controlling the two output parts (in the center of the schematics)
@@ -15,7 +15,7 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 
 ![the rendered pcb](images/LampDriverPCB.png)
 
-To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exported the board design to gerber format](files/LampDriverPCB_gerber.zip).
+To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exported the board design to gerber format](files/LampDriverPCB_gerber.zip). The process is nicely [described on their website](https://support.jlcpcb.com/article/44-how-to-export-kicad-pcb-to-gerber-files).
 
 ## Some infos about the pcb
 - Instead of soldering all those ICs directly onto the pcb you should use sockets.
@@ -42,14 +42,14 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 ```
 
 ## Bill of materials
-- 24 MOSFET IRLZ44n
+- 24 MOSFET [IRLZ44N](https://www.infineon.com/cms/en/product/power/mosfet/12v-300v-n-channel-power-mosfet/irlz44n/)
 - 24 100 Ω resistors
 - 24 22k Ω resistors
 -  6 IC sockets 16 pin
--  6 IC 74hc595AG shift registers
+-  6 IC [74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/) shift registers
 -  3 IC sockets 18 pin
--  3 IC TBD62783APG octal DMOS-FET arrays
-- 52 blade terminals (2,8mm)
+-  3 IC [TBD62783APG](https://toshiba.semicon-storage.com/info/docget.jsp?did=35900) octal DMOS-FET arrays
+- 52 [blade terminals](https://www.vogtshop.ch/index.cfm?content=productData&Language=1&TreeID=BC533B35-D97E-46A2-872A-A3342E5C8212&sId=DEB33619-878B-4929-88BA-EDD863B07F05&sId=DEB33619-878B-4929-88BA-EDD863B07F05) 2,8mm
 -  9 fuse holders
 -  9 fuses
 -  1 socket JST-XH-4A
@@ -57,7 +57,7 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 ## Improvements for a future version
 - The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little.  Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
 - More detail on the silk screen. Currently the silk screen is a mess because I was lazy / too eager to have the board created finally.
-- In version 1.0 the 74hc595 ICs are powered by the separate 5V power source rather than by the arduino. This is a design flaw because the ICs AND the lamps (both 5V and 24V) get powered up simultanously. The state of the 74hc595 is not defined at that very moment and there is no way to set all the 74hc595 output pins to LOW. In effect that might lead to a brief flashing of at least some of the lamps. In a future version there will be a different design that powers the 74hc595 ICs via the arduino.
+- In version 1.0 the [74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/) ICs are powered by the separate 5V power source rather than by the arduino. This is a design flaw because the ICs AND the lamps (both 5V and 24V) get powered up simultanously. The state of the 74hc595 is not defined at that very moment and there is no way to set all the [74hc595](https://microcontrollerslab.com/74hc595-shift-register-interfacing-arduino/) output pins to LOW. In effect that might lead to a brief flashing of at least some of the lamps. In a future version there will be a different design that powers the 74hc595 ICs via the arduino.
 
 ## Disclaimer
 The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
