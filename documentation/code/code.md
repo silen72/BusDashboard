@@ -16,7 +16,7 @@ The code does this by breaking those two tasks down into subtasks:
 
 ## Receive OMSI updates from the PC
 
-KOMSI sends a stream like this every frame: A123B0C0D0E0F0G0H0I0J0K0L0M0N0O0P0Q0R0S0T0U0V0W0X0Y0Z0a0b0c0d0e0f0. This stream consists of pairs of commands (a single char, like 'A') and one assciated value. The value is transferred as ascii values, so 123 becomes '1' '2' '3'.
+KOMSI sends a stream like this every [frame](https://en.wikipedia.org/wiki/Frame_rate): A123B0C0D0E0F0G0H0I0J0K0L0M0N0O0P0Q0R0S0T0U0V0W0X0Y0Z0a0b0c0d0e0f0. This stream consists of pairs of commands (a single char, like 'A') and one assciated value. The value is transferred as ascii values, so 123 becomes '1' '2' '3'.
 
 What OMSI value a command character represents is configurable in KOMSI. Therefore the code is also flexible regarding what command triggers which actions. The KOMSIHandler class takes chars from the stream (KOMSIHandler.processIncoming) and builds the complete pair (command and value). When a pair is complete it notifies listeners for that specific command that a value for that command has been received. To become a listener, a class must implement KomsiCommandListener.receiveCommand. To be notified it must be added as a listener to the KOMSIHandler (KOMSIHandler.addListener). The command to listen to must be specified upon adding.
 
