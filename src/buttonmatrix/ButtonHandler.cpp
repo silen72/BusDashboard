@@ -21,7 +21,7 @@ namespace BusDashboard
   bool ButtonHandler::addListener(ButtonListener &listener, const MatrixPosition button)
   {
     uint8_t index = (uint8_t)button;
-    if (index >= ButtonHandler::BUTTON_COUNT)
+    if (index >= BUTTON_COUNT)
       return false;
 #ifdef SerialDebug
     Serial.print(F("ButtonHandler::addListener, button "));
@@ -49,9 +49,8 @@ namespace BusDashboard
   void ButtonHandler::notify(const uint8_t button, const bool state)
   {
     bool prevstate = _prevState[button];
-    bool changed = (state != prevstate);
-    // Dashboard must be powered, in case listers decide to activate lamps
-    if (changed)
+    // Dashboard must be powered, in case listeners decide to activate lamps
+    if (state != prevstate)
     {
       Dashboard::instance().resetIdleTimer();
       _prevState[button] = state;
