@@ -30,7 +30,7 @@ A KomsiCommandListener might want to toggle a light. It may request the lamp dri
 
 The ButtonHandler class is responsible for scanning all the knobs, switches and buttons on the dashboard. The [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md) is organized in rows and columms. Every time the buttonHandler().scan() is called it scans the next row. The scan frequency is limited (only every x ms) to prioritize receiving OMSI updates.
 
-For each of the eight columns buttons in the row it determines the current state (connected or not connected = pressed or not pressed). It notifies listeners of the current state the button is in as well as the state the button had on the last scan.
+For each of the eight buttons in the row it determines the current state (connected or not connected = pressed or not pressed). It notifies listeners of the current state the button is in as well as the state the button had on the last scan.
 
 To react to button states the code takes the same flexible approach as with the KOMSIHandler (see above). To become a listener, a class must implement ButtonListener. To be notified it must be added as a listener to the ButtonHandler (ButtonHandler.addListener). Upon adding the button position to listen to must be specified.
 
