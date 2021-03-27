@@ -9,7 +9,7 @@ namespace BusDashboard
 
    public:
       static const uint8_t NUMBER_OF_ICS = 6; // the number of 74HC595 ICs on the board
-      static const uint64_t WRITE_DELAY = 25; // wait at least this many ms between to actual writes to the lamp driver board
+      static const uint64_t WRITE_DELAY = 25; // wait at least this many ms between two actual writes to the lamp driver board
 
       enum DriverPosition
       {
