@@ -22,7 +22,11 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 * 1 Dupont 1x10
 * 1 Dupont 2*3 (ICSP)
 
-## Improvements for a future version
+The board pre-soldering:
+![The board pre-soldering](images/pre_soldering.png)
+
+Soldered and attached to the Arduino:
+ ![Soldered and attached](images/soldered.png)
 
 ## How does it work?
 It has no real funcionality besides routing the various arduino I/O-pins to socket pins.

@@ -41,6 +41,9 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 */
 ```
 
+The first prototype:
+![The first prototype](images/prototype.png)
+
 ## Bill of materials
 - 24 MOSFET [IRLZ44N](https://www.infineon.com/cms/en/product/power/mosfet/12v-300v-n-channel-power-mosfet/irlz44n/)
 - 24 100 Ω resistors
@@ -53,6 +56,12 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 -  9 fuse holders [RND 170-00187](https://www.reichelt.de/sicherungshalter-fuer-5-x-20-mm-250-v-10-a-beige-rnd-170-00187-p253172.html?CCOUNTRY=445&LANGUAGE=de) (I haven't found a manufacturer's site for this so I simply chose the reseller's)
 -  9 fuses 500mA (f)
 -  1 socket JST-XH-4A
+
+The soldered board:
+![The soldered board](images/soldered.png)
+
+Performing 24V tests:
+![Performing 24V tests](images/testing.png)
 
 ## Improvements for a future version
 - The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little.  Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...

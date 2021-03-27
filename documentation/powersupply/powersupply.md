@@ -10,6 +10,9 @@ Both power supplies are controlled by a relais. We didn't want to tinker with hi
 
 Both power supplies and the relais are mounted on a board that nicely fits in the base part of the dashboard. We placed it there so it does not need to be moved when opening the dashboard.
 
+The assembled power supply:
+![The assembled power supply](images/sps_assembled.png)
+
 We have installed a mains socket in the dashboard cover near the power supplies. This is to further increase safety: should someone trip over the cord powering the dashboard, only the plug gets pulled. Otherwise a ripped out cable could expose high voltage leads.
 
 The Arduino is exclusively powered via the USB connection to the PC.

@@ -14,6 +14,9 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 - The diodes are necessary to avoid [keyboard ghosting](https://en.wikipedia.org/wiki/Rollover_(key)#Ghosting)
 - The blade terminals may seem to have a lot of space between them. Placing them closer to each other is possible but makes the assembly (or disassembly if necessary) more finicky.
 
+The first prototype:
+![The first prototype](images/prototype.png)
+
 ## Bill of materials
 -   1 IC socket 28 pin
 -   1 IC [MCP23S17](https://www.microchip.com/wwwproducts/en/MCP23S17)
@@ -27,6 +30,9 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 The MCP23S17 has 16 I/O pins. Eight of those (GP<b>A</b>x) are set to output, the other eight (GP<b>B</b>x) to input. The eight input pins are pulled down to ground because otherwise they would be floating (not connected to anything) when the connected button is not pressed or no button is connected at all. In the rendered pcb image above you can see the GP<b>B</b>x pins and their resistors facing to the left and the GP<b>A</b>x on the opposing side of the IC.
 
 The code powers only one of the eight ROWs at a time by setting exactly one of the eight GP<b>A</b>x pins on the MCP23S17 to HIGH. It then scans all eight GP<b>B</b>x pins. For each GPBx pin that measures HIGH it knows that the blade terminals in that ROW and COLumn must be connected -> the button connected to these blade terminals is pushed.
+
+The soldered board:
+![The soldered board](images/soldered.png)
 
 ## Improvements for a future version
 - Swap VCC and GND pins on the input connector. Alternative: swap VCC and GND on the [shield pcb](../shield/shield.md)
