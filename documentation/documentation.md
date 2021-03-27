@@ -40,4 +40,4 @@ Ultimately we wanted to have that crisp sound when the indicator / turn signal i
 
 ## Software
 
- [(tbd)](code/code.md)
+An overview is given [(here)](code/code.md). We have also taken a considerable amount of time to comment the source code. 
