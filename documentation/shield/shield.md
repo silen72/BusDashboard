@@ -8,6 +8,7 @@ Its only purpose is to provide sockets for the connection cables to the various 
 
 
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
+
 ![the pcb](images/Shield-brd.svg)
 
 ![the rendered pcb](images/ShieldPCB.png)
