@@ -1,5 +1,5 @@
 # BusDashboard
-Code, schematics, documentation and electronics for using a used bus dashboard and an arduino leonardo as a controller for OMSI
+Code, [schematics, documentation and electronics](documentation/documentation.md) for using a used bus dashboard and an arduino leonardo as a controller for OMSI
 
 Disclaimer: The files and information given here are for informational purposes only. They have worked for me but I do not give any guarantee that they will work for you. Use them at your own risk.
 
