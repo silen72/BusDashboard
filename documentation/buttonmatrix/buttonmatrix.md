@@ -23,7 +23,7 @@ The first prototype:
 -   1 resistor 1k
 -   8 resistors 10k
 -  64 diodes 1N4148
-- 128 blade terminals
+- 128 [blade terminals](https://www.vogtshop.ch/index.cfm?content=productData&Language=1&TreeID=BC533B35-D97E-46A2-872A-A3342E5C8212&sId=DEB33619-878B-4929-88BA-EDD863B07F05&sId=DEB33619-878B-4929-88BA-EDD863B07F05) 2,8mm
 -   1 connector JST-XH-6A
 
 ## How does it work?
