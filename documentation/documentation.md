@@ -30,13 +30,13 @@ The controller is based on an [Arduino Leonardo](https://www.arduino.cc/en/Main/
 
 It is connected to two custom pcb that take care of the in- and output of the bus dashboard. The input is mostly "which switch is in what position", "which button is currently pressed", and so on. The pcb is called [buttonmatrix](buttonmatrix/buttonmatrix.md). The output is mainly switching light bulbs and leds on and off. So the pcb is called [lampdriver](lampdriver/lampdriver.md).
 
-The [power supply](powersupply/powersupply.md) needs to provide 24V for lighting most of the stock switches and 5V for a few customized parts on the dashboard. To add a little safety it is controlled by the arduino via a relais. The Arduino itself is independantly powered by the connected PC via USB.
+The [power supply](powersupply/powersupply.md) needs to provide 24V for lighting most of the stock switches and 5V for a few customized parts on the dashboard. To add a little safety it is controlled by the arduino via a relay. The Arduino itself is independantly powered by the connected PC via USB.
 
 The dashboard of course contains a speed indicator. Just like everthing else it came without any documentation. We also haven't found publicly available documentation on it. What we do know is that it is normally connected to the CANBus on the bus. Therefor we have included a [commercially available CANBus board](https://joy-it.net/en/products/SBC-CAN01) in the setup. Currently it is not used because we still need to figure out what to send to make the speed indicator move. Should that not succeed we'll take apart the speed indicator and modify it using a stepper motor.
 
 To make the connections between arduino and pcbs more robust and to have options when it comes to positioning the new parts inside the dashboard we wanted to use pluggable cables. For that we have created a simple [shield](shield/shield.md) for the Arduino.
 
-Ultimately we wanted to have that crisp sound when the indicator / turn signal is on. To have the real thing, we simply decided on a relais that is glued to the dashboard - the dashboard body is the sound box. It is a 5V relais so we control it using the lampdriver pcb.
+Ultimately we wanted to have that crisp sound when the indicator / turn signal is on. To have the real thing, we simply decided on a relay that is glued to the dashboard - the dashboard body is the sound box. It is a 5V relay so we control it using the lampdriver pcb.
 
 ## Software
 

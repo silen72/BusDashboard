@@ -11,6 +11,12 @@ namespace BusDashboard
       static const uint8_t NUMBER_OF_ICS = 6; // the number of 74HC595 ICs on the board
       static const uint64_t WRITE_DELAY = 25; // wait at least this many ms between two actual writes to the lamp driver board
 
+      // ToDo: translate
+      /**
+       * all known lights (mostly) and the position on the lamp driver pcb they are connected to
+       * position  1 to 24 is the 24V side of the board
+       * position 25 to 48 is the  5V side of the board
+      */
       enum DriverPosition
       {
          None = 0,
