@@ -37,6 +37,7 @@ namespace BusDashboard
          Tuer_3 = 25,
          Tuer_2,
          Tuer_1,
+         BLINKER_RELAIS = 48
       };
 
       /**
