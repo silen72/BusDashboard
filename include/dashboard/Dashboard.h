@@ -9,6 +9,7 @@ namespace BusDashboard
     class KeyboardHandler;
     class KomsiHandler;
     class CANBus;
+    class PowerSupply;
 
     class LightControl;
     class Shifter;
@@ -36,7 +37,7 @@ namespace BusDashboard
         {
             static CGuard g; // Speicherbereinigung
             if (!_instance)
-                _instance = new Dashboard(LeonardoPins::POWER_RELAY);
+                _instance = new Dashboard();
             return *_instance;
         }
         void xyz(){};
@@ -75,6 +76,7 @@ namespace BusDashboard
         KeyboardHandler &keyboardHandler() { return *_keyboardHandler; };
         KomsiHandler &komsiHandler() { return *_komsiHandler; };
         CANBus &canBusHandler() { return *_canBusHandler; };
+        PowerSupply &powerSupply() { return *_powerSupply; };
 
     protected:
     private:
@@ -93,10 +95,9 @@ namespace BusDashboard
             }
         };
 
-        static const uint32_t MAX_IDLE_MS = 15L * 60L * 1000L; // if within this amount of time (in ms) no button has been used an no command has been received, the dashboard is considered to be idle
+        static const uint32_t MAX_IDLE_MS = 15L * 60L * 1000L; // if within this amount of time (in ms) no button has been used the dashboard is considered to be idle
         static const uint32_t WARN_IDLE_MS = 30L * 1000L;      // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
 
-        const uint8_t _pin_relay;
         uint32_t _lastWakeupAction;
         bool _warningGiven = false;
         bool _warningActive = false;
@@ -108,6 +109,7 @@ namespace BusDashboard
         KeyboardHandler *_keyboardHandler;
         KomsiHandler *_komsiHandler;
         CANBus *_canBusHandler;
+        PowerSupply *_powerSupply;
 
         LightControl *_lightcontrol;
         Shifter *_shifter;
@@ -141,7 +143,7 @@ namespace BusDashboard
         void initUnit(ButtonListener *bl);
 
         // disallow creation
-        Dashboard() = delete;
+        Dashboard();
         Dashboard(const Dashboard &) = delete;
         Dashboard &operator=(const Dashboard &) = delete;
         ~Dashboard() {}

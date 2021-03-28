@@ -8,6 +8,7 @@
 #include "CANBus/CANBus.h"
 
 #include "dashboard/LightControl.h"
+#include "dashboard/PowerSupply.h"
 #include "dashboard/Shifter.h"
 #include "dashboard/SimplePushButton.h"
 #include "dashboard/SimpleSwitch.h"
@@ -15,6 +16,11 @@
 
 namespace BusDashboard
 {
+
+    Dashboard::Dashboard()
+    {
+        _lastWakeupAction = millis();
+    }
 
     void Dashboard::checkIdle()
     {
@@ -39,19 +45,14 @@ namespace BusDashboard
         }
         else
         {
-            // switch off dashboard power relay
-            digitalWrite(_pin_relay, LOW);
+            powerSupply().deactivate(); // switch off dashboard power relay
         }
     }
 
     void Dashboard::resetIdleTimer()
     {
         _lastWakeupAction = millis();
-        if (_sleeping)
-        {
-            // back to action: wake up dashboard
-            digitalWrite(_pin_relay, HIGH);
-        }
+        powerSupply().activate();
         _sleeping = false;
         _warningGiven = false;
         _warningActive = false;
@@ -66,7 +67,6 @@ namespace BusDashboard
     void Dashboard::begin()
     {
         // initialize own hardware
-        pinMode(_pin_relay, OUTPUT);
         resetIdleTimer();
 
         // switch off all lamps (a flaw in hw design: the lamps got power with the digitalWrite instruction above, so they probably already have flashed...)
@@ -83,7 +83,8 @@ namespace BusDashboard
         _komsiHandler->begin();
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
         _canBusHandler->begin();
-
+        _powerSupply = new PowerSupply(LeonardoPins::POWER_RELAY);
+        _powerSupply->begin();
 
         // initialise knobs, handles, buttons, switches
         _lightcontrol = new LightControl();
@@ -132,11 +133,6 @@ namespace BusDashboard
 
     }
 
-    Dashboard::Dashboard(const uint8_t pin_relay) : _pin_relay(pin_relay)
-    {
-        _lastWakeupAction = millis();
-    }
-
     bool Dashboard::isLit()
     {
         return _lightcontrol->isLit();
@@ -154,6 +150,7 @@ namespace BusDashboard
         lampHandler().update();
         keyboardHandler().update();
         checkIdle();
+        powerSupply().update();
     }
 
     Dashboard *Dashboard::_instance = 0;
