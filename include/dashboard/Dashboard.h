@@ -10,6 +10,7 @@ namespace BusDashboard
     class KomsiHandler;
     class CANBus;
     class PowerSupply;
+    class InactivityWarner;
 
     class LightControl;
     class Shifter;
@@ -40,9 +41,14 @@ namespace BusDashboard
                 _instance = new Dashboard();
             return *_instance;
         }
-        void xyz(){};
 
-        static const uint16_t WARN_BLINK_DELAY_MS = 200; // when a button signals a problem, this is the delay time in ms between toggling the lamp
+        enum IdleState
+        {
+            ACTIVE,
+            WARNING,
+            WARNED,
+            IDLE
+        };
 
         /**
          * polls the Serial input queue for KOMSI commands
@@ -62,9 +68,9 @@ namespace BusDashboard
         void begin();
 
         /**
-         * @returns the time in ms that have past without any waking actions
+         * @returns the time in ms that have passed without any waking actions
          */
-        uint32_t sleepTimeMs() const { return millis() - _lastWakeupAction; }
+        uint32_t idleTimeMs() const { return millis() - _lastActionTS; }
 
         bool isLit();
 
@@ -98,10 +104,8 @@ namespace BusDashboard
         static const uint32_t MAX_IDLE_MS = 15L * 60L * 1000L; // if within this amount of time (in ms) no button has been used the dashboard is considered to be idle
         static const uint32_t WARN_IDLE_MS = 30L * 1000L;      // this amount of time (in ms) before switching off the mains relay, the dashboard gives a warning
 
-        uint32_t _lastWakeupAction;
-        bool _warningGiven = false;
-        bool _warningActive = false;
-        bool _sleeping = true;
+        IdleState _idleState = ACTIVE;
+        uint32_t _lastActionTS;
 
         // parts of the dashboard
         ButtonHandler *_buttonHandler;
@@ -110,6 +114,7 @@ namespace BusDashboard
         KomsiHandler *_komsiHandler;
         CANBus *_canBusHandler;
         PowerSupply *_powerSupply;
+        InactivityWarner *_inactivityWarner;
 
         LightControl *_lightcontrol;
         Shifter *_shifter;
@@ -137,9 +142,11 @@ namespace BusDashboard
          * controls the mains relay (turns it off after idle time threshold is met)
          * emits a warning
          */
-        void
-        checkIdle();
+        void checkIdle();
 
+        /*
+        * adds a ButtonListener to the ButtonHandler, then initialises the listener
+        */
         void initUnit(ButtonListener *bl);
 
         // disallow creation

@@ -7,55 +7,63 @@
 #include "KOMSI/KOMSIHandler.h"
 #include "CANBus/CANBus.h"
 
+#include "dashboard/InactivityWarner.h"
 #include "dashboard/LightControl.h"
 #include "dashboard/PowerSupply.h"
 #include "dashboard/Shifter.h"
 #include "dashboard/SimplePushButton.h"
 #include "dashboard/SimpleSwitch.h"
 
-
 namespace BusDashboard
 {
 
     Dashboard::Dashboard()
     {
-        _lastWakeupAction = millis();
+        _lastActionTS = millis();
     }
 
     void Dashboard::checkIdle()
     {
-        uint32_t idleTime = millis() - _lastWakeupAction;
-        if (idleTime < Dashboard::WARN_IDLE_MS)
+        if (_idleState == IdleState::IDLE)
             return;
 
-        if (idleTime < Dashboard::MAX_IDLE_MS)
+        uint32_t idleTime = idleTimeMs();
+        if (idleTime < (Dashboard::MAX_IDLE_MS - Dashboard::WARN_IDLE_MS))
+            return; // not yet approaching idle time limit
+
+        if (idleTime < Dashboard::MAX_IDLE_MS) //  is idleTime within warning threshold?
         {
-            if (!_warningGiven)
+            switch (_idleState)
             {
-                if (_warningActive)
+            case IdleState::ACTIVE:
+                // first time reaching this idle time threshold -> start warning
+                _inactivityWarner->begin();
+                _idleState = IdleState::WARNING;
+                break;
+            case IdleState::WARNING:
+                _inactivityWarner->update();
+                if (!_inactivityWarner->warningActive()) // switch to WARNED when inactivityWarner is done warning
                 {
-                    // ToDo: emit a warning (without delays)
-                    _warningGiven = true;
+                    _idleState = IdleState::WARNED;
                 }
-                else
-                {
-                    _warningActive = true;
-                }
+                break;
+            default:
+                break;
             }
         }
-        else
+        else // idle time limit has been reached
         {
             powerSupply().deactivate(); // switch off dashboard power relay
+            _idleState = IdleState::IDLE;
         }
     }
 
     void Dashboard::resetIdleTimer()
     {
-        _lastWakeupAction = millis();
+        _lastActionTS = millis();
         powerSupply().activate();
-        _sleeping = false;
-        _warningGiven = false;
-        _warningActive = false;
+        _inactivityWarner->stopWarning();
+        _idleState = ACTIVE;
     }
 
     void Dashboard::initUnit(ButtonListener *bl)
@@ -85,6 +93,8 @@ namespace BusDashboard
         _canBusHandler->begin();
         _powerSupply = new PowerSupply(LeonardoPins::POWER_RELAY);
         _powerSupply->begin();
+        _inactivityWarner = new InactivityWarner(LampHandler::DriverPosition::BLINKER_RELAIS);
+        _inactivityWarner->begin();
 
         // initialise knobs, handles, buttons, switches
         _lightcontrol = new LightControl();
