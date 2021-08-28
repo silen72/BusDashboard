@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "BusDashboard",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string": "cpp"
+		}
+	}
+}
