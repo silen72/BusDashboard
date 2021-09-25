@@ -38,14 +38,13 @@ namespace BusDashboard
         }
     }
 
-    void LampHandler::update()
+    void LampHandler::update(const uint64_t timestamp)
     {
-        uint64_t const now = millis();
-        int64_t const diff = abs(now - _lastWriteMs);
+        int64_t const diff = abs(timestamp - _lastWriteMs);
         if ((uint64_t)diff < WRITE_DELAY)
             return;
         writeLampState();
-        _lastWriteMs = now;
+        _lastWriteMs = timestamp;
     }
 
     bool LampHandler::state(const uint8_t position, const bool queryHw) const

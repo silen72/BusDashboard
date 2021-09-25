@@ -44,7 +44,7 @@ namespace BusDashboard
        * updates the physical state of the lamps to the logical state, if necessary
        * communicates with the shift register ICs
        */
-      void update();
+      void update(const uint64_t timestamp);
 
       /**
        * @returns the pin number to which SI is connected 

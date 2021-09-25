@@ -118,7 +118,7 @@ namespace BusDashboard {
 		 * this needs to be called repeatedly - note that one call only queries one row of buttons
 		 * note also that this neither tries to debounce buttons nor does it detect changes, the listeners receive 'raw' data
 		*/
-		void scan();
+		void scan(const uint64_t timestamp);
 
 		/**
 		 * initialize the instance (call this once in setup())
@@ -133,8 +133,8 @@ namespace BusDashboard {
 		const uint8_t _address = 0x20;                     // SPI: A0 .. A2 connected to ground
 		ItemNode<ButtonListener> *_listener[BUTTON_COUNT]; // registered listeners
 		uint8_t _row = 0;								   // the current row (this row gets queried on updateStatus)
-		unsigned long _lastButtonChange = 0;			   // timestamp: last change in a button state
-		unsigned long _lastRead = 0;					   // timestamp: last read action (for throtteling the read frequency)
+		uint64_t _lastButtonChange = 0;					   // timestamp: last change in a button state
+		uint64_t _lastRead = 0;							   // timestamp: last read action (for throtteling the read frequency)
 		bool _prevState[BUTTON_COUNT];					   // the state the button was in on last read attempt
 
 		gpio_MCP23S17* _mcp;

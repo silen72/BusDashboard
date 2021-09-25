@@ -96,7 +96,7 @@ namespace BusDashboard
         /**
          * updates the keyboard actions in the queue (calls their run() and removes them, when they are both done() and removable())
          */
-        void update();
+        void update(const uint64_t timestamp);
 
         /**
          * initializes the instance

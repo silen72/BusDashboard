@@ -149,15 +149,17 @@ namespace BusDashboard
 
     void Dashboard::update()
     {
+        const uint64_t now = millis();
+
         if (Serial.available())
         {
             int val = Serial.read();
             komsiHandler().processIncoming(val);
             resetIdleTimer();
         }
-        buttonHandler().scan();
-        lampHandler().update();
-        keyboardHandler().update();
+        buttonHandler().scan(now);
+        lampHandler().update(now);
+        keyboardHandler().update(now);
         checkIdle();
         powerSupply().update();
     }

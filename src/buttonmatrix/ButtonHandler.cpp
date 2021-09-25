@@ -103,11 +103,10 @@ namespace BusDashboard
     _mcp->gpioRegisterWriteByte(MCP23S17_GPPU + 1, 0x00);  // no pullup on input ports
   }
 
-  void ButtonHandler::scan()
+  void ButtonHandler::scan(const uint64_t timestamp)
   {
     // throttle reads
-    const uint32_t now = millis();
-    if (abs(now - _lastRead) < READ_DELAY_MS)
+    if (abs(timestamp - _lastRead) < READ_DELAY_MS)
       return;
     // read one row of buttons
     setMuxRow();
@@ -123,6 +122,6 @@ namespace BusDashboard
     _row++;
     if (_row >= MATRIX_ROW_COUNT)
       _row = 0;
-    _lastRead = now;
+    _lastRead = timestamp;
   }
 } // namespace BusDashboard

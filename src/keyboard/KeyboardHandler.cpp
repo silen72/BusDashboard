@@ -40,7 +40,7 @@ namespace BusDashboard
 		addAction(*(new KeyPressReleaseMod(keycode, modifierkeycode, duration)));
 	}
 
-	void KeyboardHandler::update()
+	void KeyboardHandler::update(const uint64_t timestamp)
 	{
 		ItemNode<KeyAction> *node = _nextActionNode;
 		if (nullptr == node)
