@@ -50,17 +50,7 @@ namespace BusDashboard
             IDLE
         };
 
-        /**
-         * polls the Serial input queue for KOMSI commands
-         * scans the buttons
-         * sets lamps on the dashboard accordingly
-         */
-        void update();
-
-        /**
-         * resets the idleTimer
-         */
-        void resetIdleTimer();
+        Dashboard(const uint8_t pin_relay);
 
         /**
          * initialization: turn on mains relay
@@ -68,21 +58,58 @@ namespace BusDashboard
         void begin();
 
         /**
+         * @returns the buttonhandler instance
+         */
+        ButtonHandler &buttonHandler() { return *_buttonHandler; };
+
+        /**
+         * @returns the canbushandler instance
+         */
+        CANBus &canBusHandler() { return *_canBusHandler; };
+
+        /**
          * @returns the time in ms that have passed without any waking actions
          */
         uint32_t idleTimeMs() const { return millis() - _lastActionTS; }
 
+        /**
+         * @returns wether the dashboard is lit
+         */
         bool isLit();
 
-        Dashboard(const uint8_t pin_relay);
-
-        // hardware handler classes
-        ButtonHandler &buttonHandler() { return *_buttonHandler; };
-        LampHandler &lampHandler() { return *_lampHandler; };
+        /**
+         * @returns the keyboardhandler instance
+         */
         KeyboardHandler &keyboardHandler() { return *_keyboardHandler; };
+
+        /**
+         * @returns the komsihandler instance
+         */
         KomsiHandler &komsiHandler() { return *_komsiHandler; };
-        CANBus &canBusHandler() { return *_canBusHandler; };
+
+        /**
+         * @returns the lamphandler instance
+         */
+        LampHandler &lampHandler() { return *_lampHandler; };
+
+        /**
+         * @returns the powersupplyhandler instance
+         */
         PowerSupply &powerSupply() { return *_powerSupply; };
+
+        /**
+         * resets the idleTimer
+         * activates the power supply
+         * stops any pending idle warnings
+         */
+        void resetIdleTimer();
+
+        /**
+         * polls the Serial input queue for KOMSI commands
+         * scans the buttons
+         * sets lamps on the dashboard accordingly
+         */
+        void update();
 
     protected:
     private:
@@ -156,4 +183,3 @@ namespace BusDashboard
         ~Dashboard() {}
     };
 } // namespace BusDashboard
-
