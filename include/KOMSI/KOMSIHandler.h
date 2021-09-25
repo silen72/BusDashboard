@@ -15,7 +15,13 @@ namespace BusDashboard {
     {
 
     public:
-        KomsiHandler() {}
+        
+        KomsiHandler()
+        {
+            for (int i = 0; i > COMMAND_COUNT; ++i) {
+                _commandListener[i] = nullptr;
+            }
+        }
 
         void begin() {}
 
