@@ -61,7 +61,7 @@ namespace BusDashboard
     void Dashboard::resetIdleTimer()
     {
         _lastActionTS = millis();
-        powerSupply().activate();
+        _powerSupply->activate();
         _inactivityWarner->stopWarning();
         _idleState = ACTIVE;
     }
@@ -74,33 +74,32 @@ namespace BusDashboard
 
     void Dashboard::begin()
     {
-        // initialize own hardware
-        resetIdleTimer();
-
-        // switch off all lamps (a flaw in hw design: the lamps got power with the digitalWrite instruction above, so they probably already have flashed...)
-        _lampHandler = new LampHandler(LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
-        _lampHandler->begin();
-        _lampHandler->allOff();
-
-        // initialise embedded classes
         _buttonHandler = new ButtonHandler(LeonardoPins::BUTTON_MATRIX_CS, ButtonHandler::MCP23S17_ADRS);
         _buttonHandler->begin();
-        _keyboardHandler = new KeyboardHandler();
-        _keyboardHandler->begin();
         _komsiHandler = new KomsiHandler();
         _komsiHandler->begin();
+
+        _keyboardHandler = new KeyboardHandler();
+        _keyboardHandler->begin();
         _canBusHandler = new CANBus(LeonardoPins::CAN_CS, LeonardoPins::CAN_NT);
         _canBusHandler->begin();
+
         _powerSupply = new PowerSupply(LeonardoPins::POWER_RELAY);
         _powerSupply->begin();
+        _lampHandler = new LampHandler(LeonardoPins::LAMP_DRIVER_SI, LeonardoPins::LAMP_DRIVER_SCK, LeonardoPins::LAMP_DRIVER_RCK);
+        _lampHandler->begin();
         _inactivityWarner = new InactivityWarner(LampHandler::DriverPosition::BLINKER_RELAIS);
         _inactivityWarner->begin();
+        resetIdleTimer(); // needs _powerSupply and _inactivityWarner -> those have to be initialized before!
+        // switch off all lamps (a flaw in hw design: the lamps got power with the digitalWrite instruction above, so they probably already have flashed...)
+        _lampHandler->allOff();
 
         // initialise knobs, handles, buttons, switches
         _lightcontrol = new LightControl();
         initUnit(_lightcontrol);
         _asr = new SimplePushButton('a', ButtonHandler::MatrixPosition::Asr, LampHandler::DriverPosition::ASR);
         initUnit(_asr);
+
         _interiorLightingLvl1 = new SimpleSwitch('8', '8', ButtonHandler::MatrixPosition::Licht_Innen_1, LampHandler::DriverPosition::Licht_Innen);
         initUnit(_interiorLightingLvl1);
         _interiorLightingLvl2 = new SimpleSwitch('9', '8', ButtonHandler::MatrixPosition::Licht_Innen_2);
@@ -110,6 +109,7 @@ namespace BusDashboard
         // Warnblinkanlage
         _announcementOfStops = new SimplePushButton('q', ButtonHandler::MatrixPosition::Haltestellenansage, LampHandler::DriverPosition::Haltestellenansage);
         initUnit(_announcementOfStops);
+
         // Multihebel
         // Retarderhebel
         // Zündung
@@ -140,7 +140,6 @@ namespace BusDashboard
 
         _shifter = new Shifter();
         initUnit(_shifter);
-
     }
 
     bool Dashboard::isLit()
@@ -163,5 +162,5 @@ namespace BusDashboard
         powerSupply().update();
     }
 
-    Dashboard *Dashboard::_instance = 0;
+    Dashboard *Dashboard::_instance = nullptr;
 } // namespace BusDashboard
