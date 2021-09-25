@@ -72,7 +72,7 @@ Performing 24V tests:
 
 ## Improvements for a future version
 
-- Add 10k pulldown resistors to SI, RCLK, SRCLK. It's not strictly necessary and actually it works without them. But: those pulldown resistors make sure the lines are always in a defined state. While we're at it, add 10k between OE and GND.
+- Add 10k pulldown resistors to SI, RCLK, SRCLK. It's not strictly necessary and actually it works without them. But: those pulldown resistors make sure the lines are always in a defined state. While we're at it, add 10k between OE and GND. (Thanks, Thomas!)
 - Add a way to reset all six 74hc595 at once using the currently unused SRCLR pin on them.
 - The drill holes for the blade terminals need to be a little wider (between 1.30 and 1.35mm). Currently the drill holes are 1.2mm wide, as the manufacturer recommends. The blade terminals do not align cleanly on the board but stick out a little.  Measuring the pin on the blade terminals (~1.38mm) indicates that it should still stick to the drill hole for easy soldering when the drill hole is 1.35mm wide. Needs some testing...
 - Maybe replace the blade terminals altogether with screw terminals. Intese testing with the pcb has shown that often tightening and loosening the connections easily leads to ripped out blade terminals. It helps to solder the blade terminals from both sides, but still...
