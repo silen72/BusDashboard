@@ -107,8 +107,8 @@ namespace BusDashboard
       const uint8_t _pinSerialClock;
       const uint8_t _pinLatch;
       uint64_t _lastWriteMs = 0;
-      uint8_t _lampstates[NUMBER_OF_ICS];   // logical lamp state:  one array entry (8bit) per IC; byte0, bit0 = position0; byte1, bit0 = position8 ...
-      uint8_t _lampstatesHw[NUMBER_OF_ICS]; // hardware lamp state: one array entry (8bit) per IC
+      uint8_t _lampstates[NUMBER_OF_ICS] = {};   // logical lamp state:  one array entry (8bit) per IC; byte0, bit0 = position0; byte1, bit0 = position8 ...
+      uint8_t _lampstatesHw[NUMBER_OF_ICS] = {}; // hardware lamp state: one array entry (8bit) per IC
 
       /**
        * takes the lamp position on the board and derives the index into _lampstates and the bitmask from it. 

@@ -6,11 +6,6 @@ namespace BusDashboard
 {
   ButtonHandler::ButtonHandler(const uint8_t pin_cs, const uint8_t address) : _pin_cs(pin_cs), _address(address), _mcp(new gpio_MCP23S17(pin_cs, _address))
   {
-    for (uint8_t i = 0; i < BUTTON_COUNT; i++)
-    {
-      _listener[i] = nullptr;
-      _prevState[i] = false;
-    }
   }
 
   bool ButtonHandler::previousState(const uint8_t button)

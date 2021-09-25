@@ -16,12 +16,7 @@ namespace BusDashboard {
 
     public:
         
-        KomsiHandler()
-        {
-            for (int i = 0; i > COMMAND_COUNT; ++i) {
-                _commandListener[i] = nullptr;
-            }
-        }
+        KomsiHandler() {}
 
         void begin() {}
 
@@ -112,7 +107,7 @@ namespace BusDashboard {
     private:
         static const uint8_t COMMAND_COUNT = 2 * 26;
 
-        ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT]; // stores the listeners per command
+        ItemNode<KomsiCommandListener> *_commandListener[COMMAND_COUNT] = {}; // stores the listeners per command, init with nullptr
         uint8_t _command = 0;
         uint16_t _command_value = 0;
 
