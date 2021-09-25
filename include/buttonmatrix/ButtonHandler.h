@@ -115,7 +115,7 @@ namespace BusDashboard {
 
 		/**
 		 * queries the current state of connected buttons and notifies listeners
-		 * this needs to be called repeatedly - note that one only queries one row of buttons
+		 * this needs to be called repeatedly - note that one call only queries one row of buttons
 		 * note also that this neither tries to debounce buttons nor does it detect changes, the listeners receive 'raw' data
 		*/
 		void scan();
