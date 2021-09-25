@@ -40,7 +40,8 @@ namespace BusDashboard
         void addListener(PowerStateListener &listener);
 
         /*
-        * initializes the object
+        * initializes the power supply relay handler
+        * the relay is initially turned off
         */
         void begin();
 
@@ -72,7 +73,7 @@ namespace BusDashboard
         const uint8_t _relayPin;
         PowerState _currentState = NOT_INITIALIZED;
         PowerState _targetState = NOT_ACTIVE;
-        ItemNode<PowerStateListener> *_stateListener;
+        ItemNode<PowerStateListener> *_stateListener = nullptr;
 
         // notify all listeners about the current state
         void notifyListeners();
