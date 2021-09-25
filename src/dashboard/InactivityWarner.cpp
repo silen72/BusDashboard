@@ -9,7 +9,7 @@ namespace BusDashboard
 
     void InactivityWarner::begin()
     {
-        stopWarning();
+        //stopWarning();
     }
 
     void InactivityWarner::startWarning()
