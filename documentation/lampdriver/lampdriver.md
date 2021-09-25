@@ -11,6 +11,7 @@ The Lamp Driver PCB mainly consist of three distinct parts:
 ![the schematics](images/LampDriverSchematics.png)
 
 Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD):
+
 ![the board](images/LampDriverBoard.png)
 
 
@@ -44,6 +45,7 @@ To have the board produced by [JLCPCB](https://jlcpcb.com/) I have also [exporte
 ```
 
 The first prototype:
+
 ![The first prototype](images/prototype.png)
 
 ## Bill of materials
@@ -61,9 +63,11 @@ The first prototype:
 -  1 socket JST-XH-4A
 
 The soldered board:
+
 ![The soldered board](images/soldered.png)
 
 Performing 24V tests:
+
 ![Performing 24V tests](images/testing.png)
 
 ## Improvements for a future version

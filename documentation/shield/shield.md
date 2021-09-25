@@ -44,5 +44,5 @@ Double check the cabling you create. Neglecting this may lead to both unexpected
 
 ## Improvements for a future version
 
-- Swap VCC and GND pins on the connector to the [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md). Alternative: swap VCC and GND there
-- Add two pins to the socket that connects the lamp driver pcb: one for 5v from the Arduino Leonardo and another to be able to reset (switch everything of at once) the lamp driver pcb. Connecting the 5V from the Arduino will remove the design flaw described in the button matrix documentation.
+* Swap VCC and GND pins on the connector to the [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md). Alternative: swap VCC and GND there
+* Add two pins to the socket that connects the lamp driver pcb: one for 5v from the Arduino Leonardo and another to be able to reset (switch everything of at once) the lamp driver pcb. Connecting the 5V from the Arduino will remove the design flaw described in the button matrix documentation.
