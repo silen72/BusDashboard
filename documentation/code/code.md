@@ -1,12 +1,14 @@
 # A brief glimpse at what the code does
 
 There are two main tasks the board has to perform:
+
 - receive OMSI updates from the PC and turn lights on and off accordingly
 - check for (newly) pressed or released buttons on the dashboard and send keystrokes to the PC accordingly
 
 The challenge is to perform these tasks in a way that there is no noticable lag - neither between pressing a button on the dashboard and the corresponding action in the bus simulator nor between an update in OMSI like "the indicator light is now on" (and visibly so on the screen) and the actual indicator on the dashboard. In order to achieve this, the communication aspect is treated with the highest priority.
 
 The code does this by breaking those two tasks down into subtasks:
+
 - receive OMSI updates from the PC
 - partially scan the buttons and switches on the dashboard
 - update the lamp driver pcb if necessary
@@ -48,6 +50,7 @@ The LampHandler class keeps track of the desired state and the real current stat
 To connect dashboard components with its virtual counterparts in OMSI it is necessary to keep track of the state of the actual component and send keystrokes to the PC upon changing states. Keeping track of the state of the actual component is done by ButtonListeners (see above).
 
 Sending keystrokes is done by either telling the KeyboardHandler class what action to take. It provides four actions:
+
 - press a key (and don't release it)
 - release a key
 - press a key for a certain time then release it
