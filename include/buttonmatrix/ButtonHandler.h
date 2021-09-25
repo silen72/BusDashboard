@@ -145,10 +145,12 @@ namespace BusDashboard {
 		 */
 		uint8_t readMuxColumns() {
 			uint8_t val = _mcp->gpioRegisterReadByte(MCP23S17_GPIO + 1);
+/*
 #ifdef SerialDebug
 			Serial.print(F("ButtonHandler::readMuxColumns(), val: "));
 			Serial.println(val, BIN);
 #endif
+*/
 			return val;
 		}
 
@@ -157,12 +159,14 @@ namespace BusDashboard {
 		 */
 		void setMuxRow() {
 			const uint8_t pin = 1 << _row;
+/*
 #ifdef SerialDebug
 			Serial.print(F("ButtonHandler::setMuxRow(), row: "));
 			Serial.print(_row);
 			Serial.print(F(", pin:"));
 			Serial.println(pin,BIN);
 #endif
+*/
 			_mcp->gpioRegisterWriteByte(MCP23S17_GPIO, pin);
 		}
 
