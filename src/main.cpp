@@ -2,6 +2,7 @@
 #include <Keyboard.h>
 #include <SPI.h>
 #include "dashboard/Dashboard.h"
+#include "lampdriver/LampHandler.h"
 
 using namespace BusDashboard;
 
@@ -13,6 +14,7 @@ void setup()
   Serial.begin(115200); // initialize communication with the PC (only in: KOMSI)
   Keyboard.begin();     // initialize communication with the PC (only out: Keyboard)
   dashboard.begin();    // wake up the dashboard (enable power for the transformers)
+  pinMode(13, OUTPUT);  // debugging: onboard blinks
 }
 
 #ifdef SerialDebug
@@ -23,4 +25,10 @@ void setup()
 void loop()
 {
   dashboard.update();
+
+  // debugging:
+
+  const unsigned long seconds = millis() / 1000;
+  const bool state = (seconds % 2 == 0);
+  digitalWrite(13, state);
 }
