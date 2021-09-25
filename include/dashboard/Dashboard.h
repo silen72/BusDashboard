@@ -21,6 +21,7 @@ namespace BusDashboard
     // Pins used to connect to the various PCBs
     enum LeonardoPins
     {
+        //LAMP_DRIVER_RESET = 3, // not actually connected yet, preparation for board revision 2.0
         LAMP_DRIVER_SI = 4,    // connected to the first 74HC595's SI-pin
         LAMP_DRIVER_RCK = 5,   // connected to all 74HC595's RCLK-pins
         LAMP_DRIVER_SCK = 6,   // connected to all 74HC595's SRCLK-pins
