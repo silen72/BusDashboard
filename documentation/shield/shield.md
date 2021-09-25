@@ -13,10 +13,12 @@ Based on the schematics I have created an easy-to-solder PCB (THT instead of SMD
 ![the rendered pcb](images/ShieldPCB.png)
 
 ## Bill of materials
+
 1 Socket  JST-XH3A (3x1)
 2 Sockets JST-XH4A (4x1)
 1 Socket  JST-XH6A (6x1)
 1 Set Arduino stacking headers (female, including ICSP), consisting of
+
 * 1 Dupont 1x6
 * 2 Dupont 1x8
 * 1 Dupont 1x10
@@ -31,7 +33,14 @@ Soldered and attached to the Arduino:
  ![Soldered and attached](images/soldered.png)
 
 ## How does it work?
+
 It has no real funcionality besides routing the various arduino I/O-pins to socket pins.
 
+## Things to take good care of
+
+Double check the cabling you create. Neglecting this may lead to both unexpected and unwanted situations. Trust me.
+
 ## Improvements for a future version
+
 - Swap VCC and GND pins on the connector to the [buttonmatrix pcb](../buttonmatrix/buttonmatrix.md). Alternative: swap VCC and GND there
+- Add two pins to the socket that connects the lamp driver pcb: one for 5v from the Arduino Leonardo and another to be able to reset (switch everything of at once) the lamp driver pcb. Connecting the 5V from the Arduino will remove the design flaw described in the button matrix documentation.
