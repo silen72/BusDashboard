@@ -34,8 +34,7 @@ namespace BusDashboard
             I2_leaving    // I2 has changed to LOW but no other knob position is measured HIGH yet
         };
         State _currentState = State::Undefined;
-        unsigned long _leavingTS = 0;
-        unsigned long _blinkTS = 0;
+        uint64_t _leavingTS = 0;
         bool _dashboardLit = false;
 
         LightControl(const LightControl &) = delete;
