@@ -15,7 +15,7 @@ namespace BusDashboard {
     protected:
 
     private:
-        enum class State
+        enum class State : uint8_t
         {
             Undefined,
             R,

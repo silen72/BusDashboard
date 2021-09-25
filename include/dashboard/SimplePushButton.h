@@ -8,7 +8,7 @@ namespace BusDashboard
     class SimplePushButton : public ButtonListener
     {
     public:
-        enum class LightMode
+        enum class LightMode : uint8_t
         {
             AlwaysOn,
             AlwaysOff,

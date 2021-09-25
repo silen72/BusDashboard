@@ -9,7 +9,7 @@ namespace BusDashboard
     {
 
     public:
-        enum class LightMode
+        enum class LightMode : uint8_t
         {
             AlwaysOn,
             AlwaysOff,

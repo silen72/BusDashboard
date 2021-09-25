@@ -17,7 +17,7 @@ namespace BusDashboard
        * position  1 to 24 is the 24V side of the board
        * position 25 to 48 is the  5V side of the board
       */
-      enum DriverPosition
+      enum DriverPosition : uint8_t
       {
          None = 0,
          // 24V: position 1 .. 24

@@ -19,7 +19,7 @@ namespace BusDashboard
     class ButtonListener;
 
     // Pins used to connect to the various PCBs
-    enum LeonardoPins
+    enum LeonardoPins : uint8_t
     {
         //LAMP_DRIVER_RESET = 3, // not actually connected yet, preparation for board revision 2.0
         LAMP_DRIVER_SI = 4,    // connected to the first 74HC595's SI-pin
@@ -43,7 +43,7 @@ namespace BusDashboard
             return *_instance;
         }
 
-        enum IdleState
+        enum IdleState : uint8_t
         {
             ACTIVE,
             WARNING,

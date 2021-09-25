@@ -17,7 +17,7 @@ namespace BusDashboard
         /**
          * this enum contains all states the power supply may be in
          */
-        enum PowerState
+        enum PowerState : uint8_t
         {
             NOT_INITIALIZED,
             BEFORE_ACTIVATION,
